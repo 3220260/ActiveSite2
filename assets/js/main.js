@@ -1,5 +1,7 @@
-
-
+const ASSISTANT_CHAT_URL = 'https://chat-kj4xqngk0-built-to-fail-inc.vercel.app/#';
+const wizardStepViewedKeys = new Set();
+const wizardCompletedKeys = new Set();
+let assistantChatPreviousFocus = null;
 
 function getFileName(path) {
     return (path || '').split('/').pop() || path || 'unknown';
@@ -56,15 +58,21 @@ function resumeOpenOfferViews() {
 }
 
 function getOfferCardContext(card) {
-    const modalId = card?.dataset?.modalTarget;
-    const offerName = getOfferName(modalId);
-    return offerName ? { offer_id: modalId, offer_name: offerName } : null;
+    const modalId = card?.dataset?.modalTarget || card?.querySelector?.('[data-modal-target]')?.dataset?.modalTarget || '';
+    const offerName = card?.dataset?.offer || getOfferName(modalId);
+    const category = card?.dataset?.category || '';
+    return offerName ? { offer_id: modalId || offerName, offer_name: offerName, category } : null;
 }
 
 function startOfferCardView(card) {
     const context = getOfferCardContext(card);
     if (!context || offerCardViewStarts.has(card) || hasOpenBlockingLayer()) return;
     offerCardViewStarts.set(card, Date.now());
+
+    if (!offerCardViewed.has(context.offer_id)) {
+        offerCardViewed.add(context.offer_id);
+        trackEvent('offer_view', context);
+    }
 }
 
 function stopOfferCardView(card, options = {}) {
@@ -76,12 +84,7 @@ function stopOfferCardView(card, options = {}) {
     const seconds = Math.max(0, Math.round((Date.now() - startedAt) / 1000));
     if (seconds < MIN_CARD_VIEW_SECONDS) return;
 
-    if (!offerCardViewed.has(context.offer_id)) {
-        offerCardViewed.add(context.offer_id);
-        trackEvent('Offer Engagement', 'offer_card_view', context.offer_name, context);
-    }
-
-    trackEvent('Offer Engagement', 'offer_card_time_spent', context.offer_name, {
+    trackEvent('offer_card_time_spent', {
         ...context,
         engagement_time_sec: seconds,
         value: seconds,
@@ -111,7 +114,7 @@ function refreshVisibleOfferCards() {
 }
 
 function initializeOfferCardTracking() {
-    trackedOfferCards = Array.from(document.querySelectorAll('#offers-grid [data-modal-target]'));
+    trackedOfferCards = Array.from(document.querySelectorAll('[data-offer-card]'));
     if (!trackedOfferCards.length || !('IntersectionObserver' in window)) return;
 
     const observer = new IntersectionObserver((entries) => {
@@ -131,32 +134,37 @@ function trackLinkClick(link) {
 
     if (href.startsWith('assets/docs/')) {
         const documentName = getFileName(href);
-        trackEvent('Documents', 'pdf_download', documentName, {
+        trackEvent('pdf_download', {
             ...context,
             document_name: documentName,
+            label: link.dataset.label || documentName,
+            offer_name: link.dataset.offer || context.offer_name,
         });
         return;
     }
 
     if (href.startsWith('tel:')) {
-        trackEvent('Contact', 'contact_click', 'phone', {
+        trackEvent('phone_click', {
             ...context,
             contact_type: 'phone',
+            label: link.dataset.label || 'phone',
         });
         return;
     }
 
     if (href.startsWith('mailto:')) {
-        trackEvent('Contact', 'contact_click', 'email', {
+        trackEvent('email_click', {
             ...context,
             contact_type: 'email',
+            label: link.dataset.label || 'email',
         });
         return;
     }
 
     if (href.includes('invite.viber.com')) {
-        trackEvent('Community', 'viber_click', 'Viber Community', {
+        trackEvent('viber_click', {
             destination: 'viber_community',
+            label: link.dataset.label || 'Viber Community',
         });
     }
 }
@@ -729,6 +737,25 @@ function showProcessWizardStep(containerId, index) {
     if (current) current.textContent = safeIndex + 1;
     if (stepTitle) stepTitle.textContent = currentStepTitle;
 
+    const wizardStepKey = `${containerId}:${safeIndex}`;
+    if (!wizardStepViewedKeys.has(wizardStepKey)) {
+        wizardStepViewedKeys.add(wizardStepKey);
+        trackEvent('wizard_step_view', {
+            wizard_id: containerId,
+            step_number: safeIndex + 1,
+            step_title: currentStepTitle,
+            offer_name: config.title,
+        });
+    }
+
+    if (safeIndex === steps.length - 1 && !wizardCompletedKeys.has(containerId)) {
+        wizardCompletedKeys.add(containerId);
+        trackEvent('wizard_completed', {
+            wizard_id: containerId,
+            offer_name: config.title,
+        });
+    }
+
     updateProcessHeaderStep(containerId, safeIndex, steps.length, currentStepTitle);
 
     const dots = wizard.querySelector('[data-process-dots]');
@@ -875,11 +902,209 @@ function activateVisibleProcessWizard(root) {
     if (activeProcess) resetProcessWizard(activeProcess.id);
 }
 
+function getExplicitTrackParams(target) {
+    return {
+        label: target.dataset.label || target.textContent.trim().replace(/\s+/g, ' ').slice(0, 80),
+        offer_name: target.dataset.offer || undefined,
+        category: target.dataset.category || undefined,
+    };
+}
+
+function shouldSkipExplicitTracking(target) {
+    if (!target) return true;
+    const link = target.closest('a[href]');
+    if (!link) return false;
+
+    const href = link.getAttribute('href') || '';
+    return href.startsWith('tel:') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('assets/docs/') ||
+        href.includes('invite.viber.com');
+}
+
+function applyOfferFilter(category, source = null) {
+    const normalizedCategory = category || 'all';
+
+    document.querySelectorAll('[data-category-filter]').forEach((button) => {
+        button.classList.toggle('is-active', button.dataset.categoryFilter === normalizedCategory);
+    });
+
+    document.querySelectorAll('[data-offer-card]').forEach((card) => {
+        const shouldShow = normalizedCategory === 'all' || card.dataset.category === normalizedCategory;
+        card.hidden = !shouldShow;
+        if (!shouldShow) stopOfferCardView(card);
+    });
+
+    trackEvent('category_filter_click', {
+        category: normalizedCategory,
+        label: source?.dataset?.label || normalizedCategory,
+    });
+
+    if (source && !source.closest('.offer-filter-bar')) {
+        document.getElementById('offers')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    requestAnimationFrame(refreshVisibleOfferCards);
+}
+
+function getAssistantChatModal() {
+    return document.getElementById('assistantChatModal');
+}
+
+function isAssistantChatOpen() {
+    const modal = getAssistantChatModal();
+    return Boolean(modal && !modal.classList.contains('hidden'));
+}
+
+function getAssistantChatFocusable() {
+    const modal = getAssistantChatModal();
+    if (!modal) return [];
+
+    return Array.from(modal.querySelectorAll(
+        'a[href], button:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])'
+    )).filter((element) => !element.hasAttribute('disabled') && element.offsetParent !== null);
+}
+
+function focusAssistantChatStart() {
+    const focusable = getAssistantChatFocusable();
+    const closeButton = document.querySelector('#assistantChatModal [data-chat-close]:not([aria-hidden="true"])');
+    (closeButton || focusable[0])?.focus?.();
+}
+
+function openAssistantChat() {
+    const modal = getAssistantChatModal();
+    if (!modal || isAssistantChatOpen()) return;
+
+    assistantChatPreviousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const iframe = modal.querySelector('iframe[data-src]');
+    if (iframe && !iframe.getAttribute('src')) {
+        iframe.setAttribute('src', iframe.dataset.src || ASSISTANT_CHAT_URL);
+    }
+
+    modal.classList.remove('hidden');
+    lockPageScroll();
+    trackEvent('chat_open', { label: 'assistant_chat' });
+    setTimeout(focusAssistantChatStart, 0);
+}
+
+function closeAssistantChat() {
+    const modal = getAssistantChatModal();
+    if (!modal || modal.classList.contains('hidden')) return;
+
+    modal.classList.add('hidden');
+    trackEvent('chat_close', { label: 'assistant_chat' });
+    unlockPageScrollIfIdle();
+
+    if (assistantChatPreviousFocus && document.contains(assistantChatPreviousFocus)) {
+        assistantChatPreviousFocus.focus();
+    }
+    assistantChatPreviousFocus = null;
+}
+
+function trapAssistantChatFocus(event) {
+    if (!isAssistantChatOpen() || event.key !== 'Tab') return false;
+
+    const focusable = getAssistantChatFocusable();
+    if (!focusable.length) return false;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+        return true;
+    }
+
+    if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+        return true;
+    }
+
+    return false;
+}
+
+function enhanceIbanWarnings() {
+    document.querySelectorAll('[data-copy-iban]').forEach((button) => {
+        if (button.nextElementSibling?.classList?.contains('iban-security-note')) return;
+
+        const warning = document.createElement('p');
+        warning.className = 'iban-security-note';
+        warning.textContent = 'Πριν από οποιαδήποτε κατάθεση, επιβεβαιώστε τα στοιχεία με τον Συνεταιρισμό.';
+        button.insertAdjacentElement('afterend', warning);
+    });
+}
+
+function initializeFaqTracking() {
+    document.querySelectorAll('#faq details').forEach((details) => {
+        details.addEventListener('toggle', () => {
+            if (!details.open) return;
+            const question = details.querySelector('summary span')?.textContent?.trim() || 'FAQ';
+            trackEvent('faq_open', { label: question });
+        });
+    });
+}
+
+function initializeLandingStepTracking() {
+    if (!('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            const step = entry.target.dataset.wizardStep || '';
+            const key = `landing:${step}`;
+            if (!wizardStepViewedKeys.has(key)) {
+                wizardStepViewedKeys.add(key);
+                trackEvent('wizard_step_view', {
+                    wizard_id: 'landing_process',
+                    step_number: step,
+                    step_title: entry.target.querySelector('h3')?.textContent?.trim() || '',
+                });
+            }
+
+            if (step === '4' && !wizardCompletedKeys.has('landing_process')) {
+                wizardCompletedKeys.add('landing_process');
+                trackEvent('wizard_completed', { wizard_id: 'landing_process' });
+            }
+        });
+    }, { threshold: 0.55 });
+
+    document.querySelectorAll('[data-wizard-step]').forEach((step) => observer.observe(step));
+}
+
 
 function handleDocumentClick(event) {
 
     const stopTarget = event.target.closest('[data-stop-click]');
     if (stopTarget) event.stopPropagation();
+
+    const chatOpenTarget = event.target.closest('[data-chat-open]');
+    if (chatOpenTarget) {
+        event.preventDefault();
+        openAssistantChat();
+        return;
+    }
+
+    const chatCloseTarget = event.target.closest('[data-chat-close]');
+    if (chatCloseTarget) {
+        event.preventDefault();
+        closeAssistantChat();
+        return;
+    }
+
+    const categoryTarget = event.target.closest('[data-category-filter]');
+    if (categoryTarget) {
+        event.preventDefault();
+        applyOfferFilter(categoryTarget.dataset.categoryFilter, categoryTarget);
+        return;
+    }
+
+    const explicitTrackTarget = event.target.closest('[data-track]');
+    if (explicitTrackTarget && !shouldSkipExplicitTracking(explicitTrackTarget)) {
+        trackEvent(explicitTrackTarget.dataset.track, getExplicitTrackParams(explicitTrackTarget));
+    }
 
     const linkTarget = event.target.closest('a[href]');
     if (linkTarget) trackLinkClick(linkTarget);
@@ -946,7 +1171,7 @@ function handleDocumentClick(event) {
     const copyTextTarget = event.target.closest('[data-copy-text]');
     if (copyTextTarget) {
         event.preventDefault();
-        trackEvent('Payments', 'payment_copy', 'account_name', {
+        trackEvent('payment_copy', {
             ...getOpenOfferContext(),
             copy_type: 'account_name',
         });
@@ -957,7 +1182,7 @@ function handleDocumentClick(event) {
     const copyIbanTarget = event.target.closest('[data-copy-iban]');
     if (copyIbanTarget) {
         event.preventDefault();
-        trackEvent('Payments', 'payment_copy', 'iban', {
+        trackEvent('copy_iban', {
             ...getOpenOfferContext(),
             copy_type: 'iban',
         });
@@ -1049,6 +1274,11 @@ if (modalCloseTarget) {
     closeModal(modalToClose);
 
     if (modalToOpen) {
+        trackEvent('offer_click', {
+            offer_id: modalToOpen,
+            offer_name: modalCloseTarget.dataset.offer || getOfferName(modalToOpen),
+            category: modalCloseTarget.dataset.category,
+        });
         openModal(modalToOpen);
 
         if (
@@ -1072,7 +1302,13 @@ if (modalCloseTarget) {
     const modalTarget = event.target.closest('[data-modal-target]');
     if (modalTarget) {
         event.preventDefault();
-        openModal(modalTarget.dataset.modalTarget);
+        const targetModalId = modalTarget.dataset.modalTarget;
+        trackEvent('offer_click', {
+            offer_id: targetModalId,
+            offer_name: modalTarget.dataset.offer || getOfferName(targetModalId),
+            category: modalTarget.dataset.category,
+        });
+        openModal(targetModalId);
         return;
     }
 
@@ -1084,6 +1320,30 @@ if (modalCloseTarget) {
 }
 
 function handleDocumentKeydown(event) {
+    if (event.key === 'Escape') {
+        if (isAssistantChatOpen()) {
+            event.preventDefault();
+            closeAssistantChat();
+            return;
+        }
+
+        const preview = document.getElementById('imagePreviewModal');
+        if (preview && !preview.classList.contains('hidden')) {
+            event.preventDefault();
+            closeModal('imagePreviewModal');
+            return;
+        }
+
+        const openModalElement = Array.from(document.querySelectorAll('.modal-backdrop:not(.hidden)')).pop();
+        if (openModalElement?.id) {
+            event.preventDefault();
+            closeModal(openModalElement.id);
+            return;
+        }
+    }
+
+    if (trapAssistantChatFocus(event)) return;
+
     if ((event.key !== 'Enter' && event.key !== ' ') || !event.target.matches('[role="button"][data-modal-target]')) {
         return;
     }
@@ -1154,6 +1414,11 @@ function handleCookieConsent(action) {
     banner.style.opacity = '0';
     banner.style.transform = 'translateY(100%)';
     setTimeout(() => banner.classList.add('hidden'), 500);
+
+    const cookiesModal = document.getElementById('cookiesModal');
+    if (cookiesModal && !cookiesModal.classList.contains('hidden')) {
+        closeModal('cookiesModal');
+    }
 }
 
 /* =========================================
@@ -1291,6 +1556,9 @@ document.addEventListener('touchend', handleProcessSwipeEnd, { passive: true });
         observer.observe(el);
     });
 
+    enhanceIbanWarnings();
+    initializeFaqTracking();
+    initializeLandingStepTracking();
     initializeOfferCardTracking();
     window.addEventListener('load', () => {
     setTimeout(loadSiteUpdateNotice, 1000);

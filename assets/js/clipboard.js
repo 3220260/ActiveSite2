@@ -73,7 +73,7 @@ function copyToClipboard(text, element) {
 async function copyIBAN(text, element) {
     try {
         await writeClipboard(text);
-        showToast('Ο αριθμός λογαριασμού αντιγράφηκε!', 'success');
+        showToast('Αντιγράφηκε', 'success');
         const iconCopy = element.querySelector('.icon-copy');
         const iconCheck = element.querySelector('.icon-check');
         if (iconCopy && iconCheck) { iconCopy.classList.add('hidden'); iconCheck.classList.remove('hidden'); }

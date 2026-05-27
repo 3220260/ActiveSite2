@@ -1,7 +1,56 @@
 /* Base styles */
 
 /* --- 1. ΒΑΣΙΚΕΣ ΡΥΘΜΙΣΕΙΣ --- */
-:root { --primary: #0f2b5c; }
-body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; color: #1e293b; overflow-x: hidden; }
-h1, h2, h3, .brand-font { font-family: 'Space Grotesk', sans-serif; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+:root {
+    --primary: #071a33;
+    --primary-strong: #06152a;
+    --police-blue: #165dba;
+    --police-blue-soft: #dbeafe;
+    --surface: #ffffff;
+    --surface-soft: #f6f8fb;
+    --surface-muted: #eef3f8;
+    --border: #d8e1ec;
+    --text: #172033;
+    --text-muted: #5f6f86;
+    --accent-mobile: #d7232f;
+    --accent-internet: #0284c7;
+    --accent-health: #0f9f8f;
+    --accent-docs: #b7791f;
+    --shadow-card: 0 16px 42px rgba(7, 26, 51, 0.10);
+    --radius-card: 8px;
+    --nav-height: 6rem;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-height) + 1rem);
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--surface-soft);
+    color: var(--text);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+.brand-font {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+a,
+button {
+    touch-action: manipulation;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid rgba(22, 93, 186, 0.45);
+    outline-offset: 3px;
+}

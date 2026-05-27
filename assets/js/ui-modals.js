@@ -17,6 +17,7 @@ function closeSidebarInstantly() {
 
 function goHomeFromHeader() {
     const preview = document.getElementById('imagePreviewModal');
+    const chat = document.getElementById('assistantChatModal');
 
     document.querySelectorAll('.modal-backdrop:not(.hidden)').forEach((modal) => {
         if (modal.id) stopOfferView(modal.id);
@@ -27,6 +28,10 @@ function goHomeFromHeader() {
         preview.classList.add('hidden');
         stopImagePreviewDrag();
         resetImagePreviewZoom(false);
+    }
+
+    if (chat && !chat.classList.contains('hidden') && typeof closeAssistantChat === 'function') {
+        closeAssistantChat();
     }
 
     closeSidebarInstantly();
@@ -49,10 +54,12 @@ function goHomeFromHeader() {
 function hasOpenBlockingLayer() {
     const sidebar = document.getElementById('sidebarMenu');
     const preview = document.getElementById('imagePreviewModal');
+    const chat = document.getElementById('assistantChatModal');
 
     return Boolean(
         document.querySelector('.modal-backdrop:not(.hidden)') ||
         (preview && !preview.classList.contains('hidden')) ||
+        (chat && !chat.classList.contains('hidden')) ||
         (sidebar && !sidebar.classList.contains('-translate-x-full'))
     );
 }

@@ -4,22 +4,26 @@ import { fileURLToPath } from 'node:url';
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
+const cssFiles = [
+    'assets/css/base.css',
+    'assets/css/components.css',
+    'assets/css/responsive.css',
+    'assets/css/animations.css',
+    'assets/css/firefox-esr.css',
+    'assets/css/tailwind.css',
+];
+
 const checks = [
     {
         file: 'index.html',
         content: readFileSync(resolve(projectRoot, 'index.html'), 'utf8'),
         baseDir: projectRoot,
     },
-    {
-        file: 'assets/css/styles.css',
-        content: readFileSync(resolve(projectRoot, 'assets/css/styles.css'), 'utf8'),
+    ...cssFiles.map((file) => ({
+        file,
+        content: readFileSync(resolve(projectRoot, file), 'utf8'),
         baseDir: resolve(projectRoot, 'assets/css'),
-    },
-    {
-        file: 'assets/css/tailwind.css',
-        content: readFileSync(resolve(projectRoot, 'assets/css/tailwind.css'), 'utf8'),
-        baseDir: resolve(projectRoot, 'assets/css'),
-    },
+    })),
 ];
 
 const html = checks[0].content;

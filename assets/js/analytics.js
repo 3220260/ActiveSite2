@@ -9,6 +9,8 @@
 const GA_MEASUREMENT_ID = 'G-LHQ9SHKY6J';
 const TRACKED_OFFERS = Object.freeze({
     mobileModal: 'Κινητή Τηλεφωνία',
+    vodaChoiceModal: 'Επιλογή Vodafone CU',
+    novaChoiceModal: 'Επιλογή NOVA Q',
     vodaModal: 'Vodafone CU',
     novaModal: 'NOVA Q',
     novaLinePhone: 'Σταθερό και Internet',
@@ -32,22 +34,38 @@ function loadAllTracking() {
     document.head.appendChild(script);
 
     window.gtag('js', new Date());
-    window.gtag('config', GA_MEASUREMENT_ID, { 'anonymize_ip': true });
+    window.gtag('config', GA_MEASUREMENT_ID, {
+        anonymize_ip: true,
+        send_page_view: false,
+    });
     window.trackingLoaded = true;
+    trackEvent('page_view', {
+        page_title: document.title,
+        page_location: window.location.href,
+        page_path: window.location.pathname,
+    });
 }
 
 function hasAnalyticsConsent() {
     return localStorage.getItem('cookieConsent') === 'accepted';
 }
 
-function trackEvent(category, action, label, params = {}) {
-    if (hasAnalyticsConsent() && typeof window.gtag === 'function') {
-        window.gtag('event', action, {
-            event_category: category,
-            event_label: label,
-            ...params,
-        });
+function trackEvent(eventName, params = {}, legacyLabel, legacyParams = {}) {
+    let normalizedEventName = eventName;
+    let normalizedParams = params;
+
+    if (typeof params === 'string') {
+        normalizedEventName = params;
+        normalizedParams = {
+            event_category: eventName,
+            event_label: legacyLabel,
+            ...legacyParams,
+        };
     }
+
+    if (!hasAnalyticsConsent() || typeof window.gtag !== 'function') return;
+
+    window.gtag('event', normalizedEventName, normalizedParams || {});
 }
 
 function getOfferName(modalId) {

@@ -44,10 +44,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/css/tailwind.css?v=20260429-2">
-  <link rel="stylesheet" href="assets/css/base.css?v=20260522-1">
-  <link rel="stylesheet" href="assets/css/components.css?v=20260524-icon-fix">
+  <link rel="stylesheet" href="assets/css/base.css?v=20260527-pro">
+  <link rel="stylesheet" href="assets/css/components.css?v=20260527-pro">
   <link rel="stylesheet" href="assets/css/animations.css?v=20260523-7">
-  <link rel="stylesheet" href="assets/css/responsive.css?v=20260527-info-modal-fix">
+  <link rel="stylesheet" href="assets/css/responsive.css?v=20260527-pro">
   <link rel="stylesheet" href="assets/css/firefox-esr.css?v=20260523-1">
 
   <script type="application/ld+json">
@@ -123,11 +123,9 @@
 </script>
 
 </head>
-<body>
+<body id="top">
 
-   
-
-    <nav data-action="go-home" class="fixed top-0 w-full z-50 bg-[#6FA4D9] shadow-md transition-all duration-300 border-b border-blue-300/50 cursor-pointer">
+    <nav aria-label="Κύρια πλοήγηση" class="site-top-nav fixed top-0 w-full z-50 bg-[#6FA4D9] shadow-md transition-all duration-300 border-b border-blue-300/50">
     <div class="max-w-7xl mx-auto px-4 h-24 flex items-center justify-between relative">
 
     <button type="button" data-action="toggle-sidebar" class="z-50 shrink-0 group flex flex-col items-start gap-[5px] p-3 cursor-pointer hover:bg-white/10 rounded-xl transition-all mr-2">
@@ -138,7 +136,7 @@
     </button>
 
     <div class="flex-1 flex justify-center items-center gap-2 md:gap-3 md:absolute md:left-1/2 md:top-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2">
-        <a href="#top" class="flex items-center gap-3 no-underline hover:opacity-90 transition-opacity" aria-label="Επιστροφή στην αρχική">
+        <a href="#top" data-action="go-home" class="flex items-center gap-3 no-underline hover:opacity-90 transition-opacity" aria-label="Επιστροφή στην αρχική">
         <img src="assets/images/LOGO.webp" alt="Λογότυπο" width="400" height="218" decoding="async" class="h-10 md:h-16 w-auto object-contain p-1 bg-white/20 rounded-xl border border-white/40 shadow-sm shrink-0 backdrop-blur-sm">
         <div class="flex flex-col justify-center items-center text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)]">
             <h2 class="hidden sm:block font-bold text-white/90 text-[8px] md:text-xs tracking-wider uppercase leading-tight text-center">
@@ -151,447 +149,295 @@
         </a>
     </div>
 
-    <div class="w-12 shrink-0"></div>
+    <div class="hidden lg:flex items-center gap-2 shrink-0">
+        <a href="#offers" class="site-nav-link">Προσφορές</a>
+        <a href="#process" class="site-nav-link">Διαδικασία</a>
+        <a href="#faq" class="site-nav-link">FAQ</a>
+        <a href="#contact" class="site-nav-link">Επικοινωνία</a>
+    </div>
     </div>
     </nav>
 
-    <main class="pt-24 md:pt-44 pb-12 px-4 max-w-7xl mx-auto">
+    <main class="site-main">
 
-    <header class="mb-2 md:mb-12 relative z-10">
-        <h1 class="hidden md:block text-6xl md:text-5xl font-black mb-3 leading-tight tracking-tighter">
-        <span class="full-red-blue-gradient">
-            Συνεταιρισμός Αστυνομικών Αττικής - Επίσημες Προσφορές Π.Κ.Σ.Α.Α.
-            </span>
-        </h1>
-
-        <h1 class="block md:hidden text-4xl font-black mb-3 leading-tight tracking-tighter text-center">
-            <span class="full-red-blue-gradient">
-            Συνεταιρισμός Αστυνομικών Αττικής
-            </span>
-        </h1>
-        <div class="md:hidden mt-6 text-blue-600 animate-bounce">
-            <i class="fa-solid fa-chevron-down text-2xl"></i>
+    <section class="landing-hero" aria-labelledby="hero-title">
+      <div class="landing-hero-copy">
+        <div class="hero-kicker">
+          <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+          Π.Κ.Σ.Α.Α. · Συνεταιρισμός Αστυνομικών Αττικής
         </div>
-    </header>
-    <section class="official-intro mt-8 mb-10">
-      <div class="official-intro-card">
-        <div class="official-intro-glow official-intro-glow-blue"></div>
-        <div class="official-intro-glow official-intro-glow-red"></div>
 
-        <div class="official-intro-content">
-          <div class="official-intro-badge">
-            <i class="fa-solid fa-shield-halved"></i>
-            Επίσημη πλατφόρμα ενημέρωσης
-          </div>
+        <h1 id="hero-title">Επίσημες Προσφορές για τα μέλη του Συνεταιρισμού</h1>
 
-          <h2 class="official-intro-title">
-            Π.Κ.Σ.Α.Α.
-            <span>Συνεταιρισμός Αστυνομικών Αττικής</span>
-          </h2>
+        <p>
+          Συγκεντρωμένες παροχές για κινητή τηλεφωνία, σταθερή, FTTH / Internet,
+          τηλεόραση, υγεία και διαδικασίες δικαιολογητικών, με καθαρή ενημέρωση
+          και άμεση επικοινωνία με τον Συνεταιρισμό.
+        </p>
 
-          <p class="official-intro-text">
-            Όλες οι προσφορές και οι παροχές για τα μέλη, συγκεντρωμένες σε μία
-            επίσημη πλατφόρμα. Ενημερωθείτε εύκολα για προγράμματα κινητής,
-            σταθερής, internet, τηλεόρασης, υγείας και συνεργαζόμενων υπηρεσιών.
-          </p>
-
-          <div class="official-intro-tags" aria-label="Κατηγορίες προσφορών">
-            <button type="button" data-modal-target="mobileModal">
-              <i class="fa-solid fa-mobile-screen"></i>
-              <span>Κινητή</span>
-            </button>
-
-            <button type="button" data-modal-target="internetChoiceModal">
-              <i class="fa-solid fa-wifi"></i>
-              <span>Internet</span>
-            </button>
-
-            <button type="button" data-modal-target="novaEonModal">
-              <i class="fa-solid fa-tv"></i>
-              <span>Τηλεόραση</span>
-            </button>
-
-            <button type="button" data-modal-target="healthModal">
-              <i class="fa-solid fa-heart-pulse"></i>
-              <span>Υγεία</span>
-            </button>
-          </div>
+        <div class="hero-actions" role="group" aria-label="Βασικές ενέργειες">
+          <a href="#offers" class="btn-primary" data-track="offer_click" data-label="hero_offers">
+            <i class="fa-solid fa-tags" aria-hidden="true"></i>
+            Δείτε προσφορές
+          </a>
+          <a href="#contact" class="btn-secondary" data-track="contact_section_click" data-label="hero_contact">
+            <i class="fa-solid fa-headset" aria-hidden="true"></i>
+            Επικοινωνία
+          </a>
+          <a href="#process" class="btn-ghost" data-track="process_click" data-label="hero_process">
+            <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+            Διαδικασία εγγραφής
+          </a>
         </div>
+      </div>
+
+      <aside class="hero-service-panel" aria-label="Στοιχεία υπηρεσίας">
+        <img src="assets/images/LOGO.webp" alt="Λογότυπο Π.Κ.Σ.Α.Α." width="400" height="218" decoding="async">
+        <div>
+          <span class="service-status">Επίσημη πλατφόρμα ενημέρωσης</span>
+          <h2>Παροχές μελών με οργανωμένη διαδικασία</h2>
+          <p>Τα CTA οδηγούν σε αναλυτικές οδηγίες, έγγραφα PDF και στοιχεία επικοινωνίας χωρίς περιττά βήματα.</p>
+        </div>
+        <div class="hero-contact-strip">
+          <a href="tel:2105245210" data-track="phone_click" data-label="hero_phone">
+            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+            210&nbsp;5245210
+          </a>
+          <a href="mailto:synetelas2011@gmail.com" data-track="email_click" data-label="hero_email">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            Email
+          </a>
+        </div>
+      </aside>
+    </section>
+
+    <section class="quick-actions" aria-labelledby="quick-actions-title">
+      <div class="section-heading">
+        <span>Γρήγορες επιλογές</span>
+        <h2 id="quick-actions-title">Βρείτε την κατηγορία που σας ενδιαφέρει</h2>
+      </div>
+
+      <div class="quick-actions-grid">
+        <button type="button" data-category-filter="mobile" data-track="category_filter_click" data-label="Κινητή τηλεφωνία" class="quick-action quick-action-mobile">
+          <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
+          <span>Κινητή τηλεφωνία</span>
+        </button>
+        <button type="button" data-category-filter="internet" data-track="category_filter_click" data-label="Σταθερή / Internet" class="quick-action quick-action-internet">
+          <i class="fa-solid fa-wifi" aria-hidden="true"></i>
+          <span>Σταθερή / Internet</span>
+        </button>
+        <button type="button" data-category-filter="tv" data-track="category_filter_click" data-label="TV" class="quick-action quick-action-tv">
+          <i class="fa-solid fa-tv" aria-hidden="true"></i>
+          <span>TV</span>
+        </button>
+        <button type="button" data-category-filter="health" data-track="category_filter_click" data-label="Υγεία" class="quick-action quick-action-health">
+          <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
+          <span>Υγεία</span>
+        </button>
+        <a href="#process" data-track="wizard_step_view" data-label="Δικαιολογητικά" class="quick-action quick-action-docs">
+          <i class="fa-solid fa-file-shield" aria-hidden="true"></i>
+          <span>Δικαιολογητικά</span>
+        </a>
       </div>
     </section>
 
-    <section id="offers-grid" class="grid grid-cols-1 md:grid-cols-6 gap-6 h-auto auto-rows-min md:auto-rows-[200px] -mt-2 md:mt-0">
+    <section id="offers" class="offers-section" aria-labelledby="offers-title">
+      <div class="section-heading section-heading-row">
+        <div>
+          <span>Προσφορές αστυνομικών</span>
+          <h2 id="offers-title">Ενεργές παροχές Π.Κ.Σ.Α.Α.</h2>
+        </div>
 
-            <article class="bento-item premium-mobile-card md:col-span-3 md:row-span-4 rounded-3xl p-8 relative overflow-hidden cursor-pointer group text-white z-0 min-h-[750px] md:min-h-0">
-                <div class="mobile-offer-bg" aria-hidden="true">
-                    <div class="mobile-orbit mobile-orbit-one"></div>
-                    <div class="mobile-orbit mobile-orbit-two"></div>
-                    <div class="mobile-signal-lines">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
+        <div class="offer-filter-bar" role="group" aria-label="Φίλτρα κατηγοριών προσφορών">
+          <button type="button" class="is-active" data-category-filter="all" data-track="category_filter_click" data-label="Όλες">Όλες</button>
+          <button type="button" data-category-filter="mobile" data-track="category_filter_click" data-label="Κινητή">Κινητή</button>
+          <button type="button" data-category-filter="internet" data-track="category_filter_click" data-label="Internet">Internet</button>
+          <button type="button" data-category-filter="tv" data-track="category_filter_click" data-label="TV">TV</button>
+          <button type="button" data-category-filter="health" data-track="category_filter_click" data-label="Υγεία">Υγεία</button>
+        </div>
+      </div>
 
-                    <div class="mobile-network-chip">
-                        <i class="fa-solid fa-sim-card"></i>
-                        <span>5G</span>
-                    </div>
-                </div>
+      <div id="offers-grid" class="offer-grid">
+        <article class="offer-card offer-card-mobile" data-offer-card data-offer="Κινητή τηλεφωνία Vodafone CU και NOVA Q" data-category="mobile">
+          <div class="offer-card-top">
+            <span class="offer-category">Κινητή τηλεφωνία</span>
+            <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
+          </div>
+          <h3>Vodafone CU / NOVA Q</h3>
+          <div class="offer-price">100€ <span>/ 12 μήνες</span></div>
+          <p>Ετήσιο πλάνο επικοινωνίας για μέλη με πλήρη κάλυψη ομιλίας και data.</p>
+          <dl class="offer-details">
+            <div><dt>Περιλαμβάνει</dt><dd>Απεριόριστη ομιλία, data, SMS ανά πάροχο.</dd></div>
+            <div><dt>Ισχύει για</dt><dd>Μέλη του Συνεταιρισμού και δικαιούχους της διαδικασίας.</dd></div>
+          </dl>
+          <ul class="offer-benefits">
+            <li>Vodafone CU: 300 GB κάθε μήνα.</li>
+            <li>NOVA Q: απεριόριστα GB.</li>
+            <li>Οδηγός για νέο αριθμό ή φορητότητα.</li>
+          </ul>
+          <div class="offer-actions">
+            <button type="button" data-modal-target="mobileModal" data-track="offer_interest_click" data-offer="Κινητή τηλεφωνία" data-category="mobile">Με ενδιαφέρει</button>
+          </div>
+          <p class="offer-note">Οι λεπτομέρειες και τα δικαιολογητικά εμφανίζονται ανά πάροχο.</p>
+        </article>
 
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/60 to-slate-950/35 pointer-events-none"></div>
+        <article class="offer-card offer-card-internet" data-offer-card data-offer="Vodafone Σταθερή και Internet" data-category="internet">
+          <div class="offer-card-top">
+            <span class="offer-category">Internet / FTTH</span>
+            <i class="fa-solid fa-wifi" aria-hidden="true"></i>
+          </div>
+          <h3>Vodafone Σταθερή &amp; Internet</h3>
+          <div class="offer-price">από 16,00€ <span>/ μήνα</span></div>
+          <p>ADSL/FTTC και FTTH πακέτα με δωρεάν router, εγκατάσταση και ενεργοποίηση.</p>
+          <dl class="offer-details">
+            <div><dt>Περιλαμβάνει</dt><dd>Απεριόριστα σταθερά + 300' προς κινητά.</dd></div>
+            <div><dt>Ισχύει για</dt><dd>Μέλη που θέλουν νέα ή υφιστάμενη σύνδεση σταθερής.</dd></div>
+          </dl>
+          <ul class="offer-benefits">
+            <li>FTTH 100 Mbps και 300 Mbps.</li>
+            <li>2 μήνες δωρεάν στα FTTH πακέτα.</li>
+            <li>Δωρεάν router Wi-Fi.</li>
+          </ul>
+          <div class="offer-actions">
+            <button type="button" data-modal-target="vodafoneFixedModal" data-track="offer_interest_click" data-offer="Vodafone Σταθερή & Internet" data-category="internet">Με ενδιαφέρει</button>
+            <a href="assets/docs/ypefthini-dilosi-vodafone-statheri.pdf" download data-track="pdf_download" data-label="ypefthini-dilosi-vodafone-statheri.pdf" data-offer="Vodafone Σταθερή & Internet">Λήψη αρχείου</a>
+          </div>
+          <p class="offer-note">Απαιτείται σωστή συμπλήρωση δικαιολογητικών και επιβεβαίωση στοιχείων.</p>
+        </article>
 
-                <div class="relative z-10 h-full flex flex-col justify-between">
-                    <div class="flex flex-row items-stretch gap-4 w-full max-w-3xl">
-                        <div class="mobile-title-panel flex-1 p-5 rounded-2xl flex flex-col items-center justify-center shadow-2xl transition duration-300 group">
-                            <span class="text-[20px] md:text-[30px] text-white-500 uppercase tracking-widest mb-2 text-center leading-tight">Κινητή Τηλεφωνία</span>
-                            <div class="flex flex-col md:flex-row items-center gap-3 md:gap-4">
-                                <span class="text-2xl md:text-4xl font-extrabold text-red-200 drop-shadow">Vodafone CU</span>
-                                <span class="hidden md:block text-white/20 text-3xl font-light">|</span>
-                                <span class="text-xl md:text-4xl font-extrabold text-blue-200 drop-shadow">NOVA Q</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-8 mt-10 md:mt-0">
+        <article class="offer-card offer-card-internet" data-offer-card data-offer="Nova Σταθερό και Internet" data-category="internet">
+          <div class="offer-card-top">
+            <span class="offer-category">Σταθερή / Internet</span>
+            <i class="fa-solid fa-tower-broadcast" aria-hidden="true"></i>
+          </div>
+          <h3>Nova 5G Home Internet</h3>
+          <div class="offer-price">17,90€ <span>/ μήνα</span></div>
+          <p>Σταθερό και internet με δωρεάν τέλη και γρήγορη διαδικασία αίτησης.</p>
+          <dl class="offer-details">
+            <div><dt>Περιλαμβάνει</dt><dd>Ταχύτητες έως 100 Mbps και απεριόριστα προς όλους.</dd></div>
+            <div><dt>Ισχύει για</dt><dd>Μέλη που θέλουν λύση σταθερού internet.</dd></div>
+          </dl>
+          <ul class="offer-benefits">
+            <li>Μηδενικό κόστος έναρξης.</li>
+            <li>Αναλυτικά βήματα για αίτηση και αποστολή.</li>
+            <li>Υποστήριξη από τον Συνεταιρισμό.</li>
+          </ul>
+          <div class="offer-actions">
+            <button type="button" data-modal-target="novaLinePhone" data-track="offer_interest_click" data-offer="Nova Σταθερό & Internet" data-category="internet">Με ενδιαφέρει</button>
+            <a href="assets/docs/StatheroAitisi.pdf" download data-track="pdf_download" data-label="StatheroAitisi.pdf" data-offer="Nova Σταθερό & Internet">Λήψη αρχείου</a>
+          </div>
+          <p class="offer-note">Για περιοχές χωρίς σαφή διεύθυνση ζητούνται επιπλέον στοιχεία τοποθεσίας.</p>
+        </article>
 
-                        <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap mb-2">
-                            <span class="text-yellow-200 text-2xl md:text-3xl whitespace-nowrap uppercase italic">Με μόνο</span>
-                            <span class="mobile-price-badge inline-block bg-yellow-400 text-slate-900 px-4 py-1 rounded-xl shadow-[0_0_20px_rgba(250,204,21,0.5)] transform -rotate-2 text-3xl md:text-4xl">
-                                100 €
-                            </span>
-                        </div>
+        <article class="offer-card offer-card-tv" data-offer-card data-offer="EON και Cosmote TV" data-category="tv">
+          <div class="offer-card-top">
+            <span class="offer-category">TV</span>
+            <i class="fa-solid fa-tv" aria-hidden="true"></i>
+          </div>
+          <h3>EON + Cosmote TV</h3>
+          <div class="offer-price">20,90€ <span>/ μήνα</span></div>
+          <p>Premium τηλεοπτικό πακέτο για αθλητικά, ταινίες και on demand περιεχόμενο.</p>
+          <dl class="offer-details">
+            <div><dt>Περιλαμβάνει</dt><dd>Αθλητικό θέαμα και 6.000+ ταινίες / σειρές.</dd></div>
+            <div><dt>Ισχύει για</dt><dd>Μέλη που επιλέγουν τηλεοπτική υπηρεσία μέσω διαδικασίας Συνεταιρισμού.</dd></div>
+          </dl>
+          <ul class="offer-benefits">
+            <li>2 πάγια δώρο.</li>
+            <li>Euroleague, Super League και επιλεγμένο premium περιεχόμενο.</li>
+            <li>Οδηγίες για ψηφιακή υπογραφή μέσω GOV.gr.</li>
+          </ul>
+          <div class="offer-actions">
+            <button type="button" data-modal-target="novaEonModal" data-track="offer_interest_click" data-offer="EON + Cosmote TV" data-category="tv">Με ενδιαφέρει</button>
+            <a href="assets/docs/AitisiTV.pdf" download data-track="pdf_download" data-label="AitisiTV.pdf" data-offer="EON + Cosmote TV">Λήψη αρχείου</a>
+          </div>
+          <p class="offer-note">Η αίτηση πρέπει να συμπληρωθεί πλήρως πριν από την αποστολή.</p>
+        </article>
 
-                        <span class="text-yellow-200 text-xl md:text-2xl block opacity-90">
-                            για 12 ολόκληρους μήνες
-                        </span>
+        <article class="offer-card offer-card-health" data-offer-card data-offer="Υγεία και Περίθαλψη" data-category="health">
+          <div class="offer-card-top">
+            <span class="offer-category">Υγεία</span>
+            <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
+          </div>
+          <h3>Υγεία &amp; Περίθαλψη</h3>
+          <div class="offer-price">32,18€ <span>/ μήνα</span></div>
+          <p>Παροχές υγείας για νοσοκομειακή κάλυψη και συνεργαζόμενες υπηρεσίες.</p>
+          <dl class="offer-details">
+            <div><dt>Περιλαμβάνει</dt><dd>Νοσοκομειακή κάλυψη 50.000€ και επιλεγμένες παροχές.</dd></div>
+            <div><dt>Ισχύει για</dt><dd>Μέλη, συνταξιούχους και μέλη οικογένειας όπου αναφέρεται στους όρους.</dd></div>
+          </dl>
+          <ul class="offer-benefits">
+            <li>Συνεργαζόμενα νοσοκομεία για επείγοντα.</li>
+            <li>Πρόσβαση σε ειδικότητες με προνομιακούς όρους.</li>
+            <li>Πληροφορίες από τα γραφεία του Συνεταιρισμού.</li>
+          </ul>
+          <div class="offer-actions">
+            <button type="button" data-modal-target="healthModal" data-track="offer_interest_click" data-offer="Υγεία & Περίθαλψη" data-category="health">Με ενδιαφέρει</button>
+          </div>
+          <p class="offer-note">Οι παροχές υγείας εμφανίζονται αναλυτικά στο παράθυρο της προσφοράς.</p>
+        </article>
+      </div>
+    </section>
 
-                        <ul class="space-y-4">
-                            <li class="flex items-center gap-4 group">
-                                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 border border-blue-400/30">
-                                    <i class="fa-solid fa-phone-flip text-blue-100 text-lg"></i>
-                                </div>
-                                <span class="text-white text-lg font-semibold tracking-wide">Απεριόριστη Ομιλία προς όλους</span>
-                            </li>
-                            <li class="flex items-center gap-4 group">
-                                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 border border-blue-400/30">
-                                    <i class="fa-solid fa-cloud-arrow-down text-blue-100 text-lg"></i>
-                                </div>
-                                <span class="text-white text-lg font-semibold tracking-wide">Ατελείωτα Data (Internet)</span>
-                            </li>
-                            <li class="flex items-center gap-4 group">
-                                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 border border-blue-400/30">
-                                    <i class="fa-solid fa-comment-sms text-blue-100 text-lg"></i>
-                                </div>
-                                <span class="text-white text-lg font-semibold tracking-wide">Δωρεάν SMS προς όλους</span>
-                            </li>
-                            <li class="w-full mt-5">
-                                <div class="mobile-provider-cta">
-                                    <div class="mobile-provider-cta-top">
-                                        <span class="mobile-provider-label">
-                                            Διαθέσιμοι πάροχοι
-                                        </span>
+    <section id="process" class="process-section" aria-labelledby="process-title">
+      <div class="section-heading">
+        <span>Διαδικασία</span>
+        <h2 id="process-title">Τέσσερα καθαρά βήματα για να προχωρήσει η αίτηση</h2>
+      </div>
+      <div class="process-steps">
+        <article data-wizard-step="1">
+          <span>Βήμα 1</span>
+          <h3>Επιλογή προσφοράς</h3>
+          <p>Διαλέγετε την προσφορά που σας ενδιαφέρει και ανοίγετε τις αναλυτικές οδηγίες.</p>
+        </article>
+        <article data-wizard-step="2">
+          <span>Βήμα 2</span>
+          <h3>Δικαιολογητικά</h3>
+          <p>Κατεβάζετε τα απαραίτητα PDF και συμπληρώνετε τα έγγραφα με βάση τον οδηγό.</p>
+        </article>
+        <article data-wizard-step="3">
+          <span>Βήμα 3</span>
+          <h3>Πληρωμή / αποστολή στοιχείων</h3>
+          <p>Αποστέλλετε τα στοιχεία στο email του Συνεταιρισμού και, όπου χρειάζεται, ολοκληρώνετε την πληρωμή.</p>
+        </article>
+        <article data-wizard-step="4">
+          <span>Βήμα 4</span>
+          <h3>Επιβεβαίωση / ενεργοποίηση</h3>
+          <p>Ο Συνεταιρισμός επιβεβαιώνει τα στοιχεία και σας ενημερώνει για την ολοκλήρωση.</p>
+        </article>
+      </div>
+    </section>
 
-                                        <span class="mobile-provider-arrow">
-                                            <i class="fa-solid fa-arrow-right"></i>
-                                        </span>
-                                    </div>
-
-                                    <div class="mobile-provider-brands">
-                                        <span class="mobile-provider-vodafone">Vodafone CU</span>
-                                        <span class="mobile-provider-divider"></span>
-                                        <span class="mobile-provider-nova">NOVA Q</span>
-                                    </div>
-
-                                    <div class="mobile-provider-bottom">
-                                        Πατήστε για λεπτομέρειες προσφοράς
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <button
-    type="button"
-    data-modal-target="mobileModal"
-    aria-label="Άνοιγμα προσφοράς κινητής"
-    class="absolute inset-0 z-10 rounded-3xl">
-</button>
-            </article>
-
-
-            <article class="bento-item min-h-[420px] md:min-h-0 md:col-span-3 md:row-span-3 bg-gradient-to-br from-red-700 via-red-600 to-slate-900 rounded-[2.5rem] p-7 border border-red-400/40 cursor-pointer relative overflow-hidden group hover:border-red-300 transition-all duration-500 shadow-2xl flex flex-col justify-between">
-
-                <div class="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/20 opacity-70"></div>
-                <div class="absolute -right-10 -top-10 w-44 h-44 bg-white/10 blur-[80px] rounded-full"></div>
-
-
-                <div class="relative z-10 w-full">
-                    <div class="flex justify-between items-start mb-8">
-                        <div class="flex flex-col gap-1">
-                            <div class="text-[10px] font-black tracking-[0.3em] text-white/80 uppercase mb-1">VODAFONE ΣΤΑΘΕΡΗ</div>
-                            <h3 class="text-2xl font-black text-white leading-tight">Σταθερή <br>και Internet</h3>
-                        </div>
-                        <div class="flex flex-col items-end gap-2">
-                            <span class="bg-white text-red-700 text-[9px] font-black px-2.5 py-1 rounded-lg shadow-lg uppercase tracking-tighter">Νέα Προσφορά</span>
-                            <i class="fa-solid fa-wifi text-white/70 group-hover:text-white transition-colors"></i>
-                        </div>
-                    </div>
-
-                    <div class="relative overflow-hidden bg-white/10 border border-white/20 backdrop-blur-md p-4 rounded-[1.5rem] group-hover:bg-white/[0.16] transition-all duration-300">
-                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-white"></div>
-
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-white shadow-inner">
-                                <i class="fa-solid fa-gift text-xl"></i>
-                            </div>
-
-                            <div class="flex flex-col">
-                                <span class="text-white font-black text-xl leading-none tracking-tight">2 ΜΗΝΕΣ ΔΩΡΕΑΝ</span>
-                                <span class="text-[10px] text-white/75 font-bold uppercase mt-1 tracking-widest">
-                                    στα FTTH πακέτα
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 space-y-2">
-                        <div class="flex items-center gap-2 text-[11px] text-white/85 font-medium italic">
-                            <i class="fa-solid fa-bolt-lightning text-white/60"></i>
-                            ADSL/FTTC, FTTH 100 Mbps, FTTH 300 Mbps
-                        </div>
-                        <div class="flex items-center gap-2 text-[11px] text-white/85 font-medium italic">
-                            <i class="fa-solid fa-phone-flip text-white/60"></i>
-                            Απεριόριστα σταθερά + 300' προς κινητά
-                        </div>
-                        <div class="flex items-center gap-2 text-[11px] text-white/85 font-medium italic">
-                            <i class="fa-solid fa-wifi text-white/60"></i>
-                            Δωρεάν router Wi-Fi
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-8 relative z-10">
-                    <div class="bg-white/10 border border-white/20 p-4 rounded-[1.8rem] backdrop-blur-sm transition-all flex items-center justify-between px-6">
-                        <div class="flex flex-col">
-                            <span class="text-[10px] font-bold text-white/75 uppercase tracking-wider">από</span>
-                            <span class="text-4xl font-black text-white">16,00€</span>
-                        </div>
-
-                        <div class="text-right">
-                            <span class="text-[15px] font-black text-white/75 uppercase tracking-widest">
-                                τον μήνα
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <button
-                    type="button"
-                    data-modal-target="vodafoneFixedModal"
-                    aria-label="Άνοιγμα προσφοράς Vodafone σταθερής και internet"
-                    class="absolute inset-0 z-10 rounded-[2.5rem]">
-                </button>
-            </article>
-
-            <article class="bento-item min-h-[350px] md:min-h-0 md:col-span-3 md:row-span-2 bg-[#0f172a] rounded-[2.5rem] p-7 border border-slate-700/50 cursor-pointer relative overflow-hidden group hover:border-orange-500/50 transition-all duration-500 shadow-2xl flex flex-col justify-between">
-
-                <div class="absolute inset-0 bg-gradient-to-br from-orange-600/20 via-transparent to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                <div class="absolute -right-10 -top-10 w-40 h-40 bg-orange-500/10 blur-[80px] rounded-full"></div>
-
-                <i class="fa-solid fa-tower-broadcast absolute -left-6 -bottom-6 text-8xl text-white/[0.03] group-hover:text-orange-500/[0.05] group-hover:scale-125 transition-all duration-700"></i>
-
-                <div class="relative z-10 w-full">
-                    <div class="flex justify-between items-start mb-8">
-                        <div class="flex flex-col gap-1">
-                            <div class="text-[10px] font-black tracking-[0.3em] text-orange-500 uppercase mb-1">NOVA 5G HOME INTERNET</div>
-                            <h3 class="text-2xl font-black text-white leading-tight">Σταθερό <br>και Internet</h3>
-                        </div>
-                        <div class="flex flex-col items-end gap-2">
-                            <span class="bg-orange-500 text-white text-[9px] font-black px-2.5 py-1 rounded-lg shadow-lg shadow-orange-500/20 animate-pulse uppercase tracking-tighter">New Gen</span>
-                            <i class="fa-solid fa-wifi text-slate-500 group-hover:text-orange-400 transition-colors"></i>
-                        </div>
-                    </div>
-
-                    <div class="relative overflow-hidden bg-white/5 border border-white/10 backdrop-blur-md p-4 rounded-[1.5rem] group-hover:bg-white/[0.08] group-hover:border-orange-500/30 transition-all duration-300">
-                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-orange-500"></div>
-
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center text-orange-500 shadow-inner">
-                                <i class="fa-solid fa-gift text-xl"></i>
-                            </div>
-
-                            <div class="flex flex-col">
-                                <span class="text-white font-black text-xl leading-none tracking-tight">ΔΩΡΕΑΝ ΤΕΛΗ</span>
-                                <span class="text-[10px] text-slate-400 font-bold uppercase mt-1 tracking-widest">
-                                    Μηδενικό κόστος έναρξης
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 space-y-2">
-                        <div class="flex items-center gap-2 text-[11px] text-slate-400 font-medium italic">
-                            <i class="fa-solid fa-bolt-lightning text-orange-500/50"></i>
-                            Ταχύτητες έως 100 Mbps
-                        </div>
-                        <div class="flex items-center gap-2 text-[11px] text-slate-400 font-medium italic">
-                            <i class="fa-solid fa-phone-flip text-orange-500/50"></i>
-                            Απεριόριστα προς όλους
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-8 relative z-10">
-                    <div class="bg-slate-800/40 border border-slate-700/50 p-4 rounded-[1.8rem] backdrop-blur-sm group-hover:border-orange-500/20 transition-all flex items-center justify-between px-6">
-                        <div class="flex flex-col">
-
-                            <span class="text-4xl font-black text-white">17,90€</span>
-                        </div>
-
-                        <div class="text-right">
-                            <span class="text-[15px] font-black text-slate-400 uppercase tracking-widest">
-                                To μηνα
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <button
-    type="button"
-    data-modal-target="novaLinePhone"
-    aria-label="Άνοιγμα προσφοράς Nova κινητής και σταθερής"
-    class="absolute inset-0 z-10 rounded-[2.5rem]">
-</button>
-            </article>
-
-            <article class="bento-item min-h-[350px] md:min-h-0 md:col-span-3 md:row-span-2 bg-slate-900 rounded-[2.5rem] p-7 border border-slate-800 cursor-pointer relative overflow-hidden group hover:border-purple-500/50 transition-all duration-500 shadow-2xl flex flex-col justify-between">
-
-                <div class="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-transparent to-red-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                <div class="absolute -right-10 -top-10 w-40 h-40 bg-purple-500/10 blur-[80px] rounded-full"></div>
-
-                <i class="fa-solid fa-clapperboard absolute -left-6 -bottom-6 text-8xl text-white/[0.03] group-hover:text-purple-500/[0.05] group-hover:scale-125 transition-all duration-700"></i>
-
-                <div class="relative z-10 w-full">
-                    <div class="flex justify-between items-start mb-8">
-                        <div class="flex flex-col gap-1">
-                            <div class="text-[10px] font-black text-purple-500 uppercase tracking-[0.3em] mb-1">Premium TV</div>
-                            <h3 class="text-2xl font-black text-white leading-tight">EON <br>+ Cosmote TV</h3>
-                        </div>
-                        <div class="flex flex-col items-end gap-2 text-right">
-                            <span class="bg-gradient-to-r from-red-600 to-purple-600 text-white text-[9px] font-black px-2.5 py-1 rounded-lg shadow-lg shadow-purple-500/20 animate-pulse uppercase">All-In</span>
-                            <i class="fa-solid fa-satellite-dish text-slate-500 group-hover:text-purple-400 transition-colors"></i>
-                        </div>
-                    </div>
-
-                    <div class="relative overflow-hidden bg-white/5 border border-white/10 backdrop-blur-md p-4 rounded-[1.5rem] group-hover:bg-white/[0.08] group-hover:border-purple-500/30 transition-all duration-300 mb-6">
-                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-500 to-purple-600"></div>
-
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-400 shadow-inner">
-                                <i class="fa-solid fa-gift text-xl"></i>
-                            </div>
-
-                            <div class="flex flex-col">
-                                <span class="text-purple-300 font-black text-lg leading-none tracking-tight uppercase">
-                                    2 ΠΑΓΙΑ ΔΩΡΟ
-                                </span>
-                                <span class="text-[10px] text-slate-400 font-bold uppercase mt-1 tracking-widest">
-                                    Αθλητικά &amp; Ταινίες
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-3">
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 w-1.5 h-1.5 rounded-full bg-purple-500 shrink-0"></div>
-                            <p class="text-[11px] text-slate-400 font-medium leading-tight">Όλο το αθλητικό θέαμα (Euroleague, Super League κ.α.)</p>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 w-1.5 h-1.5 rounded-full bg-purple-500 shrink-0"></div>
-                            <p class="text-[11px] text-slate-400 font-medium leading-tight">6.000+ Ταινίες &amp; Σειρές on demand</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-8 relative z-10">
-                    <div class="bg-slate-800/40 border border-slate-700/50 p-4 rounded-[1.8rem] backdrop-blur-sm group-hover:border-purple-500/20 transition-all flex items-center justify-between px-6">
-                        <div class="flex flex-col">
-                            <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider">Full Pack</span>
-                            <span class="text-4xl font-black text-white">20,90€</span>
-                        </div>
-                        <div class="h-8 w-px bg-slate-600"></div>
-                        <div class="text-right">
-                            <span class="text-[15px] font-black text-slate-400 uppercase tracking-widest">
-                                Το μηνα
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <button
-    type="button"
-    data-modal-target="novaEonModal"
-    aria-label="Άνοιγμα προσφοράς Nova EON"
-    class="absolute inset-0 z-10 rounded-[2.5rem]">
-</button>
-            </article>
-
-            <article class="bento-item min-h-[300px] md:min-h-0 md:col-span-3 md:row-span-2 group cursor-pointer relative perspective-1000">
-
-                <div class="relative w-full h-full bg-gradient-to-br from-slate-900 via-rose-950 to-slate-900 rounded-[2.5rem] p-7 shadow-2xl border border-rose-500/30 transform transition-all duration-500 ease-out group-hover:-rotate-x-6 group-hover:rotate-y-6 group-hover:border-rose-400/60 flex flex-col justify-between overflow-hidden">
-
-                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000 z-20 pointer-events-none"></div>
-
-                    <div class="absolute inset-0 z-0 overflow-hidden flex items-center justify-center opacity-30 group-hover:opacity-70 transition-opacity duration-700">
-                        <svg
-    viewBox="0 0 500 150"
-    class="w-full h-auto absolute top-1/2 -translate-y-1/2 text-rose-500 stroke-current fill-none stroke-[4] [stroke-linecap:round] [stroke-linejoin:round] drop-shadow-[0_0_10px_rgba(244,63,94,0.8)]">
-                            <path class="animate-ekg-line" d="M0,75 L100,75 L110,75 L120,40 L130,110 L140,75 L150,75 L160,75 L180,75 L190,40 L200,110 L210,75 L250,75 L300,75 L310,40 L320,110 L330,75 L500,75"></path>
-                        </svg>
-                    </div>
-
-                    <div class="absolute -left-10 -top-10 w-48 h-48 bg-rose-600/20 blur-[60px] rounded-full group-hover:bg-rose-500/30 transition-colors duration-700 pointer-events-none"></div>
-
-                    <div class="relative z-10 flex justify-between items-start">
-                        <div class="flex flex-col">
-                            <div class="w-12 h-12 bg-rose-500/20 rounded-2xl flex items-center justify-center text-rose-300 mb-4 shadow-inner border border-rose-400/30 backdrop-blur-md group-hover:scale-110 transition-transform duration-500">
-                                <i class="fa-solid fa-heart-pulse text-2xl animate-[heartBeat_1.5s_infinite]"></i>
-                            </div>
-
-                            <h3 class="text-2xl font-black text-white leading-tight tracking-tighter">
-                                Υγεία &amp; <br>
-                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-300 to-pink-200">Περίθαλψη</span>
-                            </h3>
-                        </div>
-
-                        <div class="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-400/20 text-emerald-300 px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest backdrop-blur-md shadow-lg">
-                            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_5px_rgba(52,211,153,0.8)]"></span>
-                            ACTIVE
-                        </div>
-                    </div>
-
-                    <div class="relative z-10 mt-auto pt-8">
-                        <div class="text-[10px] text-rose-200/60 mb-1 font-bold uppercase tracking-[0.2em] italic">"Θωράκισε την υγεία σου."</div>
-
-                        <div class="flex items-baseline gap-1 mb-3">
-                            <p class="text-4xl font-black text-white tracking-tighter drop-shadow-lg">32,18€</p>
-                            <span class="text-xs text-rose-300/60 font-bold uppercase tracking-widest">/μήνα</span>
-                        </div>
-
-                        <div class="inline-flex items-center gap-2 bg-white/10 border border-white/10 text-rose-50 text-[10px] font-bold px-3 py-2 rounded-xl backdrop-blur-md shadow-inner group-hover:bg-white/15 transition-colors">
-                            <i class="fa-solid fa-shield-halved text-rose-400 text-sm"></i>
-                            Νοσοκομειακή κάλυψη 50.000€
-                        </div>
-                    </div>
-
-                </div>
-                <button
-    type="button"
-    data-modal-target="healthModal"
-    aria-label="Άνοιγμα προσφοράς υγείας"
-    class="absolute inset-0 z-10 rounded-[2.5rem]">
-</button>
-            </article>
-
-
+    <section id="contact" class="contact-section" aria-labelledby="contact-title">
+      <div class="section-heading">
+        <span>Επικοινωνία</span>
+        <h2 id="contact-title">Μιλήστε με τον Συνεταιρισμό</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <i class="fa-solid fa-phone" aria-hidden="true"></i>
+          <a href="tel:2105245210" data-track="phone_click" data-label="2105245210">
+            <strong>210&nbsp;524&nbsp;5210</strong>
+          </a>
+          <span>Τηλέφωνο γραφείου</span>
+        </div>
+        <div class="contact-card">
+          <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
+          <a href="tel:6985177202" data-track="phone_click" data-label="6985177202">
+            <strong>698&nbsp;517&nbsp;7202</strong>
+          </a>
+          <span>Κινητό επικοινωνίας</span>
+        </div>
+        <a href="mailto:synetelas2011@gmail.com" class="contact-card" data-track="email_click" data-label="synetelas2011@gmail.com">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+          <strong>synetelas2011@gmail.com</strong>
+          <span>Email</span>
+        </a>
+        <a href="https://invite.viber.com/?g2=AQAAO36OvYPGf1Yd9eNZrLl8dHa8b6m5mv3FEDMq7g2MLXZST103lT7amKZRhH7V" target="_blank" rel="noopener noreferrer" class="contact-card" data-track="viber_click" data-label="Viber Community">
+          <i class="fa-brands fa-viber" aria-hidden="true"></i>
+          <strong>Viber / Chat</strong>
+          <span>Κοινότητα ενημερώσεων</span>
+        </a>
+      </div>
     </section>
 
     </main>
@@ -2131,7 +1977,7 @@
           <div class="relative z-10">
             <div class="internet-choice-kicker">
               <i class="fa-solid fa-wifi"></i>
-              Σταθερή & Internet
+	              Σταθερή &amp; Internet
             </div>
 
             <h3 class="internet-choice-title">
@@ -2152,27 +1998,27 @@
               data-modal-close="internetChoiceModal"
               data-modal-target="vodafoneFixedModal"
               class="internet-provider-card internet-provider-card-vodafone">
-              <div class="internet-provider-top">
-                <div class="internet-provider-icon">
+              <span class="internet-provider-top">
+                <span class="internet-provider-icon">
                   <i class="fa-solid fa-wifi"></i>
-                </div>
+                </span>
 
                 <span class="internet-provider-price">
                   από 16,00€
                 </span>
-              </div>
+              </span>
 
-              <h4>Vodafone</h4>
-              <strong>Σταθερή & Internet</strong>
+              <span class="internet-provider-name">Vodafone</span>
+              <strong>Σταθερή &amp; Internet</strong>
 
-              <p>
+              <span class="internet-provider-copy">
                 ADSL/FTTC, FTTH 100 Mbps και FTTH 300 Mbps με 2 μήνες δωρεάν στα FTTH πακέτα.
-              </p>
+              </span>
 
-              <div class="internet-provider-action">
+              <span class="internet-provider-action">
                 Προβολή προσφοράς
                 <i class="fa-solid fa-arrow-right"></i>
-              </div>
+              </span>
             </button>
 
             <button
@@ -2180,27 +2026,27 @@
               data-modal-close="internetChoiceModal"
               data-modal-target="novaLinePhone"
               class="internet-provider-card internet-provider-card-nova">
-              <div class="internet-provider-top">
-                <div class="internet-provider-icon">
+              <span class="internet-provider-top">
+                <span class="internet-provider-icon">
                   <i class="fa-solid fa-tower-broadcast"></i>
-                </div>
+                </span>
 
                 <span class="internet-provider-price">
                   17,90€
                 </span>
-              </div>
+              </span>
 
-              <h4>Nova</h4>
-              <strong>Σταθερό & Internet</strong>
+              <span class="internet-provider-name">Nova</span>
+              <strong>Σταθερό &amp; Internet</strong>
 
-              <p>
+              <span class="internet-provider-copy">
                 Σταθερό και internet με δωρεάν τέλη και ταχύτητες έως 100 Mbps.
-              </p>
+              </span>
 
-              <div class="internet-provider-action">
+              <span class="internet-provider-action">
                 Προβολή προσφοράς
                 <i class="fa-solid fa-arrow-right"></i>
-              </div>
+              </span>
             </button>
 
           </div>
@@ -2236,7 +2082,7 @@
 
               <h3 class="text-white font-black text-3xl md:text-5xl leading-[0.95] tracking-tight">
                 Σταθερή Τηλεφωνία<br>
-                <span class="text-red-100">& Internet</span>
+                <span class="text-red-100">&amp; Internet</span>
               </h3>
 
               <p class="text-red-100 text-sm md:text-base mt-4 max-w-xl leading-relaxed font-semibold">
@@ -2300,7 +2146,7 @@
               <i class="fa-solid fa-phone-flip"></i>
               <div>
                 <strong>Κλήσεις</strong>
-                <span>Απεριόριστες κλήσεις σε σταθερά & 300 λεπτά προς κινητά.</span>
+                <span>Απεριόριστες κλήσεις σε σταθερά &amp; 300 λεπτά προς κινητά.</span>
               </div>
             </div>
 
@@ -2383,7 +2229,7 @@
           <div class="vodafone-contact-actions">
             <a href="tel:2105245210">
               <i class="fa-solid fa-phone"></i>
-              <span>210 5245210</span>
+              <span>210&nbsp;524&nbsp;5210</span>
             </a>
 
             <a href="tel:6985177202">
@@ -2545,21 +2391,25 @@
             </div>
 
             <div class="info-coop-grid">
-              <a href="tel:2105245210" class="info-coop-action info-coop-action-phone">
+              <div class="info-coop-action info-coop-action-phone">
                 <i class="fa-solid fa-phone"></i>
                 <div>
-                  <strong>210 5245210</strong>
+                  <a href="tel:2105245210" data-track="phone_click" data-label="info_coop_2105245210">
+                    <strong>210&nbsp;524&nbsp;5210</strong>
+                  </a>
                   <span>Τηλέφωνο γραφείου</span>
                 </div>
-              </a>
+              </div>
 
-              <a href="tel:6985177202" class="info-coop-action info-coop-action-mobile">
+              <div class="info-coop-action info-coop-action-mobile">
                 <i class="fa-solid fa-mobile-screen"></i>
                 <div>
-                  <strong>6985177202</strong>
+                  <a href="tel:6985177202" data-track="phone_click" data-label="info_coop_6985177202">
+                    <strong>698&nbsp;517&nbsp;7202</strong>
+                  </a>
                   <span>Κινητό</span>
                 </div>
-              </a>
+              </div>
             </div>
 
             <a href="mailto:synetelas2011@gmail.com" class="info-coop-action info-coop-action-email">
@@ -2628,7 +2478,7 @@
 
     <div id="toast-container"></div>
 
-    <section class="max-w-5xl mx-auto px-4 mt-12 mb-10 reveal">
+    <section id="faq" class="max-w-5xl mx-auto px-4 mt-12 mb-10 reveal">
   <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 md:p-8">
     <div class="text-center mb-6">
       <span class="inline-flex items-center rounded-full bg-blue-50 px-4 py-1.5 text-xs font-black text-blue-700 uppercase tracking-widest">
@@ -2791,7 +2641,15 @@
             Μπορεί επίσης να χρησιμοποιούνται ανώνυμα στατιστικά για τη βελτίωση της εμπειρίας χρήσης.
         </p>
         <div class="rounded-xl bg-amber-50 border border-amber-100 p-3 text-amber-800 font-bold text-xs">
-            Μπορείτε να συνεχίσετε μόνο με τα απαραίτητα cookies από την αρχική ειδοποίηση cookies.
+            Μπορείτε να αλλάξετε την επιλογή σας οποιαδήποτε στιγμή από εδώ.
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <button type="button" data-cookie-consent="accept" class="rounded-xl bg-blue-600 p-3 font-black text-white hover:bg-blue-700 transition">
+                Αποδοχή στατιστικών
+            </button>
+            <button type="button" data-cookie-consent="reject" class="rounded-xl bg-slate-100 p-3 font-black text-slate-700 hover:bg-slate-200 transition">
+                Μόνο απαραίτητα
+            </button>
         </div>
         </div>
     </div>
@@ -2840,15 +2698,73 @@
     </div>
     </div>
 
-<script src="assets/js/offers-data.js?v=20260502"></script>
-<script src="assets/js/offers-renderer.js?v=20260502"></script>
+    <button
+        type="button"
+        id="assistantChatButton"
+        class="assistant-chat-fab"
+        data-chat-open
+        data-track="chat_open"
+        aria-label="Ρώτησε τον βοηθό">
+        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+        <span>Ρώτησε τον βοηθό</span>
+    </button>
 
-<script src="assets/js/app-state.js?v=20260522-1"></script>
-<script src="assets/js/analytics.js?v=20260522-1"></script>
-<script src="assets/js/clipboard.js?v=20260522-2"></script>
-<script src="assets/js/image-preview.js?v=20260522-1"></script>
-<script src="assets/js/ui-modals.js?v=20260522-1"></script>
-<script src="assets/js/main.js?v=13"></script>
+    <div
+        id="assistantChatModal"
+        class="assistant-chat-modal hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="assistantChatTitle"
+        aria-describedby="assistantChatDescription">
+        <div class="assistant-chat-backdrop" data-chat-close aria-hidden="true"></div>
+        <section class="assistant-chat-panel" data-chat-panel>
+            <header class="assistant-chat-header">
+                <div>
+                    <strong id="assistantChatTitle">Βοηθός Π.Κ.Σ.Α.Α.</strong>
+                    <span id="assistantChatDescription">Ρωτήστε για προσφορές, δικαιολογητικά και επικοινωνία.</span>
+                </div>
+                <button type="button" class="assistant-chat-close" data-chat-close aria-label="Κλείσιμο βοηθού">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </header>
+            <iframe
+                title="Chat βοηθός Π.Κ.Σ.Α.Α."
+                class="assistant-chat-frame"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                data-src="https://chat-kj4xqngk0-built-to-fail-inc.vercel.app/#">
+            </iframe>
+        </section>
+    </div>
+
+    <nav class="mobile-bottom-nav" aria-label="Γρήγορες ενέργειες κινητού">
+        <a href="#offers" data-track="offer_click" data-label="bottom_nav_offers">
+            <i class="fa-solid fa-tags" aria-hidden="true"></i>
+            <span>Προσφορές</span>
+        </a>
+        <a href="tel:2105245210" data-track="phone_click" data-label="bottom_nav_phone">
+            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+            <span>Κλήση</span>
+        </a>
+        <a href="mailto:synetelas2011@gmail.com" data-track="email_click" data-label="bottom_nav_email">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            <span>Email</span>
+        </a>
+        <button type="button" data-chat-open data-track="chat_open" data-label="bottom_nav_chat">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            <span>Chat</span>
+        </button>
+    </nav>
+
+<script defer src="assets/js/offers-data.js?v=20260502"></script>
+<script defer src="assets/js/offers-renderer.js?v=20260502"></script>
+
+<script defer src="assets/js/app-state.js?v=20260522-1"></script>
+<script defer src="assets/js/analytics.js?v=20260527-pro"></script>
+<script defer src="assets/js/clipboard.js?v=20260527-pro"></script>
+<script defer src="assets/js/image-preview.js?v=20260522-1"></script>
+<script defer src="assets/js/ui-modals.js?v=20260527-pro"></script>
+<script defer src="assets/js/main.js?v=20260527-pro"></script>
 
 
 </body>
