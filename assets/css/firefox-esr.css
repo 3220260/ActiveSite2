@@ -1,0 +1,100 @@
+/* Firefox ESR 115 compatibility mode */
+html.firefox-esr-mode body {
+  background: #f8fafc !important;
+}
+
+/* Κόβουμε βαριά εφέ που μπορεί να μη φορτώνουν σωστά σε Firefox ESR 115 */
+html.firefox-esr-mode .liquid-close,
+html.firefox-esr-mode .vodafone-sticky-header,
+html.firefox-esr-mode .nova-sticky-header,
+html.firefox-esr-mode .mobile-provider-modal-header,
+html.firefox-esr-mode .process-wizard-sticky,
+html.firefox-esr-mode .official-intro-badge,
+html.firefox-esr-mode .official-intro-tags button,
+html.firefox-esr-mode .mobile-title-panel,
+html.firefox-esr-mode .vodafone-fixed-price-box {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Πιο σταθερό σκοτεινό overlay στα modals */
+html.firefox-esr-mode .modal-backdrop {
+  background: rgba(15, 23, 42, 0.78) !important;
+}
+
+/* Close buttons καθαρά και εμφανή */
+html.firefox-esr-mode .liquid-close {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255,255,255,0.45) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.28) !important;
+}
+
+html.firefox-esr-mode .liquid-close::before,
+html.firefox-esr-mode .liquid-close::after {
+  display: none !important;
+}
+
+/* Intro section χωρίς περίεργα mask/gradient border */
+html.firefox-esr-mode .official-intro-card {
+  background: linear-gradient(135deg, #0f2b5c, #0f172a) !important;
+}
+
+html.firefox-esr-mode .official-intro-card::before,
+html.firefox-esr-mode .official-intro-card::after {
+  display: none !important;
+}
+
+/* Κάρτα κινητής πιο απλή και σταθερή */
+html.firefox-esr-mode .premium-mobile-card {
+  background: linear-gradient(135deg, #061226 0%, #0f2b5c 55%, #111827 100%) !important;
+}
+
+html.firefox-esr-mode .premium-mobile-card::after {
+  display: none !important;
+}
+
+html.firefox-esr-mode .premium-mobile-card .mobile-offer-bg {
+  opacity: 0.22 !important;
+}
+
+/* Sticky οδηγός πιο καθαρός */
+html.firefox-esr-mode .process-wizard-sticky {
+  background: #0f172a !important;
+  color: #ffffff !important;
+}
+
+html.firefox-esr-mode .process-wizard-sticky::before {
+  display: none !important;
+}
+
+html.firefox-esr-mode .process-wizard-sticky p,
+html.firefox-esr-mode .process-wizard-sticky h4,
+html.firefox-esr-mode .process-wizard-sticky span {
+  color: #ffffff !important;
+}
+
+/* Headers σταθερά και σκουρόχρωμα */
+html.firefox-esr-mode .mobile-provider-modal-header,
+html.firefox-esr-mode .vodafone-sticky-header,
+html.firefox-esr-mode .nova-sticky-header {
+  background: #0f172a !important;
+}
+
+/* Choice modals πιο safe */
+html.firefox-esr-mode .voda-choice-hero {
+  background: linear-gradient(135deg, #991b1b, #111827) !important;
+}
+
+html.firefox-esr-mode .nova-choice-hero {
+  background: linear-gradient(135deg, #1d4ed8, #0f172a) !important;
+}
+
+/* Μειώνουμε animation/flicker */
+html.firefox-esr-mode *,
+html.firefox-esr-mode *::before,
+html.firefox-esr-mode *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+}

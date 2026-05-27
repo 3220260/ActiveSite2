@@ -1,0 +1,71 @@
+/* =========================================
+   ANALYTICS / TRACKING
+   Μεταφέρθηκε από το main.js
+========================================= */
+
+/* =========================================
+   1. CORE SETTINGS & TRACKING
+   ========================================= */
+const GA_MEASUREMENT_ID = 'G-LHQ9SHKY6J';
+const TRACKED_OFFERS = Object.freeze({
+    mobileModal: 'Κινητή Τηλεφωνία',
+    vodaModal: 'Vodafone CU',
+    novaModal: 'NOVA Q',
+    novaLinePhone: 'Σταθερό και Internet',
+    internetChoiceModal: 'Επιλογή Σταθερής & Internet',
+    vodafoneFixedModal: 'Vodafone Σταθερή & Internet',
+    novaEonModal: 'NOVA EON TV',
+    healthModal: 'Προσφορά Υγείας',
+    gprotasisModal: 'GProtasis',
+});
+
+function loadAllTracking() {
+    if (window.trackingLoaded) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () {
+        window.dataLayer.push(arguments);
+    };
+
+    const script = document.createElement('script');
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    script.async = true;
+    document.head.appendChild(script);
+
+    window.gtag('js', new Date());
+    window.gtag('config', GA_MEASUREMENT_ID, { 'anonymize_ip': true });
+    window.trackingLoaded = true;
+}
+
+function hasAnalyticsConsent() {
+    return localStorage.getItem('cookieConsent') === 'accepted';
+}
+
+function trackEvent(category, action, label, params = {}) {
+    if (hasAnalyticsConsent() && typeof window.gtag === 'function') {
+        window.gtag('event', action, {
+            event_category: category,
+            event_label: label,
+            ...params,
+        });
+    }
+}
+
+function getOfferName(modalId) {
+    return TRACKED_OFFERS[modalId] || '';
+}
+
+function getOpenOfferContext() {
+    const openOffer = Object.keys(TRACKED_OFFERS).find((modalId) => {
+        const modal = document.getElementById(modalId);
+        return modal && !modal.classList.contains('hidden');
+    });
+
+    return openOffer ? { offer_id: openOffer, offer_name: getOfferName(openOffer) } : {};
+}
+
+function getOpenTrackedModalId() {
+    return Object.keys(TRACKED_OFFERS).find((modalId) => {
+        const modal = document.getElementById(modalId);
+        return modal && !modal.classList.contains('hidden');
+    }) || '';
+}

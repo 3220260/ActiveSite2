@@ -1,0 +1,7 @@
+/* Base styles */
+
+/* --- 1. ΒΑΣΙΚΕΣ ΡΥΘΜΙΣΕΙΣ --- */
+:root { --primary: #0f2b5c; }
+body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; color: #1e293b; overflow-x: hidden; }
+h1, h2, h3, .brand-font { font-family: 'Space Grotesk', sans-serif; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }

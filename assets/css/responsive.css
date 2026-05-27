@@ -1,0 +1,455 @@
+/* Responsive and final overrides */
+
+/* --- 10. MOBILE CLEANUP --- */
+@media (max-width: 640px) {
+    .bento-item {
+        min-height: auto !important;
+    }
+
+    .bento-item:hover {
+        transform: none !important;
+    }
+
+    .modal-backdrop {
+        backdrop-filter: none;
+    }
+}
+
+
+/* buttons inside dikaiologitika */
+#vodaChoiceOptions button,
+#novaChoiceOptions button {
+  min-height: 130px;
+  padding: 28px 18px;
+  font-size: 18px;
+  font-weight: 900;
+  border-radius: 24px;
+}
+
+@media (max-width: 640px) {
+  #vodaChoiceModal,
+  #novaChoiceModal {
+    padding: 12px !important;
+    align-items: center !important;
+  }
+
+  #vodaChoiceModal > div,
+  #novaChoiceModal > div {
+    max-height: 92vh !important;
+    overflow-y: auto !important;
+  }
+
+  #vodaChoiceOptions,
+  #novaChoiceOptions {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  #vodaChoiceOptions button,
+  #novaChoiceOptions button {
+    min-height: 72px !important;
+    height: auto !important;
+    padding: 14px 16px !important;
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+    border-radius: 18px !important;
+  }
+}
+
+#vodaModal .flex:has(> #btn-v-port):has(> #btn-v-new),
+    #novaModal .flex:has(> #btn-n-port):has(> #btn-n-new) {
+      display: none !important;
+    }
+
+    @media (min-width: 1024px) {
+      footer section:has(a[href*="invite.viber.com"]),
+      footer div:has(> a[href*="invite.viber.com"]) {
+        width: 100% !important;
+        max-width: 80rem !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+
+      footer a[href*="invite.viber.com"] {
+        width: 100% !important;
+        min-width: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0.95rem 1.25rem !important;
+        border-radius: 1.25rem !important;
+        font-size: 1rem !important;
+        line-height: 1.15 !important;
+        gap: 0.55rem !important;
+      }
+
+      footer a[href*="invite.viber.com"] img,
+      footer a[href*="invite.viber.com"] svg {
+        width: 1.25rem !important;
+        height: 1.25rem !important;
+        flex-shrink: 0 !important;
+      }
+    }
+
+    /* --- ACCESSIBILITY: REDUCED MOTION --- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* --- MOBILE FIX: μικρότερη κάρτα Κινητής Τηλεφωνίας --- */
+@media (max-width: 767px) {
+  #offers-grid {
+    gap: 1rem !important;
+  }
+
+  #offers-grid .premium-mobile-card {
+    min-height: min(560px, calc(100svh - 120px)) !important;
+    padding: 1.25rem !important;
+    border-radius: 1.5rem !important;
+  }
+
+  #offers-grid .premium-mobile-card > .relative.z-10 {
+    justify-content: center !important;
+    gap: 0.9rem !important;
+  }
+
+  #offers-grid .premium-mobile-card .mobile-title-panel {
+    padding: 0.9rem !important;
+  }
+
+  #offers-grid .premium-mobile-card .mobile-title-panel > span:first-child {
+    font-size: 17px !important;
+    letter-spacing: 0.12em !important;
+    margin-bottom: 0.35rem !important;
+  }
+
+  #offers-grid .premium-mobile-card .mobile-title-panel .text-2xl,
+  #offers-grid .premium-mobile-card .mobile-title-panel .text-xl {
+    font-size: 1.15rem !important;
+    line-height: 1.15 !important;
+  }
+
+  #offers-grid .premium-mobile-card .mt-10 {
+    margin-top: 0.4rem !important;
+  }
+
+  #offers-grid .premium-mobile-card .mb-8 {
+    margin-bottom: 0 !important;
+  }
+
+  #offers-grid .premium-mobile-card .text-2xl {
+    font-size: 1.15rem !important;
+  }
+
+  #offers-grid .premium-mobile-card .text-3xl {
+    font-size: 1.75rem !important;
+  }
+
+  #offers-grid .premium-mobile-card .text-xl {
+    font-size: 1rem !important;
+  }
+
+  #offers-grid .premium-mobile-card ul {
+    margin-top: 1rem !important;
+  }
+
+  #offers-grid .premium-mobile-card ul li {
+    gap: 0.75rem !important;
+  }
+
+  #offers-grid .premium-mobile-card ul li > div.w-10 {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+
+  #offers-grid .premium-mobile-card ul li span {
+    font-size: 0.95rem !important;
+    line-height: 1.2 !important;
+  }
+
+  #offers-grid .premium-mobile-card .mobile-provider-cta {
+    padding: 0.85rem !important;
+  }
+
+  #offers-grid .premium-mobile-card .mobile-provider-bottom {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* --- FIX: Πληροφορίες modal πιο μικρό στο desktop --- */
+#infoCoopModal .info-coop-modal {
+  width: min(92vw, 520px) !important;
+  max-height: 84vh !important;
+  border-radius: 28px !important;
+}
+
+#infoCoopModal .info-coop-scroll {
+  overflow-y: auto !important;
+  padding: 16px !important;
+}
+
+#infoCoopModal .info-coop-header {
+  padding: 16px 18px !important;
+}
+
+#infoCoopModal .info-coop-hero {
+  padding: 16px !important;
+  text-align: center !important;
+}
+
+#infoCoopModal .info-coop-logo-box img {
+  max-width: 110px !important;
+  height: auto !important;
+}
+
+#infoCoopModal .info-coop-hero h3 {
+  font-size: 24px !important;
+  line-height: 1.1 !important;
+}
+
+#infoCoopModal .info-coop-hero p {
+  font-size: 14px !important;
+  line-height: 1.35 !important;
+}
+
+#infoCoopModal .info-coop-map iframe {
+  width: 100% !important;
+  height: 180px !important;
+  border: 0 !important;
+  border-radius: 18px !important;
+}
+
+#infoCoopModal .info-coop-body {
+  display: grid !important;
+  gap: 12px !important;
+}
+
+#infoCoopModal .info-coop-action,
+#infoCoopModal .info-coop-card {
+  padding: 14px !important;
+}
+
+@media (max-width: 640px) {
+  #infoCoopModal .info-coop-modal {
+    width: 100% !important;
+    max-height: 92vh !important;
+    border-radius: 28px 28px 0 0 !important;
+  }
+
+  #infoCoopModal .info-coop-logo-box img {
+    max-width: 95px !important;
+  }
+
+  #infoCoopModal .info-coop-map iframe {
+    height: 170px !important;
+  }
+}
+/* --- FIX: Πληροφορίες modal πιο μικρό στο desktop --- */
+#infoCoopModal .info-coop-modal {
+  width: min(92vw, 520px) !important;
+  max-height: 84vh !important;
+  border-radius: 28px !important;
+}
+
+#infoCoopModal .info-coop-scroll {
+  overflow-y: auto !important;
+  padding: 16px !important;
+}
+
+#infoCoopModal .info-coop-header {
+  padding: 16px 18px !important;
+}
+
+#infoCoopModal .info-coop-hero {
+  padding: 16px !important;
+  text-align: center !important;
+}
+
+#infoCoopModal .info-coop-logo-box img {
+  max-width: 110px !important;
+  height: auto !important;
+}
+
+#infoCoopModal .info-coop-hero h3 {
+  font-size: 24px !important;
+  line-height: 1.1 !important;
+}
+
+#infoCoopModal .info-coop-hero p {
+  font-size: 14px !important;
+  line-height: 1.35 !important;
+}
+
+#infoCoopModal .info-coop-map iframe {
+  width: 100% !important;
+  height: 180px !important;
+  border: 0 !important;
+  border-radius: 18px !important;
+}
+
+#infoCoopModal .info-coop-body {
+  display: grid !important;
+  gap: 12px !important;
+}
+
+#infoCoopModal .info-coop-action,
+#infoCoopModal .info-coop-card {
+  padding: 14px !important;
+}
+
+@media (max-width: 640px) {
+  #infoCoopModal .info-coop-modal {
+    width: 100% !important;
+    max-height: 92vh !important;
+    border-radius: 28px 28px 0 0 !important;
+  }
+
+  #infoCoopModal .info-coop-logo-box img {
+    max-width: 95px !important;
+  }
+
+  #infoCoopModal .info-coop-map iframe {
+    height: 170px !important;
+  }
+}
+
+/* --- FINAL FIX: Συμμάζεμα modal Πληροφορίες --- */
+#infoCoopModal .info-coop-modal {
+  width: min(94vw, 480px) !important;
+  max-height: 82vh !important;
+  overflow: hidden !important;
+}
+
+#infoCoopModal .info-coop-scroll {
+  overflow-y: auto !important;
+  padding: 12px !important;
+}
+
+#infoCoopModal .info-coop-hero {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 14px 12px !important;
+  margin: 0 0 12px 0 !important;
+  border-radius: 22px !important;
+  min-height: auto !important;
+  height: auto !important;
+}
+
+#infoCoopModal .info-coop-logo-box {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 auto 8px auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+#infoCoopModal .info-coop-logo-box img {
+  width: 82px !important;
+  max-width: 82px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+#infoCoopModal .info-coop-hero h3 {
+  margin: 4px 0 2px 0 !important;
+  font-size: 22px !important;
+  line-height: 1.1 !important;
+}
+
+#infoCoopModal .info-coop-hero p {
+  margin: 0 !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+}
+
+#infoCoopModal .info-coop-hero span {
+  margin-top: 4px !important;
+  font-size: 11px !important;
+}
+
+#infoCoopModal .info-coop-map iframe {
+  height: 155px !important;
+  border-radius: 16px !important;
+}
+
+
+/* --- FINAL FIX: Συμμάζεμα modal Πληροφορίες --- */
+#infoCoopModal .info-coop-modal {
+  width: min(94vw, 480px) !important;
+  max-height: 82vh !important;
+  overflow: hidden !important;
+}
+
+#infoCoopModal .info-coop-scroll {
+  overflow-y: auto !important;
+  padding: 12px !important;
+}
+
+#infoCoopModal .info-coop-hero {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 14px 12px !important;
+  margin: 0 0 12px 0 !important;
+  border-radius: 22px !important;
+  min-height: auto !important;
+  height: auto !important;
+}
+
+#infoCoopModal .info-coop-logo-box {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 auto 8px auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+#infoCoopModal .info-coop-logo-box img {
+  width: 82px !important;
+  max-width: 82px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+#infoCoopModal .info-coop-hero h3 {
+  margin: 4px 0 2px 0 !important;
+  font-size: 22px !important;
+  line-height: 1.1 !important;
+}
+
+#infoCoopModal .info-coop-hero p {
+  margin: 0 !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+}
+
+#infoCoopModal .info-coop-hero span {
+  margin-top: 4px !important;
+  font-size: 11px !important;
+}
+python3 -m http.server 5500
+#infoCoopModal .info-coop-map iframe {
+  height: 155px !important;
+  border-radius: 16px !important;
+}
+

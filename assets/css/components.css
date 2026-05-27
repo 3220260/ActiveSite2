@@ -1,0 +1,2902 @@
+/* Components */
+
+/* --- 4. UI ELEMENTS (CARDS, MODALS, SCROLL) --- */
+#offers-grid { position: relative; z-index: 1; }   
+.bento-item { display: flex; flex-direction: column; height: auto; min-height: 420px; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+.bento-item.min-h-\[300px\], .bento-item.min-h-\[350px\] { min-height: 350px !important; }
+.bento-item:hover { transform: translateY(-5px); box-shadow: 0 20px 40px -5px rgba(15, 43, 92, 0.15); z-index: 10; }
+.shrink-0 { flex-shrink: 0 !important; }   
+
+.modal-backdrop { z-index: 9999 !important; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); }
+.max-h-\[90vh\] { max-height: 85vh; max-height: 85dvh; }
+
+.custom-scroll::-webkit-scrollbar { width: 8px; }
+.custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+.custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); will-change: opacity, transform; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* --- 5. TOAST NOTIFICATIONS --- */
+#toast-container { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; width: 90%; max-width: 400px; }
+.toast { background: rgba(251, 255, 255, 0.95); backdrop-filter: blur(10px); color: rgb(24, 151, 7); padding: 12px 24px; border-radius: 50px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 12px; font-size: 0.9rem; font-weight: 600; transform: translateY(100px); opacity: 0; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); will-change: transform, opacity; }
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* --- 9. PROCESS HEADER STEP BADGE --- */
+[data-process-header-step] {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    [data-process-header-step] {
+        display: inline-flex !important;
+    }
+}
+
+/* --- OFFICIAL INTRO SECTION --- */
+.official-intro {
+    position: relative;
+}
+
+.official-intro-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    background:
+        linear-gradient(135deg, rgba(15, 43, 92, 0.96), rgba(15, 23, 42, 0.98)),
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.35), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(220, 38, 38, 0.28), transparent 30%);
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
+}
+
+.official-intro-content {
+    position: relative;
+    z-index: 2;
+    max-width: 850px;
+}
+
+.official-intro-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #dbeafe;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    backdrop-filter: blur(12px);
+}
+
+.official-intro-title {
+    margin-top: 1rem;
+    color: #ffffff;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    line-height: 0.95;
+    font-weight: 950;
+    letter-spacing: -0.06em;
+}
+
+.official-intro-title span {
+    display: block;
+    margin-top: 0.55rem;
+    max-width: 720px;
+    color: #bfdbfe;
+    font-size: clamp(1.25rem, 2.4vw, 2.2rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+}
+
+.official-intro-text {
+    margin-top: 1.15rem;
+    max-width: 760px;
+    color: rgba(241, 245, 249, 0.86);
+    font-size: 1rem;
+    line-height: 1.8;
+    font-weight: 600;
+}
+
+.official-intro-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 1.4rem;
+}
+
+.official-intro-tags button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 900;
+    backdrop-filter: blur(10px);
+}
+
+.official-intro-glow {
+    position: absolute;
+    width: 18rem;
+    height: 18rem;
+    border-radius: 9999px;
+    filter: blur(55px);
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.official-intro-glow-blue {
+    right: -6rem;
+    top: -5rem;
+    background: #2563eb;
+}
+
+.official-intro-glow-red {
+    left: -7rem;
+    bottom: -7rem;
+    background: #dc2626;
+}
+
+@media (max-width: 640px) {
+    .official-intro-card {
+        padding: 1.25rem;
+        border-radius: 1.5rem;
+    }
+
+    .official-intro-text {
+        font-size: 0.92rem;
+        line-height: 1.65;
+    }
+
+    .official-intro-tags {
+        gap: 0.5rem;
+    }
+
+    .official-intro-tags button {
+        flex: 1 1 calc(50% - 0.5rem);
+        justify-content: center;
+        font-size: 0.75rem;
+        padding: 0.65rem 0.7rem;
+    }
+}
+
+.official-intro-tags button {
+    cursor: pointer;
+    appearance: none;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.official-intro-tags button:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.32);
+    transform: translateY(-3px);
+}
+
+.official-intro-tags button:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.45);
+    outline-offset: 3px;
+}
+
+/* --- PREMIUM MOBILE OFFER CARD --- */
+.mobile-offer-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.mobile-offer-bg::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.22), transparent 30%),
+        radial-gradient(circle at 80% 25%, rgba(220, 38, 38, 0.20), transparent 32%),
+        radial-gradient(circle at 50% 90%, rgba(14, 165, 233, 0.14), transparent 36%);
+    filter: blur(10px);
+    opacity: 0.55;
+}
+
+.mobile-offer-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 38px 38px;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 78%);
+}
+
+.mobile-orbit {
+    position: absolute;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    box-shadow: inset 0 0 35px rgba(255,255,255,0.05);
+}
+
+.mobile-orbit-one {
+    width: 420px;
+    height: 420px;
+    right: -150px;
+    top: -120px;
+}
+
+.mobile-orbit-two {
+    width: 300px;
+    height: 300px;
+    left: -110px;
+    bottom: 80px;
+}
+
+.mobile-signal-lines {
+    position: absolute;
+    right: 36px;
+    top: 35%;
+    width: 190px;
+    height: 190px;
+}
+
+.mobile-signal-lines span {
+    position: absolute;
+    inset: 0;
+    border: 2px solid rgba(255,255,255,0.18);
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    transform: rotate(-35deg);
+}
+
+.mobile-signal-lines span:nth-child(2) {
+    inset: 28px;
+    opacity: 0.75;
+}
+
+.mobile-signal-lines span:nth-child(3) {
+    inset: 56px;
+    opacity: 0.55;
+}
+
+.mobile-network-chip {
+    position: absolute;
+    right: 2rem;
+    top: 7rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 1rem;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(14px);
+    color: #ffffff;
+    font-weight: 950;
+    letter-spacing: -0.02em;
+    box-shadow: 0 18px 35px rgba(0,0,0,0.25);
+}
+
+.mobile-network-chip i {
+    color: #bfdbfe;
+}
+
+.mobile-data-pill {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 115px;
+    padding: 0.55rem 0.85rem;
+    border-radius: 9999px;
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 950;
+    letter-spacing: 0.02em;
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.22);
+}
+
+.mobile-data-pill-red {
+    right: 1.25rem;
+    bottom: 10rem;
+    background: rgba(220, 38, 38, 0.72);
+}
+
+.mobile-data-pill-blue {
+    left: 2rem;
+    bottom: 14rem;
+    background: rgba(37, 99, 235, 0.72);
+}
+
+@media (max-width: 640px) {
+    .mobile-network-chip {
+        right: 1rem;
+        top: 6.5rem;
+        transform: scale(0.9);
+    }
+
+    .mobile-signal-lines {
+        right: -30px;
+        top: 38%;
+        opacity: 0.65;
+    }
+
+    .mobile-data-pill-red {
+        right: 1rem;
+        bottom: 8rem;
+    }
+
+    .mobile-data-pill-blue {
+        left: 1rem;
+        bottom: 11rem;
+    }
+}
+
+/* --- CLEAN DARK MOBILE CARD FIX --- */
+.premium-mobile-card {
+    background:
+        linear-gradient(135deg, #061226 0%, #0f2b5c 48%, #2b0b15 100%) !important;
+    isolation: isolate;
+}
+
+.premium-mobile-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to bottom, rgba(2, 6, 23, 0.15), rgba(2, 6, 23, 0.82)),
+        radial-gradient(circle at 80% 20%, rgba(220, 38, 38, 0.18), transparent 32%),
+        radial-gradient(circle at 20% 10%, rgba(37, 99, 235, 0.22), transparent 34%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.premium-mobile-card .mobile-offer-bg {
+    opacity: 0.42;
+    z-index: 0;
+}
+
+.premium-mobile-card .mobile-offer-bg::before {
+    background:
+        radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.18), transparent 32%),
+        radial-gradient(circle at 80% 25%, rgba(220, 38, 38, 0.16), transparent 34%) !important;
+    opacity: 0.45 !important;
+    filter: blur(18px) !important;
+}
+
+.premium-mobile-card .mobile-offer-bg::after {
+    opacity: 0.18;
+}
+
+.premium-mobile-card .mobile-signal-lines {
+    opacity: 0.35;
+}
+
+.premium-mobile-card .mobile-network-chip {
+    background: rgba(15, 23, 42, 0.72);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+.mobile-title-panel {
+    background: rgba(2, 6, 23, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(16px);
+}
+
+.premium-mobile-card .relative.z-10 {
+    position: relative;
+    z-index: 5;
+}
+
+@media (max-width: 640px) {
+    .premium-mobile-card .mobile-offer-bg {
+        opacity: 0.28;
+    }
+
+    .premium-mobile-card .mobile-signal-lines {
+        opacity: 0.18;
+    }
+
+    .premium-mobile-card .mobile-network-chip {
+        opacity: 0.65;
+    }
+}
+
+.premium-mobile-card::after {
+    content: "";
+    position: absolute;
+    top: -45%;
+    left: -75%;
+    width: 45%;
+    height: 190%;
+    transform: rotate(18deg);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.12),
+        transparent
+    );
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* --- MOBILE PROVIDER CTA --- */
+.mobile-provider-cta {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 1.25rem;
+    padding: 1rem;
+    background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.86)),
+        linear-gradient(90deg, rgba(220, 38, 38, 0.18), rgba(37, 99, 235, 0.18));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 18px 40px rgba(2, 6, 23, 0.32);
+    backdrop-filter: blur(14px);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.mobile-provider-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(255, 255, 255, 0.10),
+        transparent
+    );
+    transform: translateX(-120%);
+    transition: transform 0.7s ease;
+    pointer-events: none;
+}
+
+.group:hover .mobile-provider-cta {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.30);
+    box-shadow: 0 22px 55px rgba(37, 99, 235, 0.22);
+}
+
+.group:hover .mobile-provider-cta::before {
+    transform: translateX(120%);
+}
+
+.mobile-provider-cta-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.mobile-provider-label {
+    color: rgba(226, 232, 240, 0.82);
+    font-size: 0.72rem;
+    font-weight: 950;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.mobile-provider-arrow {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.group:hover .mobile-provider-arrow {
+    transform: translateX(4px);
+    background: rgba(255, 255, 255, 0.20);
+}
+
+.mobile-provider-brands {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    margin-top: 0.9rem;
+    flex-wrap: wrap;
+}
+
+.mobile-provider-vodafone,
+.mobile-provider-nova {
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    line-height: 1;
+    font-weight: 950;
+    letter-spacing: -0.04em;
+}
+
+.mobile-provider-vodafone {
+    color: #fecaca;
+    text-shadow: 0 0 18px rgba(248, 113, 113, 0.28);
+}
+
+.mobile-provider-nova {
+    color: #bfdbfe;
+    text-shadow: 0 0 18px rgba(96, 165, 250, 0.28);
+}
+
+.mobile-provider-divider {
+    width: 1px;
+    height: 1.75rem;
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.mobile-provider-bottom {
+    margin-top: 0.75rem;
+    color: rgba(241, 245, 249, 0.72);
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-align: center;
+}
+
+@media (max-width: 640px) {
+    .mobile-provider-cta {
+        padding: 0.9rem;
+    }
+
+    .mobile-provider-label {
+        font-size: 0.64rem;
+    }
+
+    .mobile-provider-bottom {
+        font-size: 0.72rem;
+    }
+}
+
+/* --- PREMIUM VODAFONE FIXED MODAL --- */
+.vodafone-fixed-modal {
+    background: #ffffff;
+}
+
+.vodafone-fixed-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+    background:
+        linear-gradient(135deg, #7f1d1d 0%, #dc2626 45%, #111827 100%);
+}
+
+.vodafone-fixed-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 38px 38px;
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.vodafone-fixed-hero-glow {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(70px);
+    pointer-events: none;
+}
+
+.vodafone-fixed-hero-glow-one {
+    width: 16rem;
+    height: 16rem;
+    right: -5rem;
+    top: -5rem;
+    background: rgba(255,255,255,0.20);
+}
+
+.vodafone-fixed-hero-glow-two {
+    width: 18rem;
+    height: 18rem;
+    left: -6rem;
+    bottom: -8rem;
+    background: rgba(15,23,42,0.45);
+}
+
+.vodafone-fixed-price-box {
+    border-radius: 2rem;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.20);
+    box-shadow: 0 24px 70px rgba(0,0,0,0.25);
+    backdrop-filter: blur(18px);
+    text-align: center;
+}
+
+.vodafone-plan-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.75rem;
+    padding: 1.25rem;
+    background: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 1);
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+    text-align: center;
+}
+
+.vodafone-plan-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #dc2626, #991b1b);
+}
+
+.vodafone-plan-featured {
+    border-color: rgba(220, 38, 38, 0.28);
+    box-shadow: 0 24px 55px rgba(220, 38, 38, 0.12);
+}
+
+.vodafone-plan-ribbon {
+    display: inline-flex;
+    margin-bottom: 0.8rem;
+    border-radius: 9999px;
+    padding: 0.35rem 0.7rem;
+    background: #dc2626;
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 950;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.vodafone-plan-top span {
+    display: block;
+    color: #991b1b;
+    font-size: 0.68rem;
+    font-weight: 950;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.vodafone-plan-top strong {
+    display: block;
+    color: #0f172a;
+    font-size: 0.98rem;
+    font-weight: 950;
+    margin-top: 0.25rem;
+}
+
+.vodafone-plan-card h4 {
+    margin-top: 0.9rem;
+    font-weight: 950;
+    color: #111827;
+}
+
+.vodafone-plan-card p {
+    margin-top: 0.2rem;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.vodafone-plan-price {
+    margin-top: 1rem;
+    color: #dc2626;
+    font-size: 2.6rem;
+    line-height: 1;
+    font-weight: 950;
+    letter-spacing: -0.05em;
+}
+
+.vodafone-plan-note {
+    margin-top: 0.35rem;
+    color: #64748b;
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.vodafone-benefits-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .vodafone-benefits-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.vodafone-benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    border-radius: 1.5rem;
+    padding: 1rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+}
+
+.vodafone-benefit i {
+    display: inline-flex;
+    width: 2.55rem;
+    height: 2.55rem;
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: center;
+    background: #fee2e2;
+    color: #dc2626;
+    flex-shrink: 0;
+}
+
+.vodafone-benefit strong {
+    display: block;
+    color: #0f172a;
+    font-weight: 950;
+}
+
+.vodafone-benefit span {
+    display: block;
+    color: #64748b;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin-top: 0.2rem;
+}
+
+.vodafone-docs-box {
+    border-radius: 2rem;
+    border: 1px solid #fed7aa;
+    background: linear-gradient(135deg, #fffbeb, #ffffff);
+    padding: 1.25rem;
+}
+
+.vodafone-docs-title {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: #7c2d12;
+    font-weight: 950;
+    font-size: 1.05rem;
+}
+
+.vodafone-docs-title i {
+    color: #dc2626;
+}
+
+.vodafone-doc-item {
+    border-radius: 1.25rem;
+    background: rgba(255,255,255,0.82);
+    border: 1px solid rgba(251, 191, 36, 0.28);
+    padding: 1rem;
+}
+
+.vodafone-doc-item span {
+    display: inline-flex;
+    width: 1.75rem;
+    height: 1.75rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: #dc2626;
+    color: white;
+    font-weight: 950;
+    margin-bottom: 0.55rem;
+}
+
+.vodafone-doc-item p {
+    color: #475569;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    font-weight: 650;
+}
+
+.vodafone-declaration-box {
+    margin-top: 1rem;
+    border-radius: 1.5rem;
+    border: 1px solid #fde68a;
+    background: #ffffff;
+    padding: 1rem;
+}
+
+.vodafone-declaration-box p {
+    color: #334155;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    font-style: italic;
+}
+
+.vodafone-declaration-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-top: 0.85rem;
+    color: #92400e;
+    font-size: 0.78rem;
+    font-weight: 900;
+}
+
+.vodafone-contact-actions {
+    display: grid;
+    gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .vodafone-contact-actions {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.vodafone-contact-actions a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    border-radius: 1.25rem;
+    padding: 1rem;
+    color: #ffffff;
+    font-weight: 950;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.vodafone-contact-actions a:nth-child(1) {
+    background: #dc2626;
+}
+
+.vodafone-contact-actions a:nth-child(2) {
+    background: #111827;
+}
+
+.vodafone-contact-actions a:nth-child(3) {
+    background: #2563eb;
+}
+
+.vodafone-contact-actions a:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+}
+
+@media (max-width: 640px) {
+    .vodafone-fixed-hero {
+        padding: 1.5rem;
+    }
+
+    .vodafone-fixed-price-box {
+        padding: 1.15rem;
+    }
+
+    .vodafone-plan-price {
+        font-size: 2.25rem;
+    }
+}
+
+/* --- VODAFONE MODAL STICKY HEADER --- */
+.vodafone-sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+    background: rgba(127, 29, 29, 0.94);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.22);
+}
+
+.vodafone-sticky-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-width: 0;
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 950;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.vodafone-sticky-badge i {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+.vodafone-sticky-badge span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vodafone-sticky-close {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 950;
+    transition: background 0.2s ease, transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.vodafone-sticky-close:hover {
+    background: rgba(255, 255, 255, 0.26);
+    transform: scale(1.04);
+}
+
+@media (max-width: 640px) {
+    .vodafone-sticky-header {
+        padding: 0.75rem 0.85rem;
+    }
+
+    .vodafone-sticky-badge {
+        font-size: 0.68rem;
+        letter-spacing: 0.04em;
+    }
+
+    .vodafone-sticky-badge i {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+
+    .vodafone-sticky-close {
+        width: 2.15rem;
+        height: 2.15rem;
+    }
+}
+
+/* --- NOVA MODAL STICKY HEADER --- */
+.nova-sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+    background: linear-gradient(135deg, rgba(0, 87, 255, 0.96), rgba(249, 115, 22, 0.94));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.22);
+    flex-shrink: 0;
+}
+
+.nova-sticky-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-width: 0;
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 950;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.nova-sticky-badge i {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+.nova-sticky-badge span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nova-sticky-close {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 950;
+    transition: background 0.2s ease, transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.nova-sticky-close:hover {
+    background: rgba(255, 255, 255, 0.30);
+    transform: scale(1.04);
+}
+
+@media (max-width: 640px) {
+    .nova-sticky-header {
+        padding: 0.75rem 0.85rem;
+    }
+
+    .nova-sticky-badge {
+        font-size: 0.66rem;
+        letter-spacing: 0.04em;
+    }
+
+    .nova-sticky-badge i {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+
+    .nova-sticky-close {
+        width: 2.15rem;
+        height: 2.15rem;
+    }
+}
+
+/* --- LIQUID GLASS CLOSE BUTTONS --- */
+.liquid-close {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border-radius: 9999px !important;
+    min-width: 2.4rem;
+    min-height: 2.4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff !important;
+    background:
+        linear-gradient(135deg, rgba(255,255,255,0.24), rgba(255,255,255,0.08)) !important;
+    border: 1px solid rgba(255,255,255,0.28) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        0 12px 30px rgba(15,23,42,0.25) !important;
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    transition:
+        transform 0.22s ease,
+        background 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+}
+
+.liquid-close::before {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: inherit;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.55), transparent 32%),
+        linear-gradient(145deg, rgba(255,255,255,0.18), transparent 55%);
+    opacity: 0.55;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.liquid-close::after {
+    content: "";
+    position: absolute;
+    top: -60%;
+    left: -90%;
+    width: 65%;
+    height: 220%;
+    transform: rotate(22deg);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.38),
+        transparent
+    );
+    opacity: 0;
+    pointer-events: none;
+}
+
+.liquid-close:hover {
+    transform: scale(1.06) rotate(3deg);
+    background:
+        linear-gradient(135deg, rgba(255,255,255,0.34), rgba(255,255,255,0.12)) !important;
+    border-color: rgba(255,255,255,0.46) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.48),
+        0 16px 42px rgba(15,23,42,0.32) !important;
+}
+
+.liquid-close:hover::after {
+    animation: liquidCloseShine 0.75s ease forwards;
+}
+
+.liquid-close:active {
+    transform: scale(0.96);
+}
+
+.liquid-close:focus-visible {
+    outline: 3px solid rgba(255,255,255,0.55);
+    outline-offset: 3px;
+}
+
+@keyframes liquidCloseShine {
+    from {
+        left: -90%;
+        opacity: 0;
+    }
+    35% {
+        opacity: 1;
+    }
+    to {
+        left: 130%;
+        opacity: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .liquid-close {
+        min-width: 2.25rem;
+        min-height: 2.25rem;
+    }
+}
+
+/* --- STICKY ACTIVATION GUIDE HEADER --- */
+.process-wizard-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 45;
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    box-shadow:
+        0 16px 35px rgba(15, 23, 42, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.process-wizard-sticky::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.72),
+        rgba(255, 255, 255, 0.38)
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+
+.process-wizard-sticky [data-process-step-title] {
+    max-width: 100%;
+}
+
+.process-wizard-sticky .liquid-close {
+    min-width: 2.4rem;
+    min-height: 2.4rem;
+}
+
+@media (max-width: 640px) {
+    .process-wizard-sticky {
+        top: 0;
+        margin-left: -0.25rem;
+        margin-right: -0.25rem;
+        border-radius: 1rem;
+    }
+
+    .process-wizard-sticky [data-process-main-title] {
+        display: none;
+    }
+}
+
+/* --- DARK STICKY ACTIVATION GUIDE FIX --- */
+.process-wizard-sticky {
+    background: rgba(15, 23, 42, 0.94) !important;
+    border-color: rgba(255, 255, 255, 0.18) !important;
+    color: #ffffff !important;
+    box-shadow:
+        0 18px 45px rgba(2, 6, 23, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+
+.process-wizard-sticky::before {
+    background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.88)),
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.22), transparent 34%),
+        radial-gradient(circle at bottom left, rgba(239, 68, 68, 0.16), transparent 34%) !important;
+}
+
+.process-wizard-sticky p,
+.process-wizard-sticky h4,
+.process-wizard-sticky span {
+    color: #ffffff !important;
+}
+
+.process-wizard-sticky [data-process-step-title] {
+    color: #ffffff !important;
+}
+
+.process-wizard-sticky [data-process-current],
+.process-wizard-sticky [data-process-total] {
+    color: #bfdbfe !important;
+}
+
+.process-wizard-sticky [data-process-main-title] {
+    background: rgba(255, 255, 255, 0.14) !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+    color: #ffffff !important;
+}
+
+.process-wizard-sticky [data-process-dots] > * {
+    background: rgba(255, 255, 255, 0.28) !important;
+}
+
+.process-wizard-sticky .liquid-close {
+    background:
+        linear-gradient(135deg, rgba(220, 38, 38, 0.95), rgba(127, 29, 29, 0.9)) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.42) !important;
+    box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+}
+
+.process-wizard-sticky .liquid-close:hover {
+    background:
+        linear-gradient(135deg, rgba(239, 68, 68, 1), rgba(153, 27, 27, 0.95)) !important;
+    transform: scale(1.07);
+}
+
+@media (max-width: 640px) {
+    .process-wizard-sticky {
+        background: rgba(15, 23, 42, 0.97) !important;
+    }
+}
+
+/* --- MOBILE PROVIDER MODAL DARK HEADER --- */
+.mobile-provider-modal-header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.94)),
+        radial-gradient(circle at top right, rgba(239, 68, 68, 0.18), transparent 34%),
+        radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.18), transparent 34%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 16px 38px rgba(15, 23, 42, 0.25);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    flex-shrink: 0;
+}
+
+.mobile-provider-modal-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 950;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.mobile-provider-modal-title i {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+.mobile-provider-modal-title span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mobile-provider-modal-close {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    font-size: 1rem;
+    font-weight: 950;
+    flex-shrink: 0;
+}
+
+#mobileOffersProviderGrid {
+    background: #f8fafc;
+}
+
+@media (max-width: 640px) {
+    .mobile-provider-modal-header {
+        padding: 0.85rem 1rem;
+    }
+
+    .mobile-provider-modal-title {
+        font-size: 0.9rem;
+        letter-spacing: 0.04em;
+    }
+
+    .mobile-provider-modal-title i {
+        width: 2.1rem;
+        height: 2.1rem;
+    }
+
+    .mobile-provider-modal-close {
+        min-width: 2.25rem;
+        min-height: 2.25rem;
+    }
+}
+
+/* --- PREMIUM VODAFONE CHOICE MODAL --- */
+.voda-choice-modal {
+    isolation: isolate;
+}
+
+.voda-choice-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 1.5rem;
+    background:
+        linear-gradient(135deg, #b91c1c 0%, #ef000f 48%, #111827 100%);
+}
+
+.voda-choice-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size: 34px 34px;
+    opacity: 0.16;
+    pointer-events: none;
+}
+
+.voda-choice-glow {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(60px);
+    pointer-events: none;
+}
+
+.voda-choice-glow-one {
+    width: 13rem;
+    height: 13rem;
+    right: -4rem;
+    top: -4rem;
+    background: rgba(255,255,255,0.20);
+}
+
+.voda-choice-glow-two {
+    width: 15rem;
+    height: 15rem;
+    left: -6rem;
+    bottom: -7rem;
+    background: rgba(15,23,42,0.45);
+}
+
+.voda-choice-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    border-radius: 9999px;
+    padding: 0.45rem 0.75rem;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 950;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    backdrop-filter: blur(12px);
+}
+
+.voda-choice-title {
+    margin-top: 1rem;
+    color: #ffffff;
+    font-size: clamp(1.7rem, 4vw, 2.65rem);
+    line-height: 0.95;
+    font-weight: 950;
+    letter-spacing: -0.045em;
+}
+
+.voda-choice-subtitle {
+    margin-top: 0.8rem;
+    max-width: 34rem;
+    color: rgba(255,255,255,0.82);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    font-weight: 700;
+}
+
+.voda-choice-close {
+    flex-shrink: 0;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    font-size: 1.1rem;
+}
+
+.voda-choice-body {
+    padding: 1.25rem;
+    background:
+        radial-gradient(circle at top right, rgba(239, 68, 68, 0.08), transparent 32%),
+        #f8fafc;
+}
+
+.voda-choice-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    border-radius: 1.25rem;
+    padding: 0.9rem 1rem;
+    background: #ffffff;
+    border: 1px solid #fee2e2;
+    color: #7f1d1d;
+    font-size: 0.86rem;
+    font-weight: 850;
+    box-shadow: 0 10px 25px rgba(15,23,42,0.06);
+}
+
+.voda-choice-info i {
+    margin-top: 0.15rem;
+    color: #dc2626;
+}
+
+.voda-choice-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+    .voda-choice-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Τα κουμπιά μέσα στο vodaChoiceOptions δημιουργούνται δυναμικά από JS */
+.voda-choice-options > button {
+    position: relative;
+    overflow: hidden;
+    min-height: 8.5rem !important;
+    border-radius: 1.6rem !important;
+    padding: 1.35rem !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    font-size: 1.35rem !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.035em;
+    border: 1px solid rgba(255,255,255,0.14) !important;
+    box-shadow: 0 18px 45px rgba(15,23,42,0.14) !important;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease !important;
+}
+
+.voda-choice-options > button::before {
+    content: "";
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 1rem;
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.20);
+}
+
+.voda-choice-options > button::after {
+    content: "→";
+    position: absolute;
+    top: 1.15rem;
+    right: 1.88rem;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 950;
+    transition: transform 0.22s ease;
+}
+
+.voda-choice-options > button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 60px rgba(15,23,42,0.22) !important;
+    filter: brightness(1.02);
+}
+
+.voda-choice-options > button:hover::after {
+    transform: translateX(4px);
+}
+
+.voda-choice-options > button:first-child {
+    background:
+        linear-gradient(135deg, #111827, #1e293b) !important;
+}
+
+.voda-choice-options > button:last-child {
+    background:
+        linear-gradient(135deg, #ef000f, #991b1b) !important;
+}
+
+.voda-choice-help {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+    .voda-choice-help {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.voda-choice-help div {
+    border-radius: 1.15rem;
+    padding: 0.9rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+}
+
+.voda-choice-help strong {
+    display: block;
+    color: #0f172a;
+    font-size: 0.85rem;
+    font-weight: 950;
+}
+
+.voda-choice-help span {
+    display: block;
+    margin-top: 0.25rem;
+    color: #64748b;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    font-weight: 700;
+}
+
+@media (max-width: 640px) {
+    .voda-choice-hero {
+        padding: 1.2rem;
+    }
+
+    .voda-choice-body {
+        padding: 1rem;
+    }
+
+    .voda-choice-options > button {
+        min-height: 7.25rem !important;
+        font-size: 1.15rem !important;
+    }
+}
+
+/* --- PREMIUM NOVA CHOICE MODAL --- */
+.nova-choice-modal {
+    isolation: isolate;
+}
+
+.nova-choice-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 1.5rem;
+    background:
+        linear-gradient(135deg, #0057ff 0%, #2563eb 42%, #f97316 100%);
+}
+
+.nova-choice-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 34px 34px;
+    opacity: 0.16;
+    pointer-events: none;
+}
+
+.nova-choice-glow {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(60px);
+    pointer-events: none;
+}
+
+.nova-choice-glow-one {
+    width: 13rem;
+    height: 13rem;
+    right: -4rem;
+    top: -4rem;
+    background: rgba(255,255,255,0.24);
+}
+
+.nova-choice-glow-two {
+    width: 15rem;
+    height: 15rem;
+    left: -6rem;
+    bottom: -7rem;
+    background: rgba(15,23,42,0.35);
+}
+
+.nova-choice-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    border-radius: 9999px;
+    padding: 0.45rem 0.75rem;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 950;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    backdrop-filter: blur(12px);
+}
+
+.nova-choice-title {
+    margin-top: 1rem;
+    color: #ffffff;
+    font-size: clamp(1.7rem, 4vw, 2.65rem);
+    line-height: 0.95;
+    font-weight: 950;
+    letter-spacing: -0.045em;
+}
+
+.nova-choice-subtitle {
+    margin-top: 0.8rem;
+    max-width: 34rem;
+    color: rgba(255,255,255,0.86);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    font-weight: 700;
+}
+
+.nova-choice-close {
+    flex-shrink: 0;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    font-size: 1.1rem;
+}
+
+.nova-choice-body {
+    padding: 1.25rem;
+    background:
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 32%),
+        radial-gradient(circle at bottom left, rgba(249, 115, 22, 0.08), transparent 32%),
+        #f8fafc;
+}
+
+.nova-choice-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    border-radius: 1.25rem;
+    padding: 0.9rem 1rem;
+    background: #ffffff;
+    border: 1px solid #dbeafe;
+    color: #1e3a8a;
+    font-size: 0.86rem;
+    font-weight: 850;
+    box-shadow: 0 10px 25px rgba(15,23,42,0.06);
+}
+
+.nova-choice-info i {
+    margin-top: 0.15rem;
+    color: #2563eb;
+}
+
+.nova-choice-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+    .nova-choice-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Τα κουμπιά μέσα στο novaChoiceOptions δημιουργούνται δυναμικά από JS */
+.nova-choice-options > button {
+    position: relative;
+    overflow: hidden;
+    min-height: 8.5rem !important;
+    border-radius: 1.6rem !important;
+    padding: 1.35rem !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    font-size: 1.35rem !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.035em;
+    color: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.16) !important;
+    box-shadow: 0 18px 45px rgba(15,23,42,0.14) !important;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease !important;
+}
+
+.nova-choice-options > button::before {
+    content: "";
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 1rem;
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.20);
+}
+
+.nova-choice-options > button::after {
+    content: "→";
+    position: absolute;
+    top: 1.15rem;
+    right: 1.88rem;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 950;
+    transition: transform 0.22s ease;
+}
+
+.nova-choice-options > button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 60px rgba(15,23,42,0.22) !important;
+    filter: brightness(1.03);
+}
+
+.nova-choice-options > button:hover::after {
+    transform: translateX(4px);
+}
+
+.nova-choice-options > button:first-child {
+    background:
+        linear-gradient(135deg, #111827, #1e3a8a) !important;
+}
+
+.nova-choice-options > button:last-child {
+    background:
+        linear-gradient(135deg, #0057ff, #f97316) !important;
+}
+
+.nova-choice-help {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+    .nova-choice-help {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.nova-choice-help div {
+    border-radius: 1.15rem;
+    padding: 0.9rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+}
+
+.nova-choice-help strong {
+    display: block;
+    color: #0f172a;
+    font-size: 0.85rem;
+    font-weight: 950;
+}
+
+.nova-choice-help span {
+    display: block;
+    margin-top: 0.25rem;
+    color: #64748b;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    font-weight: 700;
+}
+
+@media (max-width: 640px) {
+    .nova-choice-hero {
+        padding: 1.2rem;
+    }
+
+    .nova-choice-body {
+        padding: 1rem;
+    }
+
+    .nova-choice-options > button {
+        min-height: 7.25rem !important;
+        font-size: 1.15rem !important;
+    }
+}
+
+/* --- HORIZONTAL STEP NAVIGATION INSIDE ACTIVATION GUIDE --- */
+.process-step-scroll-nav {
+    display: flex;
+    gap: 0.55rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.35rem 0 0.65rem;
+    margin: 0.15rem 0 0.35rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.process-step-scroll-nav::-webkit-scrollbar {
+    height: 6px;
+}
+
+.process-step-scroll-nav::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.10);
+    border-radius: 9999px;
+}
+
+.process-step-scroll-nav::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 9999px;
+}
+
+.process-step-scroll-button {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    border-radius: 9999px;
+    padding: 0.65rem 0.9rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.72rem;
+    font-weight: 950;
+    white-space: nowrap;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.process-step-scroll-button:hover {
+    background: rgba(255, 255, 255, 0.20);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.process-step-scroll-button.is-active {
+    background: #ffffff;
+    color: #0f172a;
+    border-color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.24);
+}
+
+@media (max-width: 640px) {
+    .process-step-scroll-nav {
+        margin-left: -0.1rem;
+        margin-right: -0.1rem;
+        padding-bottom: 0.55rem;
+    }
+
+    .process-step-scroll-button {
+        font-size: 0.68rem;
+        padding: 0.58rem 0.75rem;
+    }
+}
+
+/* --- HIDE OLD VISIBLE STEP NAV, KEEP MOBILE SWIPE ONLY --- */
+.process-step-scroll-nav {
+    display: none !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+}
+
+/* --- DESKTOP OFFER CARD HEIGHT FIX --- */
+@media (min-width: 768px) {
+    #offers-grid {
+        grid-auto-rows: 220px;
+    }
+
+    #offers-grid > article {
+        min-height: 0;
+    }
+
+    #offers-grid article:has([data-modal-target="vodafoneFixedModal"]) {
+        min-height: 680px;
+    }
+}
+
+/* Safari safe fallback αν το :has δεν εφαρμοστεί σωστά */
+@supports not selector(:has(*)) {
+    @media (min-width: 768px) {
+        #offers-grid > article:nth-child(2) {
+            min-height: 680px;
+        }
+    }
+}
+
+/* --- FIX VODAFONE / NOVA CARD OVERLAP ON DESKTOP --- */
+@media (min-width: 768px) {
+    #offers-grid article:has([data-modal-target="vodafoneFixedModal"]) {
+        grid-row: span 4 / span 4 !important;
+        min-height: 860px !important;
+    }
+
+    #offers-grid article:has([data-modal-target="novaLinePhone"]) {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+/* Safari/older fallback αν δεν πιάσει το :has σωστά */
+@supports not selector(:has(*)) {
+    @media (min-width: 768px) {
+        #offers-grid > article:nth-child(2) {
+            grid-row: span 4 / span 4 !important;
+            min-height: 860px !important;
+        }
+    }
+}
+
+/* --- VODAFONE DESKTOP BALANCE FIX --- */
+@media (min-width: 768px) {
+    #offers-grid {
+        grid-auto-rows: 200px !important;
+        align-items: stretch;
+    }
+
+    #offers-grid > article {
+        min-height: 0;
+    }
+
+    /* Vodafone Σταθερή */
+    #offers-grid article:has([data-modal-target="vodafoneFixedModal"]) {
+        grid-row: span 3 / span 3 !important;
+        min-height: 660px !important;
+        background:
+            linear-gradient(135deg, #7f1d1d 0%, #dc2626 42%, #0f172a 100%) !important;
+        color: #ffffff !important;
+        border-color: rgba(255,255,255,0.16) !important;
+        overflow: hidden !important;
+        position: relative;
+    }
+
+    /* Inner highlight box / strip της Vodafone */
+    #offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .rounded-\[2\.5rem\],
+    #offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .rounded-\[2rem\] {
+        background:
+            linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.08)) !important;
+        border-color: rgba(255,255,255,0.18) !important;
+        color: #ffffff !important;
+        box-shadow: none !important;
+    }
+
+    /* Κείμενα μέσα στην κάρτα να φαίνονται σωστά */
+    #offers-grid article:has([data-modal-target="vodafoneFixedModal"]) h3,
+    #offers-grid article:has([data-modal-target="vodafoneFixedModal"]) h4,
+    #offers-grid article:has([data-modal-target="vodafoneFixedModal"]) p,
+    #offers-grid article:has([data-modal-target="vodafoneFixedModal"]) span,
+    #offers-grid article:has([data-modal-target="vodafoneFixedModal"]) li {
+        color: inherit;
+    }
+
+    /* Η τιμή να μην κόβεται */
+    #offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .text-6xl {
+        font-size: 3.2rem !important;
+        line-height: 1 !important;
+    }
+
+    #offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .text-5xl {
+        line-height: 1 !important;
+    }
+
+    /* Nova να κάθεται σωστά από κάτω */
+    #offers-grid article:has([data-modal-target="novaLinePhone"]) {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+/* Fallback για Safari / browser χωρίς καλό :has support */
+@supports not selector(:has(*)) {
+    @media (min-width: 768px) {
+        #offers-grid > article:nth-child(2) {
+            grid-row: span 3 / span 3 !important;
+            min-height: 660px !important;
+            background:
+                linear-gradient(135deg, #7f1d1d 0%, #dc2626 42%, #0f172a 100%) !important;
+            color: #ffffff !important;
+            overflow: hidden !important;
+        }
+    }
+}
+
+/* --- FIX VODAFONE NEW OFFER BADGE TEXT --- */
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) span.bg-white {
+    color: #dc2626 !important;
+    background: #ffffff !important;
+    text-shadow: none !important;
+}
+
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) span.bg-white.text-red-700 {
+    color: #dc2626 !important;
+}
+
+/* --- VODAFONE CARD MOBILE COLOR FIX --- */
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) {
+    background:
+        linear-gradient(135deg, #7f1d1d 0%, #dc2626 45%, #0f172a 100%) !important;
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,0.18) !important;
+}
+
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"])::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.18), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(15,23,42,0.35), transparent 36%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) > *:not(button[data-modal-target="vodafoneFixedModal"]) {
+    position: relative;
+    z-index: 1;
+}
+
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .bg-white\/10,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .bg-white\/\[0\.16\],
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .backdrop-blur-sm,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .backdrop-blur-md {
+    background: rgba(255,255,255,0.12) !important;
+    border-color: rgba(255,255,255,0.22) !important;
+}
+
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) h3,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) p,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) div,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) span:not(.bg-white) {
+    color: #ffffff !important;
+}
+
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) span.bg-white {
+    color: #dc2626 !important;
+    background: #ffffff !important;
+}
+
+/* Mobile ειδικά */
+@media (max-width: 767px) {
+    #offers-grid article:has([data-modal-target="vodafoneFixedModal"]) {
+        min-height: 520px !important;
+        background:
+            linear-gradient(145deg, #991b1b 0%, #ef000f 48%, #111827 100%) !important;
+    }
+
+    #offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .text-4xl {
+        font-size: 2.5rem !important;
+        line-height: 1 !important;
+    }
+}
+
+/* --- REMOVE DECORATIVE WIFI SIGNAL FROM VODAFONE CARD --- */
+
+/* Κρύβουμε το μεγάλο διακοσμητικό Wi‑Fi / dot που είναι πάνω στην κάρτα Vodafone */
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .fa-wifi,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .fa-wifi::before,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .fa-signal,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .fa-circle {
+    animation: none !important;
+}
+
+/* Πιθανό decorative block επάνω αριστερά */
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .absolute.top-6.left-6,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .absolute.top-8.left-8,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .absolute.left-6.top-6,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .absolute.left-8.top-8 {
+    display: none !important;
+}
+
+/* Αν υπάρχει custom decorative wifi wrapper */
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .vodafone-wifi-decoration,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .vodafone-signal-decoration,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .wifi-decoration,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .signal-decoration {
+    display: none !important;
+}
+
+/* --- FIX VODAFONE CARD CLICK OVERLAY + REMOVE DECORATIVE WIFI --- */
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) > button[data-modal-target="vodafoneFixedModal"] {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 30 !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: transparent !important;
+    border: 0 !important;
+    cursor: pointer !important;
+}
+
+/* Κρύβει μόνο το μεγάλο decorative Wi-Fi κάτω αριστερά, όχι τα μικρά icons στα bullets */
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) > i.fa-wifi.absolute {
+    display: none !important;
+}
+
+/* Τα ορατά στοιχεία της κάρτας μένουν πάνω από background αλλά κάτω από το click overlay */
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) > div {
+    position: relative;
+    z-index: 2;
+}
+
+/* --- INTERNET CHOICE MODAL MOBILE FIX --- */
+.internet-choice-modal {
+    isolation: isolate;
+}
+
+.internet-choice-sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+    background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.94)),
+        radial-gradient(circle at top right, rgba(220, 38, 38, 0.20), transparent 34%),
+        radial-gradient(circle at bottom left, rgba(37, 99, 235, 0.20), transparent 34%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.22);
+}
+
+.internet-choice-sticky-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-width: 0;
+    color: #ffffff;
+    font-size: 0.86rem;
+    font-weight: 950;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.internet-choice-sticky-title i {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.14);
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+.internet-choice-sticky-title span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.internet-choice-close {
+    min-width: 2.4rem;
+    min-height: 2.4rem;
+    flex-shrink: 0;
+}
+
+.internet-choice-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 1.35rem 1.25rem;
+    background:
+        linear-gradient(135deg, #0f172a 0%, #1e3a8a 48%, #7f1d1d 100%);
+}
+
+.internet-choice-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 34px 34px;
+    opacity: 0.14;
+    pointer-events: none;
+}
+
+.internet-choice-hero-glow {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(60px);
+    pointer-events: none;
+}
+
+.internet-choice-hero-glow-one {
+    width: 12rem;
+    height: 12rem;
+    right: -4rem;
+    top: -4rem;
+    background: rgba(255,255,255,0.18);
+}
+
+.internet-choice-hero-glow-two {
+    width: 14rem;
+    height: 14rem;
+    left: -5rem;
+    bottom: -6rem;
+    background: rgba(220,38,38,0.26);
+}
+
+.internet-choice-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    border-radius: 9999px;
+    padding: 0.45rem 0.75rem;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.20);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 950;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.internet-choice-title {
+    margin-top: 0.9rem;
+    color: #ffffff;
+    font-size: clamp(1.8rem, 7vw, 3rem);
+    line-height: 0.95;
+    font-weight: 950;
+    letter-spacing: -0.05em;
+}
+
+.internet-choice-subtitle {
+    margin-top: 0.75rem;
+    max-width: 35rem;
+    color: rgba(255,255,255,0.82);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    font-weight: 700;
+}
+
+.internet-choice-body {
+    overflow-y: auto;
+    padding: 1rem;
+    background:
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 34%),
+        radial-gradient(circle at bottom left, rgba(220, 38, 38, 0.08), transparent 34%),
+        #f8fafc;
+}
+
+.internet-choice-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+}
+
+@media (min-width: 640px) {
+    .internet-choice-body {
+        padding: 1.25rem;
+    }
+
+    .internet-choice-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+}
+
+.internet-provider-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.6rem;
+    padding: 1.1rem;
+    min-height: 12.5rem;
+    border: 1px solid rgba(226, 232, 240, 1);
+    background: #ffffff;
+    text-align: left;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.internet-provider-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
+}
+
+.internet-provider-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    pointer-events: none;
+}
+
+.internet-provider-card-vodafone::before {
+    background: linear-gradient(135deg, #dc2626, transparent);
+}
+
+.internet-provider-card-nova::before {
+    background: linear-gradient(135deg, #2563eb, #f97316);
+}
+
+.internet-provider-top {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.internet-provider-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    box-shadow: 0 12px 28px rgba(15,23,42,0.18);
+}
+
+.internet-provider-card-vodafone .internet-provider-icon,
+.internet-provider-card-vodafone .internet-provider-price {
+    background: #dc2626;
+}
+
+.internet-provider-card-nova .internet-provider-icon,
+.internet-provider-card-nova .internet-provider-price {
+    background: #2563eb;
+}
+
+.internet-provider-price {
+    border-radius: 9999px;
+    padding: 0.4rem 0.7rem;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 950;
+}
+
+.internet-provider-card h4 {
+    position: relative;
+    z-index: 1;
+    margin-top: 1rem;
+    color: #0f172a;
+    font-size: 1.55rem;
+    line-height: 1;
+    font-weight: 950;
+    letter-spacing: -0.05em;
+}
+
+.internet-provider-card strong {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-top: 0.25rem;
+    color: #334155;
+    font-size: 0.95rem;
+    font-weight: 900;
+}
+
+.internet-provider-card p {
+    position: relative;
+    z-index: 1;
+    margin-top: 0.65rem;
+    color: #64748b;
+    font-size: 0.84rem;
+    line-height: 1.45;
+    font-weight: 650;
+}
+
+.internet-provider-action {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 1rem;
+    font-size: 0.82rem;
+    font-weight: 950;
+}
+
+.internet-provider-card-vodafone .internet-provider-action {
+    color: #dc2626;
+}
+
+.internet-provider-card-nova .internet-provider-action {
+    color: #2563eb;
+}
+
+@media (max-width: 640px) {
+    .internet-choice-hero {
+        padding: 1.2rem 1rem;
+    }
+
+    .internet-choice-title {
+        font-size: 2rem;
+    }
+
+    .internet-choice-subtitle {
+        font-size: 0.86rem;
+    }
+
+    .internet-provider-card {
+        min-height: auto;
+    }
+}
+
+/* --- FIX INTERNET CHOICE MODAL X ON MOBILE --- */
+.internet-choice-sticky-header {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: center !important;
+}
+
+.internet-choice-sticky-title {
+    min-width: 0 !important;
+    overflow: hidden !important;
+}
+
+.internet-choice-sticky-title span {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.internet-choice-close {
+    position: relative !important;
+    z-index: 999 !important;
+    width: 2.55rem !important;
+    height: 2.55rem !important;
+    min-width: 2.55rem !important;
+    min-height: 2.55rem !important;
+    margin-left: 0.75rem !important;
+    flex-shrink: 0 !important;
+    background: linear-gradient(135deg, #dc2626, #7f1d1d) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.45) !important;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.32) !important;
+    font-size: 1rem !important;
+    font-weight: 950 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.internet-choice-close::before,
+.internet-choice-close::after {
+    display: none !important;
+}
+
+@media (max-width: 640px) {
+    .internet-choice-sticky-header {
+        padding: 0.75rem 0.85rem !important;
+        gap: 0.5rem !important;
+    }
+
+    .internet-choice-sticky-title {
+        font-size: 0.78rem !important;
+        letter-spacing: 0.04em !important;
+    }
+
+    .internet-choice-sticky-title i {
+        width: 1.9rem !important;
+        height: 1.9rem !important;
+    }
+
+    .internet-choice-close {
+        width: 2.45rem !important;
+        height: 2.45rem !important;
+        min-width: 2.45rem !important;
+        min-height: 2.45rem !important;
+        margin-left: 0.35rem !important;
+    }
+}
+
+/* --- FINAL INTERNET CHOICE MODAL SIZE FIX --- */
+
+/* Desktop/tablet: να μη γίνεται full width */
+#internetChoiceModal {
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 1rem !important;
+}
+
+#internetChoiceModal .internet-choice-modal {
+    width: min(760px, calc(100vw - 2rem)) !important;
+    max-width: 760px !important;
+    max-height: 90vh !important;
+    border-radius: 2rem !important;
+}
+
+/* Κάρτες μέσα στο internet modal */
+#internetChoiceModal .internet-choice-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+/* Να μη φαίνεται τεράστιο το hero στον υπολογιστή */
+#internetChoiceModal .internet-choice-hero {
+    padding: 1.5rem !important;
+}
+
+#internetChoiceModal .internet-choice-title {
+    font-size: 2.35rem !important;
+}
+
+/* Mobile: bottom sheet, σωστό πλάτος, X πάντα δεξιά */
+@media (max-width: 640px) {
+    #internetChoiceModal {
+        align-items: flex-end !important;
+        justify-content: center !important;
+        padding: 0 !important;
+    }
+
+    #internetChoiceModal .internet-choice-modal {
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: 92vh !important;
+        border-radius: 2rem 2rem 0 0 !important;
+    }
+
+    #internetChoiceModal .internet-choice-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    #internetChoiceModal .internet-choice-hero {
+        padding: 1.15rem 1rem !important;
+    }
+
+    #internetChoiceModal .internet-choice-title {
+        font-size: 2rem !important;
+    }
+
+    #internetChoiceModal .internet-choice-sticky-header {
+        grid-template-columns: minmax(0, 1fr) auto !important;
+        padding: 0.75rem 0.85rem !important;
+    }
+
+    #internetChoiceModal .internet-choice-close {
+        width: 2.5rem !important;
+        height: 2.5rem !important;
+        min-width: 2.5rem !important;
+        min-height: 2.5rem !important;
+        display: inline-flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+}
+
+/* --- INFO / MENU MODAL CLEAN STYLE FIX --- */
+
+/* Καλύτερη εμφάνιση σε απλά information panels */
+.info-modal,
+.info-panel,
+.contact-modal,
+.contact-panel {
+    background: #ffffff !important;
+    border-radius: 2rem !important;
+    overflow: hidden !important;
+    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28) !important;
+}
+
+/* Σκούρα μπάρα για τίτλους πληροφοριών */
+.info-modal-header,
+.info-panel-header,
+.contact-modal-header,
+.contact-panel-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    background:
+        linear-gradient(135deg, #0f172a, #1e3a8a) !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Κείμενα πληροφοριών πιο καθαρά */
+.info-modal p,
+.info-panel p,
+.contact-modal p,
+.contact-panel p {
+    color: #475569 !important;
+    line-height: 1.6 !important;
+}
+
+/* Κινητά */
+@media (max-width: 640px) {
+    .modal-backdrop {
+        padding: 0.75rem !important;
+    }
+
+    .modal-backdrop > div {
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: 92vh !important;
+    }
+}
+
+/* --- CLEAN INFO COOP MODAL --- */
+.info-coop-modal {
+    isolation: isolate;
+}
+
+.info-coop-header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    background:
+        linear-gradient(135deg, rgba(15, 43, 92, 0.98), rgba(15, 23, 42, 0.96));
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.22);
+}
+
+.info-coop-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-width: 0;
+    font-size: 0.82rem;
+    font-weight: 950;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.info-coop-title i {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.14);
+    flex-shrink: 0;
+}
+
+.info-coop-title span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.info-coop-close {
+    width: 2.45rem !important;
+    height: 2.45rem !important;
+    min-width: 2.45rem !important;
+    min-height: 2.45rem !important;
+    background: linear-gradient(135deg, #dc2626, #7f1d1d) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.42) !important;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.28) !important;
+}
+
+.info-coop-close::before,
+.info-coop-close::after {
+    display: none !important;
+}
+
+.info-coop-scroll {
+    overflow-y: auto;
+}
+
+.info-coop-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 1.4rem 1.25rem;
+    text-align: center;
+    background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 32%),
+        linear-gradient(135deg, #0f2b5c, #1e3a8a);
+    color: #ffffff;
+}
+
+.info-coop-logo-box {
+    width: min(100%, 22rem);
+    margin: 0 auto;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    background: rgba(255,255,255,0.96);
+    padding: 0.65rem;
+    box-shadow: 0 18px 45px rgba(15,23,42,0.22);
+}
+
+.info-coop-logo-box img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 6.5rem;
+    object-fit: contain;
+}
+
+.info-coop-hero h3 {
+    margin-top: 1rem;
+    font-size: 1.55rem;
+    line-height: 1;
+    font-weight: 950;
+    letter-spacing: 0.04em;
+}
+
+.info-coop-hero p {
+    margin-top: 0.45rem;
+    color: rgba(219, 234, 254, 0.95);
+    font-size: 0.9rem;
+    line-height: 1.35;
+    font-weight: 750;
+}
+
+.info-coop-hero span {
+    display: block;
+    margin-top: 0.55rem;
+    color: rgba(191, 219, 254, 0.72);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.info-coop-body {
+    padding: 1rem;
+    background: #f8fafc;
+    display: grid;
+    gap: 0.9rem;
+}
+
+.info-coop-card,
+.info-coop-action {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    border-radius: 1.4rem;
+    padding: 1rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 12px 30px rgba(15,23,42,0.06);
+}
+
+.info-coop-icon,
+.info-coop-action > i {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+}
+
+.info-coop-icon-blue {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.info-coop-card h4,
+.info-coop-action strong {
+    display: block;
+    color: #0f172a;
+    font-size: 1rem;
+    line-height: 1.2;
+    font-weight: 950;
+}
+
+.info-coop-card p,
+.info-coop-action span {
+    display: block;
+    margin-top: 0.2rem;
+    color: #64748b;
+    font-size: 0.84rem;
+    line-height: 1.35;
+    font-weight: 700;
+}
+
+.info-coop-map {
+    height: 13rem;
+    border-radius: 1.4rem;
+    overflow: hidden;
+    border: 1px solid #dbeafe;
+    box-shadow: 0 16px 40px rgba(15,23,42,0.08);
+    background: #e2e8f0;
+}
+
+.info-coop-map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.info-coop-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+}
+
+.info-coop-action-phone > i,
+.info-coop-action-mobile > i {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.info-coop-action-email > i {
+    background: #ffedd5;
+    color: #ea580c;
+}
+
+.info-coop-action-email {
+    word-break: break-word;
+}
+
+@media (min-width: 640px) {
+    .info-coop-body {
+        padding: 1.25rem;
+    }
+
+    .info-coop-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    #infoCoopModal {
+        align-items: flex-end !important;
+        padding: 0 !important;
+    }
+
+    .info-coop-modal {
+        width: 100% !important;
+        max-width: 100% !important;
+        border-radius: 2rem 2rem 0 0 !important;
+    }
+
+    .info-coop-header {
+        padding: 0.75rem 0.85rem;
+    }
+
+    .info-coop-title {
+        font-size: 0.72rem;
+        letter-spacing: 0.03em;
+    }
+
+    .info-coop-logo-box img {
+        max-height: 5rem;
+    }
+
+    .info-coop-hero {
+        padding: 1.15rem 1rem;
+    }
+
+    .info-coop-map {
+        height: 11.5rem;
+    }
+}
+
