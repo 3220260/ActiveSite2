@@ -167,24 +167,30 @@
           Π.Κ.Σ.Α.Α. · Συνεταιρισμός Αστυνομικών Αττικής
         </div>
 
-        <h1 id="hero-title">Επίσημες Προσφορές για τα μέλη του Συνεταιρισμού</h1>
+        <h1 id="hero-title">
+          <span class="hero-title-desktop">Επίσημες Προσφορές για τα μέλη του Συνεταιρισμού</span>
+          <span class="hero-title-mobile">Προσφορές για μέλη Π.Κ.Σ.Α.Α.</span>
+        </h1>
 
         <p>
-          Συγκεντρωμένες παροχές για κινητή τηλεφωνία, σταθερή, FTTH / Internet,
-          τηλεόραση, υγεία και διαδικασίες δικαιολογητικών, με καθαρή ενημέρωση
-          και άμεση επικοινωνία με τον Συνεταιρισμό.
+          <span class="hero-copy-desktop">
+            Συγκεντρωμένες παροχές για κινητή τηλεφωνία, σταθερή, FTTH / Internet,
+            τηλεόραση, υγεία και διαδικασίες δικαιολογητικών, με καθαρή ενημέρωση
+            και άμεση επικοινωνία με τον Συνεταιρισμό.
+          </span>
+          <span class="hero-copy-mobile">Κινητή, Internet, TV και Υγεία για μέλη του Συνεταιρισμού.</span>
         </p>
 
         <div class="hero-actions" role="group" aria-label="Βασικές ενέργειες">
           <a href="#offers" class="btn-primary" data-track="offer_click" data-label="hero_offers">
             <i class="fa-solid fa-tags" aria-hidden="true"></i>
-            Δείτε προσφορές
+            Δες Προσφορές
           </a>
-          <a href="#contact" class="btn-secondary" data-track="contact_section_click" data-label="hero_contact">
-            <i class="fa-solid fa-headset" aria-hidden="true"></i>
-            Επικοινωνία
+          <a href="tel:2105245210" class="btn-secondary" data-track="phone_click" data-label="hero_phone_cta">
+            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+            Πάρε&nbsp;Τηλέφωνο
           </a>
-          <a href="#process" class="btn-ghost" data-track="process_click" data-label="hero_process">
+          <a href="#process" class="btn-ghost hero-process-cta" data-track="process_click" data-label="hero_process">
             <i class="fa-solid fa-list-check" aria-hidden="true"></i>
             Διαδικασία εγγραφής
           </a>
@@ -220,11 +226,11 @@
       <div class="quick-actions-grid">
         <button type="button" data-category-filter="mobile" data-track="category_filter_click" data-label="Κινητή τηλεφωνία" class="quick-action quick-action-mobile">
           <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
-          <span>Κινητή τηλεφωνία</span>
+          <span>Κινητή</span>
         </button>
         <button type="button" data-category-filter="internet" data-track="category_filter_click" data-label="Σταθερή / Internet" class="quick-action quick-action-internet">
           <i class="fa-solid fa-wifi" aria-hidden="true"></i>
-          <span>Σταθερή / Internet</span>
+          <span>Internet</span>
         </button>
         <button type="button" data-category-filter="tv" data-track="category_filter_click" data-label="TV" class="quick-action quick-action-tv">
           <i class="fa-solid fa-tv" aria-hidden="true"></i>
@@ -247,14 +253,23 @@
           <span>Προσφορές αστυνομικών</span>
           <h2 id="offers-title">Ενεργές παροχές Π.Κ.Σ.Α.Α.</h2>
         </div>
-
-        <div class="offer-filter-bar" role="group" aria-label="Φίλτρα κατηγοριών προσφορών">
-          <button type="button" class="is-active" data-category-filter="all" data-track="category_filter_click" data-label="Όλες">Όλες</button>
-          <button type="button" data-category-filter="mobile" data-track="category_filter_click" data-label="Κινητή">Κινητή</button>
-          <button type="button" data-category-filter="internet" data-track="category_filter_click" data-label="Internet">Internet</button>
-          <button type="button" data-category-filter="tv" data-track="category_filter_click" data-label="TV">TV</button>
-          <button type="button" data-category-filter="health" data-track="category_filter_click" data-label="Υγεία">Υγεία</button>
+        <div class="offer-search-bar">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input
+            type="search"
+            id="offerSearchInput"
+            placeholder="Αναζήτηση προσφοράς..."
+            aria-label="Αναζήτηση προσφοράς"
+            autocomplete="off">
         </div>
+      </div>
+
+      <div class="offer-filter-bar" role="group" aria-label="Φίλτρα κατηγοριών προσφορών">
+        <button type="button" class="is-active" data-category-filter="all" data-track="category_filter_click" data-label="Όλες">Όλες</button>
+        <button type="button" data-category-filter="mobile" data-track="category_filter_click" data-label="Κινητή">Κινητή</button>
+        <button type="button" data-category-filter="internet" data-track="category_filter_click" data-label="Internet">Internet</button>
+        <button type="button" data-category-filter="tv" data-track="category_filter_click" data-label="TV">TV</button>
+        <button type="button" data-category-filter="health" data-track="category_filter_click" data-label="Υγεία">Υγεία</button>
       </div>
 
       <div id="offers-grid" class="offer-grid">
@@ -1705,7 +1720,7 @@
             <i class="fa-solid fa-tv text-blue-400"></i>
             Διαδικασία Ενεργοποίησης EON TV
         </h3>
-        <button type="button" data-modal-close="novaEonModal" class="liquid-close text-white hover:text-blue-300 text-2xl">&times;</button>
+        <button type="button" data-modal-close="novaEonModal" class="liquid-close text-white hover:text-blue-300 text-2xl" aria-label="Κλείσιμο προσφοράς EON TV">&times;</button>
     </div>
 
     <div class="overflow-y-auto p-4 md:p-8 bg-white grow custom-scroll">
@@ -1809,7 +1824,7 @@
                     <h3 class="font-bold text-lg md:text-xl leading-none">ΠΑΡΟΧΕΣ ΥΓΕΙΑΣ</h3>
                 </div>
             </div>
-            <button type="button" data-modal-close="healthModal" class="liquid-close w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition text-2xl leading-none pb-1">&times;</button>
+            <button type="button" data-modal-close="healthModal" class="liquid-close w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition text-2xl leading-none pb-1" aria-label="Κλείσιμο προσφοράς υγείας">&times;</button>
         </div>
 
         <div class="overflow-y-auto p-4 md:p-8 bg-slate-50 grow custom-scroll">
@@ -2605,7 +2620,7 @@
             <i class="fa-solid fa-shield-halved text-blue-300"></i>
             Προσωπικά Δεδομένα
         </h3>
-        <button type="button" data-modal-close="privacyModal" class="liquid-close text-white hover:text-slate-300 text-2xl">&times;</button>
+        <button type="button" data-modal-close="privacyModal" class="liquid-close text-white hover:text-slate-300 text-2xl" aria-label="Κλείσιμο προσωπικών δεδομένων">&times;</button>
         </div>
 
         <div class="p-5 space-y-3 text-sm text-slate-600 leading-relaxed">
@@ -2630,7 +2645,7 @@
             <i class="fa-solid fa-cookie-bite text-amber-300"></i>
             Cookies
         </h3>
-        <button type="button" data-modal-close="cookiesModal" class="liquid-close text-white hover:text-slate-300 text-2xl">&times;</button>
+        <button type="button" data-modal-close="cookiesModal" class="liquid-close text-white hover:text-slate-300 text-2xl" aria-label="Κλείσιμο cookies">&times;</button>
         </div>
 
         <div class="p-5 space-y-3 text-sm text-slate-600 leading-relaxed">
@@ -2663,7 +2678,7 @@
             <i class="fa-solid fa-address-book text-emerald-300"></i>
             Επικοινωνία
         </h3>
-        <button type="button" data-modal-close="contactInfoModal" class="liquid-close text-white hover:text-slate-300 text-2xl">&times;</button>
+        <button type="button" data-modal-close="contactInfoModal" class="liquid-close text-white hover:text-slate-300 text-2xl" aria-label="Κλείσιμο επικοινωνίας">&times;</button>
         </div>
 
         <div class="p-5 space-y-3 text-sm text-slate-700">
@@ -2738,7 +2753,7 @@
     </div>
 
     <nav class="mobile-bottom-nav" aria-label="Γρήγορες ενέργειες κινητού">
-        <a href="#offers" data-track="offer_click" data-label="bottom_nav_offers">
+        <a href="#offers" class="mobile-nav-offers-link" data-track="offer_click" data-label="bottom_nav_offers">
             <i class="fa-solid fa-tags" aria-hidden="true"></i>
             <span>Προσφορές</span>
         </a>

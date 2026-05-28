@@ -2,6 +2,8 @@ const ASSISTANT_CHAT_URL = 'https://chat-kj4xqngk0-built-to-fail-inc.vercel.app/
 const wizardStepViewedKeys = new Set();
 const wizardCompletedKeys = new Set();
 let assistantChatPreviousFocus = null;
+let activeCategory = 'all';
+let activeSearchQuery = '';
 
 function getFileName(path) {
     return (path || '').split('/').pop() || path || 'unknown';
@@ -922,18 +924,57 @@ function shouldSkipExplicitTracking(target) {
         href.includes('invite.viber.com');
 }
 
+function getOfferCardSearchIndex(card) {
+    if (!card) return '';
+    if (card.dataset.searchIndex) return card.dataset.searchIndex;
+
+    const title = card.querySelector('h3')?.textContent || '';
+    const offer = card.dataset.offer || '';
+    const category = card.dataset.category || '';
+    const cardText = card.textContent || '';
+    const index = `${title} ${offer} ${category} ${cardText}`
+        .toLowerCase()
+        .replace(/\s+/g, ' ')
+        .trim();
+
+    card.dataset.searchIndex = index;
+    return index;
+}
+
+function updateOfferVisibility() {
+    const normalizedQuery = (activeSearchQuery || '').toLowerCase().trim();
+
+    document.querySelectorAll('[data-offer-card]').forEach((card) => {
+        const matchesCategory = activeCategory === 'all' || card.dataset.category === activeCategory;
+        const matchesQuery = !normalizedQuery || getOfferCardSearchIndex(card).includes(normalizedQuery);
+        const shouldShow = matchesCategory && matchesQuery;
+
+        card.hidden = !shouldShow;
+        if (!shouldShow) stopOfferCardView(card);
+    });
+
+    requestAnimationFrame(refreshVisibleOfferCards);
+}
+
+function initializeOfferSearch() {
+    const searchInput = document.getElementById('offerSearchInput');
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', (event) => {
+        activeSearchQuery = event.target.value || '';
+        updateOfferVisibility();
+    });
+}
+
 function applyOfferFilter(category, source = null) {
     const normalizedCategory = category || 'all';
+    activeCategory = normalizedCategory;
 
     document.querySelectorAll('[data-category-filter]').forEach((button) => {
         button.classList.toggle('is-active', button.dataset.categoryFilter === normalizedCategory);
     });
 
-    document.querySelectorAll('[data-offer-card]').forEach((card) => {
-        const shouldShow = normalizedCategory === 'all' || card.dataset.category === normalizedCategory;
-        card.hidden = !shouldShow;
-        if (!shouldShow) stopOfferCardView(card);
-    });
+    updateOfferVisibility();
 
     trackEvent('category_filter_click', {
         category: normalizedCategory,
@@ -1072,6 +1113,23 @@ function initializeLandingStepTracking() {
     }, { threshold: 0.55 });
 
     document.querySelectorAll('[data-wizard-step]').forEach((step) => observer.observe(step));
+}
+
+function initializeBottomNavOffersState() {
+    const offersSection = document.getElementById('offers');
+    const offersNavLink = document.querySelector('.mobile-nav-offers-link');
+    if (!offersSection || !offersNavLink || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            offersNavLink.classList.toggle('is-active', entry.isIntersecting);
+        });
+    }, {
+        threshold: 0.01,
+        rootMargin: '0px',
+    });
+
+    observer.observe(offersSection);
 }
 
 
@@ -1559,6 +1617,9 @@ document.addEventListener('touchend', handleProcessSwipeEnd, { passive: true });
     enhanceIbanWarnings();
     initializeFaqTracking();
     initializeLandingStepTracking();
+    initializeOfferSearch();
+    initializeBottomNavOffersState();
+    updateOfferVisibility();
     initializeOfferCardTracking();
     window.addEventListener('load', () => {
     setTimeout(loadSiteUpdateNotice, 1000);

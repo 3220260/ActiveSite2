@@ -35,10 +35,10 @@
 
 .landing-hero {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 370px;
-    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+    gap: 1.25rem;
     align-items: stretch;
-    min-height: 560px;
+    min-height: auto;
 }
 
 .landing-hero-copy,
@@ -91,8 +91,8 @@
     max-width: 760px;
     margin-top: 1.2rem;
     color: #ffffff;
-    font-size: 4rem;
-    line-height: 0.98;
+    font-size: clamp(2.6rem, 4vw, 4rem);
+    line-height: 1.05;
     font-weight: 950;
     letter-spacing: 0;
 }
@@ -104,6 +104,11 @@
     font-size: 1.08rem;
     line-height: 1.75;
     font-weight: 600;
+}
+
+.hero-title-mobile,
+.hero-copy-mobile {
+    display: none;
 }
 
 .hero-actions,
@@ -234,6 +239,44 @@
     gap: 1rem;
 }
 
+.offer-search-bar {
+    position: relative;
+    width: min(100%, 360px);
+    margin-left: auto;
+}
+
+.offer-search-bar i {
+    position: absolute;
+    top: 50%;
+    left: 0.82rem;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.offer-search-bar input {
+    width: 100%;
+    min-height: 2.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: #ffffff;
+    color: var(--primary);
+    padding: 0.55rem 0.9rem 0.55rem 2.25rem;
+    font-size: 0.92rem;
+    font-weight: 750;
+}
+
+.offer-search-bar input::placeholder {
+    color: var(--text-muted);
+    font-weight: 650;
+}
+
+.offer-search-bar input:focus-visible {
+    outline: 3px solid rgba(22, 93, 186, 0.34);
+    outline-offset: 2px;
+    border-color: var(--police-blue);
+}
+
 .quick-actions-grid {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -279,6 +322,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    margin-top: 0.65rem;
 }
 
 .offer-filter-bar button {
@@ -300,8 +344,9 @@
 
 .offer-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1rem;
+    align-items: stretch;
 }
 
 .offer-card {
@@ -3438,4 +3483,31 @@
     .info-coop-map {
         height: 11.5rem;
     }
+}
+
+@media (min-width: 1024px) {
+  .site-top-nav .max-w-7xl {
+    display: grid !important;
+    grid-template-columns: auto minmax(280px, 1fr) auto !important;
+    align-items: center !important;
+    gap: 1rem !important;
+  }
+
+  .site-top-nav .md\:absolute {
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+    justify-content: center !important;
+    min-width: 0 !important;
+  }
+
+  .site-top-nav h2 {
+    max-width: 430px !important;
+    white-space: normal !important;
+  }
+
+  .site-nav-link {
+    white-space: nowrap !important;
+  }
 }
