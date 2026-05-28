@@ -130,6 +130,27 @@ function initializeOfferCardTracking() {
     refreshVisibleOfferCards();
 }
 
+function initializeOfferCardReveal() {
+    const cards = Array.from(document.querySelectorAll('[data-offer-card]'));
+    if (!cards.length || !('IntersectionObserver' in window)) {
+        cards.forEach((card) => card.classList.add('is-visible'));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            const index = cards.indexOf(entry.target);
+            entry.target.style.transitionDelay = `${Math.min(index * 80, 320)}ms`;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.18 });
+
+    cards.forEach((card) => observer.observe(card));
+}
+
 function trackLinkClick(link) {
     const href = link.getAttribute('href') || '';
     const context = getOpenOfferContext();
@@ -1523,6 +1544,21 @@ async function loadSiteUpdateNotice() {
     }
 }
 
+function triggerPageLoadedState(delay = 0) {
+    const applyLoadedClass = () => {
+        requestAnimationFrame(() => {
+            document.body.classList.add('page-loaded');
+        });
+    };
+
+    if (delay > 0) {
+        setTimeout(applyLoadedClass, delay);
+        return;
+    }
+
+    applyLoadedClass();
+}
+
 function initializePage() {
     if (pageInitialized) return;
     pageInitialized = true;
@@ -1530,13 +1566,16 @@ function initializePage() {
     // Preloader
     const preloader = document.getElementById('preloader');
     if (preloader) {
-       requestAnimationFrame(() => {
-    preloader.classList.add('opacity-0', 'pointer-events-none');
-    setTimeout(() => {
-        preloader.style.display = 'none';
-        document.body.classList.remove('loading');
-    }, 200);
-});
+        requestAnimationFrame(() => {
+            preloader.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                preloader.style.display = 'none';
+                document.body.classList.remove('loading');
+                triggerPageLoadedState(100);
+            }, 200);
+        });
+    } else {
+        triggerPageLoadedState(100);
     }
 
     // Cookies Check
@@ -1553,8 +1592,8 @@ function initializePage() {
 
     // Delegated UI listeners
     document.addEventListener('click', handleDocumentClick);
-document.addEventListener('touchstart', handleProcessSwipeStart, { passive: true });
-document.addEventListener('touchend', handleProcessSwipeEnd, { passive: true });
+    document.addEventListener('touchstart', handleProcessSwipeStart, { passive: true });
+    document.addEventListener('touchend', handleProcessSwipeEnd, { passive: true });
     document.addEventListener('keydown', handleDocumentKeydown);
     document.addEventListener('touchstart', handleSwipeBackTouchStart, { passive: true });
     document.addEventListener('touchend', handleSwipeBackTouchEnd, { passive: true });
@@ -1620,10 +1659,11 @@ document.addEventListener('touchend', handleProcessSwipeEnd, { passive: true });
     initializeOfferSearch();
     initializeBottomNavOffersState();
     updateOfferVisibility();
+    initializeOfferCardReveal();
     initializeOfferCardTracking();
     window.addEventListener('load', () => {
-    setTimeout(loadSiteUpdateNotice, 1000);
-});
+        setTimeout(loadSiteUpdateNotice, 1000);
+    });
 }
 
 if (document.readyState === 'loading') {
