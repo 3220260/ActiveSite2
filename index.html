@@ -53,6 +53,7 @@
   <link rel="stylesheet" href="assets/css/hero-simplified.css?v=20260529-hero-simplified">
   <link rel="stylesheet" href="assets/css/mobile-wizard.css?v=20260529-wizard">
   <link rel="stylesheet" href="assets/css/activation-guide.css?v=20260529-activation-guide">
+  <link rel="stylesheet" href="assets/css/premium-menu.css?v=20260530-premium-menu">
 
   <script type="application/ld+json">
   {
@@ -132,11 +133,11 @@
     <nav aria-label="Κύρια πλοήγηση" class="site-top-nav fixed top-0 w-full z-50 bg-[#6FA4D9] shadow-md transition-all duration-300 border-b border-blue-300/50">
     <div class="max-w-7xl mx-auto px-4 h-24 flex items-center justify-between relative">
 
-    <button type="button" data-action="toggle-sidebar" class="z-50 shrink-0 group flex flex-col items-start gap-[5px] p-3 cursor-pointer hover:bg-white/10 rounded-xl transition-all mr-2">
+    <button type="button" data-action="toggle-sidebar" aria-label="Άνοιγμα μενού" class="premium-menu-toggle z-50 shrink-0 group flex flex-col items-start gap-[5px] p-3 cursor-pointer hover:bg-white/10 rounded-xl transition-all mr-2">
         <span class="w-8 h-[3px] bg-white rounded-full transition-all group-hover:w-10"></span>
         <span class="w-6 h-[3px] bg-white rounded-full transition-all group-hover:w-10"></span>
         <span class="w-4 h-[3px] bg-white rounded-full transition-all group-hover:w-10"></span>
-        <span class="text-[9px] font-bold text-gray-100 uppercase mt-1 tracking-widest">MENU</span>
+        <span class="premium-menu-toggle-label text-[9px] font-bold text-gray-100 uppercase mt-1 tracking-widest">Μενού</span>
     </button>
 
     <div class="flex-1 flex justify-center items-center gap-2 md:gap-3 md:absolute md:left-1/2 md:top-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2">
@@ -455,11 +456,6 @@
           <i class="fa-solid fa-envelope" aria-hidden="true"></i>
           <strong>synetelas2011@gmail.com</strong>
           <span>Email</span>
-        </a>
-        <a href="https://invite.viber.com/?g2=AQAAO36OvYPGf1Yd9eNZrLl8dHa8b6m5mv3FEDMq7g2MLXZST103lT7amKZRhH7V" target="_blank" rel="noopener noreferrer" class="contact-card" data-track="viber_click" data-label="Viber Community">
-          <i class="fa-brands fa-viber" aria-hidden="true"></i>
-          <strong>Viber / Chat</strong>
-          <span>Κοινότητα ενημερώσεων</span>
         </a>
       </div>
     </section>
@@ -2294,64 +2290,99 @@
         </div>
     </div>
 
-    <div id="sidebarOverlay"  class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[190] hidden transition-opacity opacity-0"></div>
+    <div id="sidebarOverlay" class="sidebar-overlay menu-overlay fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[190] hidden transition-opacity opacity-0"></div>
 
-    <div id="sidebarMenu" class="fixed top-0 left-0 h-full w-[300px] bg-white z-[200] transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+    <div id="sidebarMenu" class="sidebar-menu menu-drawer fixed top-0 left-0 h-full w-[300px] bg-white z-[200] transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col" role="navigation" aria-label="Μενού πλοήγησης">
 
-    <div class="bg-[#0f2b5c] p-6 flex justify-between items-center text-white">
-        <h3 class="font-bold text-lg">Μενού Επιλογών</h3>
+    <div class="premium-menu-header">
+        <div class="premium-menu-brand">
+            <img src="assets/images/LOGO.webp" alt="Π.Κ.Σ.Α.Α." width="96" height="52" decoding="async">
+            <div>
+                <strong>Π.Κ.Σ.Α.Α.</strong>
+                <span>Συνεταιρισμός Αστυνομικών Αττικής</span>
+            </div>
+        </div>
        <button
     type="button"
     data-action="toggle-sidebar"
     aria-label="Κλείσιμο μενού"
-    class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
+    class="premium-menu-close w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
     <i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>
 </button>
     </div>
 
-    <div class="p-6 overflow-y-auto custom-scroll flex-1 space-y-2">
-        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">ΕΝΕΡΓΕΣ ΠΡΟΣΦΟΡΕΣ</p>
+    <div class="premium-menu-body custom-scroll">
+        <p class="premium-menu-eyebrow">ΕΝΕΡΓΕΣ ΠΡΟΣΦΟΡΕΣ</p>
 
-        <button type="button" data-sidebar-target="mobileModal" class="w-full text-left flex items-center gap-4 p-4 rounded-xl hover:bg-blue-50 transition group border border-transparent hover:border-blue-100">
-            <span class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center group-hover:scale-110 transition">
-                <i class="fa-solid fa-mobile-screen"></i>
-            </span>
-            <span class="font-bold text-slate-700">Κινητή Τηλεφωνία</span>
-        </button>
-        <button type="button" data-sidebar-target="internetChoiceModal" class="w-full text-left flex items-center gap-4 p-4 rounded-xl hover:bg-slate-50 transition group border border-transparent hover:border-slate-200">
-            <span class="w-10 h-10 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center group-hover:scale-110 transition">
-                <i class="fa-solid fa-wifi"></i>
-            </span>
-            <span class="font-bold text-slate-700">Σταθερή &amp; Internet</span>
-        </button>
-
-        <button type="button" data-sidebar-target="novaEonModal" class="w-full text-left flex items-center gap-4 p-4 rounded-xl hover:bg-purple-50 transition group border border-transparent hover:border-purple-100">
-            <span class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center group-hover:scale-110 transition">
-                <i class="fa-solid fa-tv"></i>
-            </span>
-            <span class="font-bold text-slate-700">Nova &amp; Cosmote TV</span>
-        </button>
-
-        <button type="button" data-sidebar-target="healthModal" class="w-full text-left flex items-center gap-4 p-4 rounded-xl hover:bg-teal-50 transition group border border-transparent hover:border-teal-100">
-            <span class="w-10 h-10 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center group-hover:scale-110 transition">
-                <i class="fa-solid fa-heart-pulse"></i>
-            </span>
-            <span class="font-bold text-slate-700">Υγεία &amp; Περίθαλψη</span>
-        </button>
-
-
-
-
-        <div class="h-px bg-slate-200 my-4"></div>
-
-        <button type="button" data-sidebar-target="infoCoopModal" class="w-full text-left flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg shadow-blue-900/20 hover:scale-[1.02] transition">
-            <span class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center animate-pulse">
-                <i class="fa-solid fa-info"></i>
+        <button type="button" data-sidebar-target="mobileModal" class="premium-menu-link premium-menu-link-mobile">
+            <span class="premium-menu-link-icon">
+                <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
             </span>
             <span>
-                <span class="block font-black text-sm">ΠΛΗΡΟΦΟΡΙΕΣ</span>
-                <span class="text-[10px] text-blue-100">google map <br> Επικοινωνία</span>
+                <strong>Κινητή Τηλεφωνία</strong>
+                <small>Δες τις ενεργές επιλογές</small>
             </span>
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+        <button type="button" data-sidebar-target="internetChoiceModal" class="premium-menu-link premium-menu-link-internet">
+            <span class="premium-menu-link-icon">
+                <i class="fa-solid fa-wifi" aria-hidden="true"></i>
+            </span>
+            <span>
+                <strong>Σταθερή &amp; Internet</strong>
+                <small>FTTH και πακέτα οικιακής σύνδεσης</small>
+            </span>
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+
+        <button type="button" data-sidebar-target="novaEonModal" class="premium-menu-link premium-menu-link-tv">
+            <span class="premium-menu-link-icon">
+                <i class="fa-solid fa-tv" aria-hidden="true"></i>
+            </span>
+            <span>
+                <strong>Nova &amp; Cosmote TV</strong>
+                <small>Προσφορές ψυχαγωγίας για μέλη</small>
+            </span>
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+
+        <button type="button" data-sidebar-target="healthModal" class="premium-menu-link premium-menu-link-health">
+            <span class="premium-menu-link-icon">
+                <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
+            </span>
+            <span>
+                <strong>Υγεία &amp; Περίθαλψη</strong>
+                <small>Κάλυψη και διαθέσιμες παροχές</small>
+            </span>
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+
+        <button type="button" data-sidebar-target="infoCoopModal" class="premium-menu-link premium-menu-link-info">
+            <span class="premium-menu-link-icon">
+                <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            </span>
+            <span>
+                <strong>ΠΛΗΡΟΦΟΡΙΕΣ</strong>
+                <small>Χάρτης · Επικοινωνία · Διεύθυνση</small>
+            </span>
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <div class="premium-menu-actions">
+        <a href="tel:2105245210">
+            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+            <span>Κλήση</span>
+        </a>
+
+        <a href="mailto:synetelas2011@gmail.com">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            <span>Email</span>
+        </a>
+
+        <button type="button" data-chat-open>
+            <i class="fa-solid fa-headset" aria-hidden="true"></i>
+            <span>Chat</span>
         </button>
     </div>
     </div>
@@ -2449,32 +2480,6 @@
 
       </div>
     </div>
-
-    <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 mb-8">
-    <div class="rounded-[28px] bg-gradient-to-r from-[#5b4ce6] to-[#7360f2] shadow-xl overflow-hidden">
-        <div class="relative px-6 md:px-10 py-8 md:py-10">
-        <div class="flex flex-col items-center text-center">
-            <h3 class="text-white text-2xl md:text-3xl font-black">
-            Viber Community
-            </h3>
-
-            <p class="text-white/90 text-sm md:text-lg mt-2">
-            Μάθε πρώτος τις νέες μας προσφορές!
-            </p>
-
-            <a
-            href="https://invite.viber.com/?g2=AQAAO36OvYPGf1Yd9eNZrLl8dHa8b6m5mv3FEDMq7g2MLXZST103lT7amKZRhH7V"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="mt-6 bg-white text-[#7360f2] font-black py-3 px-8 rounded-full shadow-lg hover:bg-slate-100 transition inline-flex items-center justify-center"
-            >
-            ΣΥΝΔΕΣΟΥ ΤΩΡΑ
-            </a>
-        </div></div>
-    </div>
-    </section>
-
-
 
     <div id="imagePreviewModal" class="hidden fixed inset-0 z-[10001] bg-slate-950/95 backdrop-blur-sm">
         <button type="button" class="image-preview-close" aria-label="Κλείσιμο προεπισκόπησης" data-modal-close="imagePreviewModal">
@@ -2574,51 +2579,35 @@
   </div>
 </section>
 
-    <div id="siteLegalBar" class="mt-5 mb-8 px-3">
-    <div class="mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-white/85 backdrop-blur-md shadow-sm px-4 py-3">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-2 sm:gap-3 text-center text-[11px] md:text-xs text-slate-500">
-
-        <span class="font-black text-slate-700 whitespace-nowrap">
-            Π.Κ.Σ.Α.Α.
-        </span>
-
-        <span class="hidden sm:inline text-slate-300">•</span>
-
-        <span class="leading-snug">
-            Πληροφορίες ιστοσελίδας, προσωπικά δεδομένα και επικοινωνία
-        </span>
-
-        <span class="hidden sm:inline text-slate-300">•</span>
-
-        <div class="flex flex-wrap items-center justify-center gap-2">
-            <button type="button"
-            data-modal-target="privacyModal"
-            class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition"
-            >
-            <i class="fa-solid fa-shield-halved text-blue-600"></i>
-            Προσωπικά Δεδομένα
-            </button>
-
-            <button type="button"
-            data-modal-target="cookiesModal"
-            class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 font-bold text-slate-700 hover:bg-amber-50 hover:text-amber-700 transition"
-            >
-            <i class="fa-solid fa-cookie-bite text-amber-600"></i>
-            Cookies
-            </button>
-
-            <button type="button"
-            data-modal-target="contactInfoModal"
-            class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition"
-            >
-            <i class="fa-solid fa-address-book text-emerald-600"></i>
-            Επικοινωνία
-            </button>
+    <section id="siteLegalBar" class="site-info-shell" aria-labelledby="site-info-title">
+      <div class="site-info-panel">
+        <div class="site-info-panel-header">
+          <span class="site-info-badge">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            Πληροφορίες
+          </span>
+          <h2 id="site-info-title">Π.Κ.Σ.Α.Α.</h2>
+          <p>Πληροφορίες ιστοσελίδας, προσωπικά δεδομένα και επικοινωνία.</p>
         </div>
 
+        <div class="site-info-actions">
+          <button type="button" data-modal-target="privacyModal">
+            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            <span>Προσωπικά Δεδομένα</span>
+          </button>
+
+          <button type="button" data-modal-target="cookiesModal">
+            <i class="fa-solid fa-cookie-bite" aria-hidden="true"></i>
+            <span>Cookies</span>
+          </button>
+
+          <button type="button" data-modal-target="contactInfoModal">
+            <i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i>
+            <span>Επικοινωνία</span>
+          </button>
         </div>
-    </div>
-    </div>
+      </div>
+    </section>
 
 
     <!-- PRIVACY MODAL -->
@@ -2728,9 +2717,11 @@
         class="assistant-chat-fab"
         data-chat-open
         data-track="chat_open"
-        aria-label="Ρώτησε τον βοηθό">
-        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-        <span>Ρώτησε τον βοηθό</span>
+        aria-label="Άνοιγμα βοηθού συνομιλίας">
+        <span class="assistant-chat-fab-icon" aria-hidden="true">
+            <i class="fa-solid fa-headset"></i>
+        </span>
+        <span class="assistant-chat-fab-label">Βοηθός</span>
     </button>
 
     <div
@@ -2756,7 +2747,7 @@
                 class="assistant-chat-frame"
                 loading="lazy"
                 referrerpolicy="strict-origin-when-cross-origin"
-                data-src="https://chat-kj4xqngk0-built-to-fail-inc.vercel.app/#">
+                data-src="https://ver-bot.vercel.app/">
             </iframe>
         </section>
     </div>
@@ -2775,7 +2766,7 @@
             <span>Email</span>
         </a>
         <button type="button" data-chat-open data-track="chat_open" data-label="bottom_nav_chat">
-            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            <i class="fa-solid fa-comments" aria-hidden="true"></i>
             <span>Chat</span>
         </button>
     </nav>

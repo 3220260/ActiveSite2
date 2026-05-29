@@ -121,24 +121,51 @@
   align-items: center;
   gap: 0.65rem;
   min-height: 3.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.26);
+  padding: 0.78rem 1rem 0.78rem 0.78rem;
   border-radius: 999px;
-  background: var(--primary);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background:
+    radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.28), transparent 28%),
+    linear-gradient(135deg, var(--primary), var(--police-blue));
   color: #ffffff;
-  padding: 0.75rem 1rem;
-  box-shadow: 0 18px 42px rgba(7, 26, 51, 0.28);
+  box-shadow:
+    0 18px 38px rgba(7, 26, 51, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  backdrop-filter: blur(12px);
   font-weight: 950;
   animation: assistantFloat 3.8s ease-in-out infinite;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
 }
 
-.assistant-chat-fab i {
+.assistant-chat-fab:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 24px 48px rgba(7, 26, 51, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.10) inset;
+}
+
+.assistant-chat-fab:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.35);
+  outline-offset: 3px;
+}
+
+.assistant-chat-fab-icon {
   width: 2rem;
   height: 2rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: var(--police-blue);
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.assistant-chat-fab-icon i {
+  font-size: 1.05rem;
+}
+
+.assistant-chat-fab-label {
+  white-space: nowrap;
 }
 
 .assistant-chat-modal {
@@ -250,7 +277,7 @@
 
 .mobile-bottom-nav i {
   color: var(--police-blue);
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
 @keyframes assistantFloat {
@@ -263,10 +290,10 @@
     right: 0.9rem;
     bottom: calc(5.55rem + env(safe-area-inset-bottom));
     min-height: 3.25rem;
-    padding: 0.7rem;
+    padding: 0.7rem 0.82rem 0.7rem 0.7rem;
   }
 
-  .assistant-chat-fab span {
+  .assistant-chat-fab-label {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -288,6 +315,28 @@
 
   .mobile-bottom-nav {
     display: grid;
+  }
+
+  .site-info-shell {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .site-info-panel {
+    padding: 1rem;
+    border-radius: 22px;
+  }
+
+  .site-info-actions {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .site-info-actions button,
+  .site-info-actions a {
+    justify-content: flex-start;
+    min-height: 48px;
+    border-radius: 16px;
   }
 }
 
@@ -350,36 +399,6 @@
 #vodaModal .flex:has(> #btn-v-port):has(> #btn-v-new),
     #novaModal .flex:has(> #btn-n-port):has(> #btn-n-new) {
       display: none !important;
-    }
-
-    @media (min-width: 1024px) {
-      footer section:has(a[href*="invite.viber.com"]),
-      footer div:has(> a[href*="invite.viber.com"]) {
-        width: 100% !important;
-        max-width: 80rem !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-      }
-
-      footer a[href*="invite.viber.com"] {
-        width: 100% !important;
-        min-width: 0 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 0.95rem 1.25rem !important;
-        border-radius: 1.25rem !important;
-        font-size: 1rem !important;
-        line-height: 1.15 !important;
-        gap: 0.55rem !important;
-      }
-
-      footer a[href*="invite.viber.com"] img,
-      footer a[href*="invite.viber.com"] svg {
-        width: 1.25rem !important;
-        height: 1.25rem !important;
-        flex-shrink: 0 !important;
-      }
     }
 
     /* --- ACCESSIBILITY: REDUCED MOTION --- */

@@ -1,4 +1,4 @@
-const ASSISTANT_CHAT_URL = 'https://chat-kj4xqngk0-built-to-fail-inc.vercel.app/#';
+const ASSISTANT_CHAT_URL = 'https://ver-bot.vercel.app/';
 const wizardStepViewedKeys = new Set();
 const wizardCompletedKeys = new Set();
 let assistantChatPreviousFocus = null;
@@ -149,6 +149,11 @@ function initializeOfferCardReveal() {
     }, { threshold: 0.18 });
 
     cards.forEach((card) => observer.observe(card));
+
+    window.setTimeout(() => {
+        if (cards.some((card) => card.classList.contains('is-visible'))) return;
+        cards.forEach((card) => card.classList.add('is-visible'));
+    }, 2400);
 }
 
 function trackLinkClick(link) {

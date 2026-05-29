@@ -2,17 +2,6 @@
 
 .landing-hero {
   margin-top: 1rem;
-  display: block !important;
-  min-height: 0 !important;
-}
-
-.hero-logo-top,
-.hero-logo-watermark,
-.hero-background-logo-draw,
-.hero-trust-row,
-.hero-side-info,
-.hero-service-panel {
-  display: none !important;
 }
 
 @media (min-width: 1200px) {
@@ -27,7 +16,7 @@
   min-height: clamp(520px, 72vh, 700px);
   padding: 2.4rem 2.5rem;
   border-radius: 34px;
-  background: linear-gradient(135deg, #020617 0%, #071a33 52%, #0f2b5c 100%);
+  background: #020617;
   box-shadow: 0 34px 90px rgba(7, 26, 51, 0.20);
   isolation: isolate;
 }
