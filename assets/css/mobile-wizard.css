@@ -1,0 +1,277 @@
+/* Mobile-first wizard cleanup */
+
+.process-provider-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.28rem 0.68rem;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.process-provider-badge.is-voda {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.process-provider-badge.is-nova {
+  background: #ffedd5;
+  color: #9a3412;
+  border: 1px solid #fdba74;
+}
+
+.process-provider-type {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.28rem 0.68rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #334155;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+.wizard-iban-label {
+  font-size: 0.68rem;
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.wizard-iban-label-spaced {
+  margin-top: 0.6rem;
+}
+
+.wizard-iban-bank {
+  margin-top: 0.18rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.wizard-iban-value {
+  margin-top: 0.18rem;
+  font-size: 0.88rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  word-break: break-all;
+  color: #0f172a;
+}
+
+@media (max-width: 767px) {
+  #vodaModal,
+  #novaModal {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+
+  #vodaModal > div,
+  #novaModal > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 94dvh !important;
+    max-height: 94dvh !important;
+    border-radius: 28px 28px 0 0 !important;
+    overflow: hidden !important;
+  }
+
+  #vodaModal > div > .flex:first-child,
+  #novaModal > div > .flex:first-child {
+    display: none !important;
+  }
+
+  #vodaModal > div > .overflow-y-auto,
+  #novaModal > div > .overflow-y-auto {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 0.85rem !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #vodaModal #v-port,
+  #vodaModal #v-new,
+  #novaModal #n-port,
+  #novaModal #n-new {
+    min-height: 100%;
+  }
+
+  #vodaModal section[data-process-wizard],
+  #novaModal section[data-process-wizard] {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    overflow: visible;
+    border-radius: 24px !important;
+  }
+
+  #vodaModal section[data-process-wizard] > .px-4.md\:px-8.py-5.md\:py-8,
+  #novaModal section[data-process-wizard] > .px-4.md\:px-8.py-5.md\:py-8 {
+    flex: 1;
+    min-height: 0;
+    padding: 0.9rem !important;
+    background: #f8fafc !important;
+  }
+
+  .process-wizard-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    margin: 0 0 0.85rem !important;
+    border-radius: 0 !important;
+    padding: 1rem !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(216, 225, 236, 0.9);
+    box-shadow: none !important;
+  }
+
+  .process-wizard-sticky::before {
+    display: none !important;
+  }
+
+  .process-wizard-sticky [data-process-step-title] {
+    font-size: 1rem !important;
+    line-height: 1.25 !important;
+    color: #0f172a !important;
+  }
+
+  .process-wizard-sticky [data-process-current],
+  .process-wizard-sticky [data-process-total],
+  .process-wizard-sticky [data-process-main-title],
+  .process-wizard-sticky [data-process-subtitle],
+  .process-wizard-sticky p,
+  .process-wizard-sticky span {
+    color: #334155 !important;
+  }
+
+  .process-wizard-sticky .process-wizard-close {
+    min-width: 2.65rem !important;
+    min-height: 2.65rem !important;
+    font-size: 1.6rem !important;
+    border-radius: 999px !important;
+  }
+
+  [data-process-dots] {
+    display: flex;
+    align-items: center;
+    height: 8px;
+    gap: 6px;
+  }
+
+  [data-process-dots] span {
+    height: 8px !important;
+    border-radius: 999px;
+  }
+
+  [data-process-step] {
+    padding: 1rem !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 22px !important;
+    background: #f8fafc;
+  }
+
+  [data-process-step] .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  [data-process-step] article,
+  [data-process-step] > div,
+  .vodafone-docs-box,
+  .vodafone-plan-card,
+  .wizard-identity-card,
+  .wizard-deposit-card,
+  .wizard-email-card,
+  .wizard-sim-card {
+    border-radius: 22px !important;
+  }
+
+  [data-process-step] article {
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06) !important;
+  }
+
+  [data-process-step] h4 {
+    font-size: 1.05rem !important;
+    line-height: 1.25 !important;
+  }
+
+  [data-process-step] p,
+  [data-process-step] li {
+    font-size: 0.9rem !important;
+    line-height: 1.45 !important;
+  }
+
+  [data-process-step] a[href$=".pdf"],
+  [data-process-step] [data-preview-src],
+  [data-process-step] [data-copy-iban],
+  [data-process-step] .wizard-email-copy-action,
+  [data-process-step] .wizard-email-open-action,
+  [data-process-step] .wizard-call-cta {
+    min-height: 48px !important;
+    border-radius: 16px !important;
+    font-size: 0.9rem !important;
+  }
+
+  [data-process-step] [data-preview-src],
+  [data-process-step] a[href$=".pdf"] {
+    width: 100%;
+  }
+
+  [data-process-step] [data-copy-iban] {
+    margin-top: 0.7rem !important;
+  }
+
+  .wizard-email-actions {
+    width: 100%;
+  }
+
+  .wizard-email-copy-action,
+  .wizard-email-open-action {
+    width: 100%;
+  }
+
+  .wizard-call-cta {
+    margin-top: 0.85rem !important;
+  }
+
+  section[data-process-wizard] .sticky.bottom-0,
+  .process-bottom-nav {
+    position: sticky !important;
+    bottom: 0;
+    z-index: 70;
+    padding: 0.85rem 1rem calc(0.85rem + env(safe-area-inset-bottom)) !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    backdrop-filter: blur(14px);
+    border-top: 1px solid rgba(216, 225, 236, 0.9);
+  }
+
+  [data-process-prev],
+  [data-process-next] {
+    min-height: 52px !important;
+    border-radius: 18px !important;
+    font-size: 0.95rem !important;
+  }
+
+  [data-process-step]:not(.hidden) {
+    animation: processStepIn 280ms cubic-bezier(.2,.8,.2,1) both;
+  }
+
+  @keyframes processStepIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

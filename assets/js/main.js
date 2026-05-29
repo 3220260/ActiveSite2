@@ -502,13 +502,13 @@ function createProcessWizard(containerId, config, theme, steps) {
     const modalId = isVoda ? 'vodaModal' : 'novaModal';
     const choiceModalId = isVoda ? 'vodaChoiceModal' : 'novaChoiceModal';
 
-    const companyBadgeClass = isVoda
-        ? 'bg-red-600 text-white border-red-300'
-        : 'bg-orange-500 text-blue-700 border-orange-300';
+    const providerBadgeClass = isVoda
+        ? 'process-provider-badge is-voda'
+        : 'process-provider-badge is-nova';
 
     const closeButtonClass = isVoda
-        ? 'liquid-close w-10 h-10 rounded-full bg-red-600 text-white text-2xl font-black flex items-center justify-center hover:bg-red-700 transition border-2 border-red-300 shadow-md'
-        : 'liquid-close w-10 h-10 rounded-full bg-orange-100 text-blue-700 text-2xl font-black flex items-center justify-center hover:bg-orange-200 transition border-2 border-orange-300 shadow-md';
+        ? 'liquid-close process-wizard-close w-10 h-10 rounded-full bg-red-600 text-white text-2xl font-black flex items-center justify-center hover:bg-red-700 transition border-2 border-red-300 shadow-md'
+        : 'liquid-close process-wizard-close w-10 h-10 rounded-full bg-orange-500 text-white text-2xl font-black flex items-center justify-center hover:bg-orange-600 transition border-2 border-orange-300 shadow-md';
 
     const wizard = makeEl(
         'div',
@@ -518,12 +518,9 @@ function createProcessWizard(containerId, config, theme, steps) {
     wizard.dataset.processWizard = 'true';
     wizard.dataset.processContainer = containerId;
 
-    const header = makeEl(
-        'div',
-        'flex items-start justify-between gap-3 mb-3'
-    );
+    const header = makeEl('div', 'flex items-start justify-between gap-3');
 
-    const left = makeEl('div', 'min-w-0');
+    const left = makeEl('div', 'min-w-0 flex-1');
 
     const label = makeEl(
         'p',
@@ -531,24 +528,29 @@ function createProcessWizard(containerId, config, theme, steps) {
         'ΟΔΗΓΟΣ ΕΝΕΡΓΟΠΟΙΗΣΗΣ'
     );
 
+    const providerRow = makeEl('div', 'mt-2 flex flex-wrap items-center gap-2');
+
+    const provider = makeEl('span', providerBadgeClass, config.title);
+    provider.dataset.processMainTitle = '';
+
+    const providerType = makeEl('span', 'process-provider-type', config.subtitle);
+    providerType.dataset.processSubtitle = '';
+
+    providerRow.appendChild(provider);
+    providerRow.appendChild(providerType);
+
     const stepTitle = makeEl(
         'h4',
-        'mt-1 text-base md:text-lg font-black text-slate-900 leading-tight'
+        'mt-2 text-base md:text-lg font-black text-slate-900 leading-tight'
     );
     stepTitle.dataset.processStepTitle = '';
     stepTitle.textContent = getProcessStepTitle(steps[0], 0);
 
     left.appendChild(label);
+    left.appendChild(providerRow);
     left.appendChild(stepTitle);
 
-    const right = makeEl('div', 'flex items-center gap-2 shrink-0');
-
-    const companyBadge = makeEl(
-        'span',
-        `hidden sm:inline-flex rounded-full px-3 py-1 text-xs font-black border-2 shadow-sm ${companyBadgeClass}`,
-        config.title
-    );
-    companyBadge.dataset.processMainTitle = '';
+    const right = makeEl('div', 'flex items-center gap-2 shrink-0 pt-1');
 
     const closeButton = makeEl(
         'button',
@@ -558,23 +560,16 @@ function createProcessWizard(containerId, config, theme, steps) {
     closeButton.type = 'button';
     closeButton.dataset.modalClose = modalId;
     closeButton.dataset.modalTarget = choiceModalId;
-    closeButton.setAttribute('aria-label', 'Πίσω στην επιλογή διαδικασίας');
+    closeButton.setAttribute('aria-label', 'Κλείσιμο οδηγού και επιστροφή στην επιλογή');
 
-    right.appendChild(companyBadge);
     right.appendChild(closeButton);
 
     header.appendChild(left);
     header.appendChild(right);
 
-    const mobileBadge = makeEl(
-        'div',
-        `sm:hidden inline-flex w-fit rounded-full px-3 py-1 text-xs font-black border-2 shadow-sm mb-3 ${companyBadgeClass}`,
-        config.title
-    );
-
     const counter = makeEl(
         'div',
-        'mb-3 text-xs md:text-sm font-black text-slate-500'
+        'mt-3 text-sm font-black text-slate-600'
     );
 
     counter.append('Βήμα ');
@@ -582,7 +577,7 @@ function createProcessWizard(containerId, config, theme, steps) {
     current.dataset.processCurrent = '';
     counter.appendChild(current);
 
-    counter.append(' από ');
+    counter.append('/');
 
     const total = makeEl('span', '', String(steps.length));
     total.dataset.processTotal = '';
@@ -590,12 +585,11 @@ function createProcessWizard(containerId, config, theme, steps) {
 
     const dots = makeEl(
         'div',
-        'flex items-center gap-2 md:gap-3'
+        'mt-2 flex items-center gap-2 md:gap-3'
     );
     dots.dataset.processDots = '';
 
     wizard.appendChild(header);
-    wizard.appendChild(mobileBadge);
     wizard.appendChild(counter);
     wizard.appendChild(dots);
 
@@ -614,6 +608,132 @@ function buildProcessMailtoHref(config) {
     return `mailto:synetelas2011@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
+function buildReadyEmailHref(provider = '', processType = '') {
+    const subject = 'Αίτηση ενεργοποίησης παροχής';
+
+    const body = `Καλησπέρα σας,
+
+Σας αποστέλλω τα απαραίτητα δικαιολογητικά για την ενεργοποίηση της παροχής.
+
+Στοιχεία αιτούντος:
+Ονοματεπώνυμο:
+Τηλέφωνο επικοινωνίας:
+Πάροχος: ${provider}
+Νέος αριθμός ή φορητότητα: ${processType}
+
+Συνημμένα:
+
+* Ταυτότητα μπρος / πίσω
+* Υπεύθυνη Δήλωση
+* Έντυπο προσωπικών δεδομένων
+* Απόδειξη κατάθεσης όπου απαιτείται
+
+Ευχαριστώ πολύ.`;
+
+    return `mailto:synetelas2011@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+function enhanceProcessPreparationCards(container) {
+    if (!container) return;
+
+    const firstStep = container.querySelector('[data-process-step="0"]');
+    if (!firstStep) return;
+
+    firstStep.querySelectorAll('[data-preview-src]').forEach((previewButton) => {
+        if (previewButton.dataset.mobileLabelDone === 'true') return;
+        previewButton.textContent = 'Προβολή';
+        previewButton.dataset.mobileLabelDone = 'true';
+    });
+
+    firstStep.querySelectorAll('a[href$=".pdf"]').forEach((downloadLink) => {
+        if (downloadLink.dataset.mobileLabelDone === 'true') return;
+        downloadLink.textContent = 'Λήψη';
+        downloadLink.dataset.mobileLabelDone = 'true';
+    });
+
+    const docsGrid = firstStep.querySelector('.grid');
+    if (!docsGrid || docsGrid.querySelector('[data-identity-guide="true"]')) return;
+
+    const identityCard = makeEl(
+        'article',
+        'wizard-identity-card rounded-3xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col h-full'
+    );
+    identityCard.dataset.identityGuide = 'true';
+
+    const top = makeEl('div', 'flex items-start justify-between gap-3 mb-4');
+
+    const topLeft = makeEl('div');
+    const badge = makeEl(
+        'span',
+        'inline-flex rounded-full bg-rose-50 text-rose-700 px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wide',
+        'Υποχρεωτικό'
+    );
+    const title = makeEl('h4', 'mt-3 text-base font-black text-slate-900', 'ΤΑΥΤΟΤΗΤΑ');
+    const body = makeEl(
+        'p',
+        'mt-1 text-sm text-slate-500',
+        'Φωτοτυπία ή καθαρή φωτογραφία ταυτότητας (μπρος-πίσω).'
+    );
+    topLeft.appendChild(badge);
+    topLeft.appendChild(title);
+    topLeft.appendChild(body);
+
+    const iconWrap = makeEl('div', 'w-11 h-11 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-700 shrink-0');
+    const icon = document.createElement('i');
+    icon.className = 'fa-solid fa-id-card';
+    iconWrap.appendChild(icon);
+
+    top.appendChild(topLeft);
+    top.appendChild(iconWrap);
+
+    const hint = makeEl(
+        'div',
+        'mt-auto rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 text-center',
+        'Οδηγία: Στείλε μπρος και πίσω όψη στο ίδιο email.'
+    );
+
+    identityCard.appendChild(top);
+    identityCard.appendChild(hint);
+    docsGrid.appendChild(identityCard);
+}
+
+function enhanceProcessDepositCards(container) {
+    if (!container) return;
+
+    const depositStep = container.querySelector('[data-process-step="1"]');
+    if (!depositStep) return;
+
+    depositStep.querySelectorAll('article').forEach((card) => {
+        if (card.dataset.depositEnhanced === 'true') return;
+        card.dataset.depositEnhanced = 'true';
+        card.classList.add('wizard-deposit-card');
+
+        const ibanTextBox = Array.from(card.querySelectorAll('div')).find((element) => {
+            return /GR\d{2}/.test(element.textContent || '');
+        });
+
+        if (!ibanTextBox) return;
+
+        const raw = (ibanTextBox.textContent || '').replace(/\s+/g, ' ').trim();
+        const ibanMatch = raw.match(/GR\d{25}/);
+        const iban = ibanMatch ? ibanMatch[0] : '';
+        const bank = raw.replace(iban, '').replace(/[—-]/g, '').trim() || 'Τράπεζα';
+
+        ibanTextBox.className = 'wizard-iban-box rounded-2xl bg-slate-50 border border-slate-200 px-4 py-3';
+        ibanTextBox.innerHTML = '';
+
+        const bankLabel = makeEl('p', 'wizard-iban-label', 'Τράπεζα');
+        const bankName = makeEl('p', 'wizard-iban-bank', bank);
+        const ibanLabel = makeEl('p', 'wizard-iban-label wizard-iban-label-spaced', 'IBAN');
+        const ibanValue = makeEl('p', 'wizard-iban-value', iban || raw);
+
+        ibanTextBox.appendChild(bankLabel);
+        ibanTextBox.appendChild(bankName);
+        ibanTextBox.appendChild(ibanLabel);
+        ibanTextBox.appendChild(ibanValue);
+    });
+}
+
 function enhanceProcessEmailActions(container, config) {
     if (!container || !config) return;
 
@@ -621,37 +741,35 @@ function enhanceProcessEmailActions(container, config) {
 
     steps.forEach((step) => {
         if (!step.textContent.includes('synetelas2011@gmail.com')) return;
-        if (step.querySelector('[data-email-actions="true"]')) return;
+        const emailCard = step.querySelector('.rounded-3xl.bg-white.border.border-slate-200.p-5.shadow-sm');
+        if (!emailCard || emailCard.querySelector('[data-email-actions="true"]')) return;
 
-        const card = step.querySelector('h4')?.parentElement || step;
+        emailCard.classList.add('wizard-email-card');
 
-        const emailBox = makeEl(
-            'div',
-            'mt-4 rounded-2xl border-2 border-sky-100 bg-sky-50 p-4 shadow-sm'
-        );
-        emailBox.dataset.emailActions = 'true';
+        const description = emailCard.querySelector('p');
+        if (description) {
+            description.textContent = 'Στείλε όλα τα δικαιολογητικά σε ένα email.';
+        }
 
-        const title = makeEl(
-            'p',
-            'text-sm font-black text-sky-900 mb-3 flex items-center gap-2',
-            'Αποστολή δικαιολογητικών'
-        );
+        const openEmailLink = emailCard.querySelector('a[href^="mailto:"]');
+        if (!openEmailLink) return;
 
-        const icon = document.createElement('i');
-        icon.className = 'fa-solid fa-envelope-open-text text-sky-600';
-        title.prepend(icon);
+        openEmailLink.href = buildProcessMailtoHref(config);
+        openEmailLink.className = 'wizard-email-open-action inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-900 text-white px-5 py-3 font-bold text-center hover:bg-slate-800 transition';
 
-        const emailText = makeEl(
-            'p',
-            'text-xs font-bold text-slate-600 mb-3',
-            'Χρησιμοποίησε τα παρακάτω κουμπιά για να αποφύγεις λάθη στο email.'
-        );
+        const existingPlaneIcon = openEmailLink.querySelector('i');
+        if (!existingPlaneIcon) {
+            const openIcon = document.createElement('i');
+            openIcon.className = 'fa-solid fa-paper-plane';
+            openEmailLink.prepend(openIcon);
+        }
 
-        const actions = makeEl('div', 'grid grid-cols-1 sm:grid-cols-2 gap-2');
+        const actions = makeEl('div', 'wizard-email-actions mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2');
+        actions.dataset.emailActions = 'true';
 
         const copyButton = makeEl(
             'button',
-            'inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-sky-200 px-4 py-3 text-xs font-black text-sky-700 hover:bg-sky-100 transition',
+            'wizard-email-copy-action inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 py-3 font-bold text-slate-700 hover:bg-slate-100 transition',
             'Αντιγραφή Email'
         );
         copyButton.type = 'button';
@@ -661,25 +779,173 @@ function enhanceProcessEmailActions(container, config) {
         copyIcon.className = 'fa-solid fa-copy';
         copyButton.prepend(copyIcon);
 
-        const openEmail = makeEl(
+        const openEmailAction = openEmailLink.cloneNode(true);
+        const readyEmailLink = makeEl(
             'a',
-            'inline-flex items-center justify-center gap-2 rounded-xl bg-sky-600 px-4 py-3 text-xs font-black text-white hover:bg-sky-700 transition shadow-sm',
-            'Άνοιγμα Email'
+            'activation-email-template-button mt-3 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-sky-600 px-5 py-3 font-black text-white shadow-sm transition hover:bg-sky-700',
+            'Άνοιγμα έτοιμου email'
         );
-        openEmail.href = buildProcessMailtoHref(config);
+        readyEmailLink.href = buildReadyEmailHref(config.title, config.subtitle);
+        readyEmailLink.dataset.track = 'ready_email_open';
+        readyEmailLink.dataset.label = 'activation_ready_email';
 
-        const openIcon = document.createElement('i');
-        openIcon.className = 'fa-solid fa-paper-plane';
-        openEmail.prepend(openIcon);
+        const readyEmailIcon = document.createElement('i');
+        readyEmailIcon.className = 'fa-solid fa-envelope-open-text';
+        readyEmailLink.prepend(readyEmailIcon);
 
         actions.appendChild(copyButton);
-        actions.appendChild(openEmail);
+        actions.appendChild(openEmailAction);
 
-        emailBox.appendChild(title);
-        emailBox.appendChild(emailText);
-        emailBox.appendChild(actions);
+        const emailRow = emailCard.querySelector('.flex.flex-col.md\\:flex-row');
+        if (!emailRow) return;
 
-        card.appendChild(emailBox);
+        openEmailLink.remove();
+        emailRow.appendChild(actions);
+        emailCard.insertBefore(readyEmailLink, emailRow.nextSibling);
+
+        const checklistTitle = step.querySelector('h4');
+        if (checklistTitle && checklistTitle.textContent.includes('Πριν στείλεις')) {
+            checklistTitle.textContent = 'Πριν στείλεις';
+        }
+    });
+}
+
+function enhanceProcessSimActivationCards(container) {
+    if (!container) return;
+
+    const simStep = container.querySelector('[data-process-step="3"]');
+    if (!simStep) return;
+
+    const simCard = simStep.querySelector('article, .rounded-3xl');
+    if (!simCard) return;
+
+    simCard.classList.add('wizard-sim-card');
+
+    const heading = simCard.querySelector('h4');
+    if (heading) heading.textContent = 'Τελική ενεργοποίηση SIM';
+
+    const description = simCard.querySelector('p');
+    if (description) {
+        description.textContent = 'Όταν παραλάβεις τη SIM, κάνε τα παρακάτω.';
+    }
+
+    if (simCard.querySelector('[data-sim-call-cta="true"]')) return;
+
+    const phoneMatch = simCard.textContent.match(/\b(12200|1252)\b/);
+    const phoneNumber = phoneMatch ? phoneMatch[1] : '';
+    if (!phoneNumber) return;
+
+    const callButton = makeEl(
+        'a',
+        'wizard-call-cta mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-900 text-white px-5 py-3 font-black hover:bg-slate-800 transition',
+        `Κλήση ${phoneNumber}`
+    );
+    callButton.href = `tel:${phoneNumber}`;
+    callButton.dataset.simCallCta = 'true';
+
+    const icon = document.createElement('i');
+    icon.className = 'fa-solid fa-phone';
+    callButton.prepend(icon);
+
+    simCard.appendChild(callButton);
+
+    if (simStep.querySelector('[data-activation-next-card="true"]')) return;
+
+    const nextCard = makeEl('div', 'activation-next-card');
+    nextCard.dataset.activationNextCard = 'true';
+
+    const nextIcon = makeEl('div', 'activation-next-icon');
+    const nextIconElement = document.createElement('i');
+    nextIconElement.className = 'fa-solid fa-circle-check';
+    nextIcon.appendChild(nextIconElement);
+
+    const nextContent = makeEl('div');
+    const nextTitle = makeEl('h4', '', 'Τι γίνεται μετά;');
+    const nextList = makeEl('ol');
+
+    [
+        'Ο Συνεταιρισμός ελέγχει τα δικαιολογητικά.',
+        'Γίνεται η αποστολή ή ενεργοποίηση της παροχής.',
+        'Σε περίπτωση προβλήματος θα επικοινωνήσουμε μαζί σας.',
+    ].forEach((item) => {
+        const li = makeEl('li', '', item);
+        nextList.appendChild(li);
+    });
+
+    const nextNote = makeEl(
+        'p',
+        '',
+        'Κράτησε διαθέσιμο το τηλέφωνό σου για τυχόν επιβεβαίωση στοιχείων.'
+    );
+
+    nextContent.appendChild(nextTitle);
+    nextContent.appendChild(nextList);
+    nextContent.appendChild(nextNote);
+    nextCard.appendChild(nextIcon);
+    nextCard.appendChild(nextContent);
+
+    const completeState = simStep.querySelector('[data-wizard-complete-state]');
+    simStep.insertBefore(nextCard, completeState || null);
+}
+
+function enhanceProcessHelpBoxes(container) {
+    if (!container) return;
+
+    const steps = getProcessSteps(container);
+    steps.forEach((step) => {
+        if (step.querySelector('[data-activation-step-help="true"]')) return;
+
+        const helpBox = makeEl('div', 'activation-step-help');
+        helpBox.dataset.activationStepHelp = 'true';
+
+        const textWrap = makeEl('div', 'min-w-0');
+        const title = makeEl('strong', '', 'Χρειάζεσαι βοήθεια;');
+        const description = makeEl(
+            'span',
+            '',
+            'Ο Συνεταιρισμός μπορεί να σε καθοδηγήσει στη διαδικασία.'
+        );
+
+        textWrap.appendChild(title);
+        textWrap.appendChild(description);
+
+        const actions = makeEl('div', 'activation-step-help-actions');
+
+        const callLink = makeEl(
+            'a',
+            '',
+            'Κλήση'
+        );
+        callLink.href = 'tel:2105245210';
+        callLink.dataset.track = 'phone_click';
+        callLink.dataset.label = 'activation_help_phone';
+        const callIcon = document.createElement('i');
+        callIcon.className = 'fa-solid fa-phone';
+        callLink.prepend(callIcon);
+
+        const chatButton = makeEl(
+            'button',
+            '',
+            'Chat'
+        );
+        chatButton.type = 'button';
+        chatButton.dataset.chatOpen = '';
+        chatButton.dataset.track = 'chat_open';
+        chatButton.dataset.label = 'activation_help_chat';
+        const chatIcon = document.createElement('i');
+        chatIcon.className = 'fa-solid fa-comments';
+        chatButton.prepend(chatIcon);
+
+        actions.appendChild(callLink);
+        actions.appendChild(chatButton);
+
+        helpBox.appendChild(textWrap);
+        helpBox.appendChild(actions);
+
+        const insertBefore = step.querySelector('[data-activation-next-card="true"]')
+            || step.querySelector('[data-wizard-complete-state]')
+            || step.lastElementChild;
+        step.insertBefore(helpBox, insertBefore || null);
     });
 }
 
@@ -694,7 +960,11 @@ function ensureProcessWizard(containerId) {
     if (!steps.length) return;
 
     moveDownloadBlockToPreparation(container, steps[0]);
+    enhanceProcessPreparationCards(container);
+    enhanceProcessDepositCards(container);
     enhanceProcessEmailActions(container, config);
+    enhanceProcessSimActivationCards(container);
+    enhanceProcessHelpBoxes(container);
 
     const theme = getProcessWizardTheme(config.color);
     const timeline = getProcessTimeline(container);
@@ -714,10 +984,12 @@ function ensureProcessWizard(containerId) {
     const mainTitle = wizard.querySelector('[data-process-main-title]');
     const subtitle = wizard.querySelector('[data-process-subtitle]');
     const total = wizard.querySelector('[data-process-total]');
+    const bottomNav = container.querySelector('[data-process-prev]')?.parentElement;
 
     if (mainTitle) mainTitle.textContent = config.title;
     if (subtitle) subtitle.textContent = config.subtitle;
     if (total) total.textContent = steps.length;
+    if (bottomNav) bottomNav.classList.add('process-bottom-nav');
 
     showProcessWizardStep(containerId, processWizardState[containerId] || 0);
 }
@@ -828,7 +1100,7 @@ function showProcessWizardStep(containerId, index) {
 
     if (next) {
         next.disabled = safeIndex === steps.length - 1;
-        next.textContent = safeIndex === steps.length - 1 ? 'Τέλος' : 'Επόμενο';
+        next.textContent = safeIndex === steps.length - 1 ? 'Ολοκλήρωση' : 'Επόμενο';
     }
 }
 
@@ -856,13 +1128,14 @@ function shouldIgnoreProcessSwipe(target) {
     if (!target || !target.closest) return false;
 
     return Boolean(target.closest(
-        'button, a, input, textarea, select, [role="button"], [contenteditable="true"], [data-preview-src], [data-copy-iban], [data-copy-email]'
+        'button, a, input, textarea, select, [role="button"], [contenteditable="true"], [data-preview-src], [data-preview-zoom], [data-preview-reset], [data-copy-iban], [data-copy-email], [data-copy-text], [data-modal-target], [data-modal-close], #imagePreviewModal'
     ));
 }
 
 function handleProcessSwipeStart(event) {
     if (!event.touches || event.touches.length !== 1) return;
     if (window.innerWidth > 768) return;
+    if (typeof isImagePreviewOpen === 'function' && isImagePreviewOpen()) return;
     if (shouldIgnoreProcessSwipe(event.target)) return;
 
     const containerId = getProcessContainerFromTarget(event.target);
@@ -1098,6 +1371,60 @@ function enhanceIbanWarnings() {
     });
 }
 
+async function copyIbanWithFeedback(text, element) {
+    if (!text || !element) return;
+
+    const label = element.querySelector('span');
+    const iconCopy = element.querySelector('.icon-copy');
+    const iconCheck = element.querySelector('.icon-check');
+    const originalLabel = element.dataset.copyLabel || label?.textContent?.trim() || 'Αντιγραφή IBAN';
+
+    if (!element.dataset.copyLabel) {
+        element.dataset.copyLabel = originalLabel;
+    }
+
+    try {
+        if (typeof writeClipboard === 'function') {
+            await writeClipboard(text);
+        } else if (navigator.clipboard) {
+            await navigator.clipboard.writeText(text);
+        } else if (typeof copyIBAN === 'function') {
+            await copyIBAN(text, element);
+            return;
+        } else {
+            throw new Error('Clipboard API not available');
+        }
+
+        showToast('Αντιγράφηκε', 'success');
+
+        if (iconCopy && iconCheck) {
+            iconCopy.classList.add('hidden');
+            iconCheck.classList.remove('hidden');
+        }
+
+        if (label) {
+            label.textContent = 'Αντιγράφηκε ✓';
+        }
+
+        element.classList.add('border-green-500', 'bg-green-50');
+
+        setTimeout(() => {
+            if (iconCopy && iconCheck) {
+                iconCopy.classList.remove('hidden');
+                iconCheck.classList.add('hidden');
+            }
+
+            if (label) {
+                label.textContent = element.dataset.copyLabel || originalLabel;
+            }
+
+            element.classList.remove('border-green-500', 'bg-green-50');
+        }, 2000);
+    } catch (error) {
+        showToast('Η αντιγραφή απέτυχε', 'error');
+    }
+}
+
 function initializeFaqTracking() {
     document.querySelectorAll('#faq details').forEach((details) => {
         details.addEventListener('toggle', () => {
@@ -1265,7 +1592,7 @@ function handleDocumentClick(event) {
             ...getOpenOfferContext(),
             copy_type: 'iban',
         });
-        copyIBAN(copyIbanTarget.dataset.copyIban, copyIbanTarget);
+        copyIbanWithFeedback(copyIbanTarget.dataset.copyIban, copyIbanTarget);
         return;
     }
 
@@ -1571,11 +1898,11 @@ function initializePage() {
             setTimeout(() => {
                 preloader.style.display = 'none';
                 document.body.classList.remove('loading');
-                triggerPageLoadedState(100);
+                triggerPageLoadedState(80);
             }, 200);
         });
     } else {
-        triggerPageLoadedState(100);
+        triggerPageLoadedState(80);
     }
 
     // Cookies Check
