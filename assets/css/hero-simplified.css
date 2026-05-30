@@ -163,55 +163,55 @@ body:not(.page-loaded) .hero-actions {
 }
 
 body.page-loaded .hero-single-shell::before {
-  animation: heroOutlineDraw 650ms cubic-bezier(.2,.8,.2,1) forwards;
+  animation: heroOutlineDraw 900ms cubic-bezier(.16,1,.3,1) forwards;
 }
 
 body.page-loaded .hero-single-shell::after {
-  animation: heroFillReveal 900ms cubic-bezier(.2,.8,.2,1) 180ms forwards;
+  animation: heroFillReveal 1350ms cubic-bezier(.16,1,.3,1) 140ms forwards;
 }
 
 body.page-loaded .hero-kicker {
-  animation: fadeSlideUp 520ms cubic-bezier(.2,.8,.2,1) 720ms both;
+  animation: fadeSlideUp 620ms cubic-bezier(.16,1,.3,1) 1080ms both;
 }
 
 body.page-loaded .hero-title-wrap {
-  animation: fadeSlideUp 640ms cubic-bezier(.2,.8,.2,1) 860ms both;
+  animation: fadeSlideUp 760ms cubic-bezier(.16,1,.3,1) 1240ms both;
 }
 
 body.page-loaded .hero-title-svg text {
   animation:
-    drawLetters 1.05s cubic-bezier(.2,.8,.2,1) forwards,
-    fillLetters 0.6s ease forwards;
+    drawLetters 1.4s cubic-bezier(.16,1,.3,1) forwards,
+    fillLetters 0.85s ease forwards;
 }
 
 body.page-loaded .hero-title-svg text:nth-of-type(1) {
-  animation-delay: 0.9s, 1.52s;
+  animation-delay: 1.18s, 2.04s;
 }
 
 body.page-loaded .hero-title-svg text:nth-of-type(2) {
-  animation-delay: 1.05s, 1.67s;
+  animation-delay: 1.42s, 2.28s;
 }
 
 body.page-loaded .hero-title-svg text:nth-of-type(3) {
-  animation-delay: 1.2s, 1.82s;
+  animation-delay: 1.66s, 2.52s;
 }
 
 body.page-loaded .hero-content > p {
-  animation: fadeSlideUp 620ms cubic-bezier(.2,.8,.2,1) 1030ms both;
+  animation: fadeSlideUp 760ms cubic-bezier(.16,1,.3,1) 1500ms both;
 }
 
 body.page-loaded .hero-actions {
-  animation: fadeSlideUp 620ms cubic-bezier(.2,.8,.2,1) 1180ms both;
+  animation: fadeSlideUp 760ms cubic-bezier(.16,1,.3,1) 1700ms both;
 }
 
 @keyframes heroOutlineDraw {
   0% {
     opacity: 0;
-    transform: scale(0.985);
+    transform: scale(0.972) translateY(8px);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
   }
 }
 
@@ -219,10 +219,12 @@ body.page-loaded .hero-actions {
   0% {
     opacity: 0;
     clip-path: inset(0 100% 0 0 round 34px);
+    filter: blur(10px) saturate(0.92);
   }
   100% {
     opacity: 1;
     clip-path: inset(0 0 0 0 round 34px);
+    filter: blur(0) saturate(1);
   }
 }
 
@@ -354,6 +356,7 @@ body.page-loaded .hero-actions {
     box-shadow: none;
     display: flex;
     align-items: center;
+    animation: heroShellCinematicIn 1100ms cubic-bezier(.16,1,.3,1) both;
   }
 
   body.hero-intro-ready .hero-single-shell::before {
@@ -453,7 +456,7 @@ body.page-loaded .hero-actions {
 
 @media (min-width: 1024px) {
   body.hero-intro-ready.page-loaded .hero-single-shell::after {
-    animation: heroFillRevealFullscreen 900ms cubic-bezier(.2,.8,.2,1) 180ms forwards;
+    animation: heroFillRevealFullscreen 1500ms cubic-bezier(.16,1,.3,1) 220ms forwards;
   }
 }
 
@@ -461,10 +464,25 @@ body.page-loaded .hero-actions {
   0% {
     opacity: 0;
     clip-path: inset(0 100% 0 0);
+    filter: blur(10px) saturate(0.92);
   }
   100% {
     opacity: 1;
     clip-path: inset(0 0 0 0);
+    filter: blur(0) saturate(1);
+  }
+}
+
+@keyframes heroShellCinematicIn {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.992) translateY(14px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
   }
 }
 
