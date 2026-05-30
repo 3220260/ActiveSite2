@@ -3634,6 +3634,29 @@
   width: max-content;
   max-width: min(620px, calc(100% - 360px));
 }
+.site-top-nav .brand-center {
+  min-width: 0;
+  max-width: min(560px, 42vw);
+  overflow: hidden;
+}
+
+.site-top-nav .brand-center a {
+  min-width: 0;
+}
+
+.site-top-nav .brand-center h2 {
+  white-space: normal;
+}
+
+@media (max-width: 1279px) {
+  .site-top-nav .brand-center h2 {
+    display: none !important;
+  }
+
+  .site-top-nav .brand-center img {
+    height: 3.8rem;
+  }
+}
 
 @media (max-width: 767px) {
   .site-top-nav .brand-center {
