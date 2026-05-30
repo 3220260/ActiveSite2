@@ -4,6 +4,19 @@ const wizardCompletedKeys = new Set();
 let assistantChatPreviousFocus = null;
 let activeCategory = 'all';
 let activeSearchQuery = '';
+const HERO_INTRO_DESKTOP_QUERY = typeof window !== 'undefined' && typeof window.matchMedia === 'function'
+    ? window.matchMedia('(min-width: 1024px)')
+    : {
+        matches: false,
+        addEventListener() {},
+        removeEventListener() {},
+        addListener() {},
+        removeListener() {},
+    };
+
+if (typeof document !== 'undefined' && document.body && document.querySelector('.landing-hero') && HERO_INTRO_DESKTOP_QUERY.matches) {
+    document.body.classList.add('hero-intro-ready');
+}
 
 function getFileName(path) {
     return (path || '').split('/').pop() || path || 'unknown';
@@ -1560,6 +1573,59 @@ function initializePremiumMenuActiveState() {
     scheduleActiveStateUpdate();
 }
 
+function initializeHeroIntroNavigation() {
+    const heroSection = document.querySelector('.landing-hero');
+    const topNav = document.querySelector('.site-top-nav');
+    if (!heroSection || !topNav) return;
+
+    const heroActionLinks = Array.from(document.querySelectorAll('.hero-actions a'));
+    let listenersBound = false;
+
+    const syncHeroIntroNavigationState = () => {
+        const isDesktop = HERO_INTRO_DESKTOP_QUERY.matches;
+        const body = document.body;
+        if (!body) return;
+
+        body.classList.toggle('hero-intro-ready', isDesktop);
+
+        if (!isDesktop) {
+            body.classList.remove('hero-nav-visible');
+            return;
+        }
+
+        const hash = window.location.hash || '#top';
+        const shouldShowNav = window.scrollY > 80 || hash !== '#top';
+        body.classList.toggle('hero-nav-visible', shouldShowNav);
+    };
+
+    const showHeroNavImmediately = () => {
+        if (!HERO_INTRO_DESKTOP_QUERY.matches) return;
+        document.body?.classList.add('hero-nav-visible');
+    };
+
+    const bindListeners = () => {
+        if (listenersBound) return;
+        listenersBound = true;
+
+        window.addEventListener('scroll', syncHeroIntroNavigationState, { passive: true });
+        window.addEventListener('resize', syncHeroIntroNavigationState, { passive: true });
+        window.addEventListener('hashchange', syncHeroIntroNavigationState);
+
+        if (typeof HERO_INTRO_DESKTOP_QUERY.addEventListener === 'function') {
+            HERO_INTRO_DESKTOP_QUERY.addEventListener('change', syncHeroIntroNavigationState);
+        } else if (typeof HERO_INTRO_DESKTOP_QUERY.addListener === 'function') {
+            HERO_INTRO_DESKTOP_QUERY.addListener(syncHeroIntroNavigationState);
+        }
+
+        heroActionLinks.forEach((link) => {
+            link.addEventListener('click', showHeroNavImmediately);
+        });
+    };
+
+    bindListeners();
+    syncHeroIntroNavigationState();
+}
+
 
 function handleDocumentClick(event) {
 
@@ -1969,6 +2035,8 @@ function triggerPageLoadedState(delay = 0) {
 function initializePage() {
     if (pageInitialized) return;
     pageInitialized = true;
+
+    initializeHeroIntroNavigation();
 
     // Preloader
     const preloader = document.getElementById('preloader');

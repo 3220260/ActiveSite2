@@ -317,6 +317,116 @@ body.page-loaded .hero-actions {
   }
 }
 
+@media (min-width: 1024px) {
+  html {
+    scroll-padding-top: 0;
+  }
+
+  body.hero-intro-ready .site-main {
+    padding-top: 0;
+  }
+
+  body.hero-intro-ready .landing-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+  }
+
+  body.hero-intro-ready .hero-single-shell {
+    width: 100%;
+    min-height: calc(100vh - 6rem);
+    padding: clamp(2.75rem, 4vw, 4rem);
+    border-radius: 40px;
+    box-shadow: 0 42px 120px rgba(7, 26, 51, 0.32);
+  }
+
+  body.hero-intro-ready .hero-content {
+    max-width: 1040px;
+  }
+
+  body.hero-intro-ready .hero-kicker {
+    margin-bottom: 1rem;
+    padding: 0.58rem 0.85rem;
+    font-size: 0.76rem;
+  }
+
+  body.hero-intro-ready .hero-title-svg {
+    max-width: 980px;
+  }
+
+  body.hero-intro-ready .hero-title-svg text {
+    font-size: 102px;
+  }
+
+  body.hero-intro-ready .hero-content > p {
+    max-width: 920px;
+    margin-top: 1.1rem;
+    font-size: 1.15rem;
+    line-height: 1.7;
+  }
+
+  body.hero-intro-ready .hero-actions {
+    gap: 0.95rem;
+    margin-top: 1.45rem;
+  }
+
+  body.hero-intro-ready .hero-actions .btn-primary,
+  body.hero-intro-ready .hero-actions .btn-secondary,
+  body.hero-intro-ready .hero-actions .btn-ghost {
+    min-height: 3.6rem;
+    padding: 0.95rem 1.25rem;
+    font-size: 0.98rem;
+  }
+
+  body.hero-intro-ready .hero-actions .hero-process-cta {
+    padding-inline: 1.1rem;
+  }
+
+  body.hero-intro-ready .site-top-nav {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    filter: none;
+    transition:
+      opacity 260ms ease,
+      transform 260ms ease,
+      filter 260ms ease;
+  }
+
+  body.hero-intro-ready:not(.hero-nav-visible) .site-top-nav {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-120%) scale(0.985);
+    filter: blur(4px);
+    transition:
+      opacity 260ms ease,
+      transform 260ms ease,
+      filter 260ms ease;
+  }
+
+  body.hero-intro-ready.hero-nav-visible .site-top-nav {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    filter: none;
+  }
+
+  #offers,
+  #process,
+  #faq,
+  #contact {
+    scroll-margin-top: 7.2rem;
+  }
+
+  .assistant-chat-fab {
+    z-index: 10021;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   body:not(.page-loaded) .hero-single-shell::before,
   body:not(.page-loaded) .hero-single-shell::after,
