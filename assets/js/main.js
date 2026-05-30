@@ -951,7 +951,7 @@ function enhanceProcessHelpBoxes(container) {
         chatButton.dataset.track = 'chat_open';
         chatButton.dataset.label = 'activation_help_chat';
         const chatIcon = document.createElement('i');
-        chatIcon.className = 'fa-solid fa-comments';
+        chatIcon.className = 'fa-solid fa-comment-dots';
         chatButton.prepend(chatIcon);
 
         actions.appendChild(callLink);
