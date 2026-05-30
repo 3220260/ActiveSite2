@@ -2687,17 +2687,27 @@
         aria-labelledby="assistantChatTitle"
         aria-describedby="assistantChatDescription">
         <div class="assistant-chat-backdrop" data-chat-close aria-hidden="true"></div>
-        <section class="assistant-chat-panel" data-chat-panel>
-            
-            <iframe
-                title="Chat βοηθός Π.Κ.Σ.Α.Α."
-                class="assistant-chat-frame"
-                loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allow="clipboard-read; clipboard-write"
-                data-src="https://ver-bot.vercel.app/?embed=1">
-            </iframe>
-        </section>
+       <section class="assistant-chat-panel" data-chat-panel>
+  <div class="assistant-chat-mobile-header">
+    <div>
+      <strong>Sofia</strong>
+      <span>Ψηφιακή βοηθός Π.Κ.Σ.Α.Α.</span>
+    </div>
+
+    <button type="button" class="assistant-chat-close-btn" data-chat-close aria-label="Κλείσιμο chat">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <iframe
+      title="Chat βοηθός Π.Κ.Σ.Α.Α."
+      class="assistant-chat-frame"
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="clipboard-read; clipboard-write"
+      data-src="https://ver-bot.vercel.app/?embed=1">
+  </iframe>
+</section>
     </div>
     
   </body>

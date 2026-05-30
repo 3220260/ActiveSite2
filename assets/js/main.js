@@ -2191,3 +2191,29 @@ window.onpopstate = function (event) {
     unlockPageScrollIfIdle();
     requestAnimationFrame(refreshVisibleOfferCards);
 };
+
+
+  function closeAssistantOuterChat() {
+    const modal = document.querySelector('.assistant-chat-modal');
+
+    if (modal) {
+      modal.classList.add('hidden');
+    }
+
+    document.body.classList.remove('assistant-chat-open');
+  }
+
+  document.addEventListener('click', function (event) {
+    const closeButton = event.target.closest('[data-chat-close]');
+    if (!closeButton) return;
+
+    closeAssistantOuterChat();
+  });
+
+  window.addEventListener('message', function (event) {
+    if (event.origin !== 'https://ver-bot.vercel.app') return;
+
+    if (event.data && event.data.type === 'PKSAA_CHAT_CLOSE') {
+      closeAssistantOuterChat();
+    }
+  });
