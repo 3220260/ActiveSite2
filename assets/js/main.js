@@ -1510,10 +1510,12 @@ function openAssistantChat(chatContext = null) {
 
     assistantChatPreviousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const iframe = getAssistantChatFrame(modal);
+    let shouldReloadFrame = false;
+    let isFrameReady = false;
     if (iframe) {
         const desiredSrc = buildAssistantChatUrl();
-        const shouldReloadFrame = iframe.getAttribute('src') !== desiredSrc;
-        const isFrameReady = iframe.dataset.assistantChatReady === 'true';
+        shouldReloadFrame = iframe.getAttribute('src') !== desiredSrc;
+        isFrameReady = iframe.dataset.assistantChatReady === 'true';
         if (shouldReloadFrame) {
             iframe.dataset.assistantChatReady = 'false';
             iframe.setAttribute('src', desiredSrc);
