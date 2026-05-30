@@ -1441,7 +1441,7 @@ function postAssistantChatFrameMessage(frame, payload) {
 }
 
 function syncAssistantChatFrameState(frame = getAssistantChatFrame()) {
-    if (!frame) return;
+    if (!frame || frame.dataset.assistantChatReady !== 'true') return;
     if (pendingAssistantChatContext) {
         postAssistantChatFrameMessage(frame, {
             source: 'pksaa-parent',
@@ -1513,9 +1513,12 @@ function openAssistantChat(chatContext = null) {
     if (iframe) {
         const desiredSrc = buildAssistantChatUrl();
         const shouldReloadFrame = iframe.getAttribute('src') !== desiredSrc;
+        const isFrameReady = iframe.dataset.assistantChatReady === 'true';
         if (shouldReloadFrame) {
+            iframe.dataset.assistantChatReady = 'false';
             iframe.setAttribute('src', desiredSrc);
             const restoreOnLoad = () => {
+                iframe.dataset.assistantChatReady = 'true';
                 syncAssistantChatFrameState(iframe);
                 iframe.removeEventListener('load', restoreOnLoad);
             };
@@ -1528,7 +1531,9 @@ function openAssistantChat(chatContext = null) {
     lockPageScroll();
     trackEvent('chat_open', { label: 'assistant_chat' });
     requestAnimationFrame(() => {
-        syncAssistantChatFrameState(iframe);
+        if (iframe && (isFrameReady || !shouldReloadFrame)) {
+            syncAssistantChatFrameState(iframe);
+        }
         setTimeout(focusAssistantChatStart, 0);
     });
 }
