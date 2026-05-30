@@ -1,7 +1,16 @@
-const ASSISTANT_CHAT_URL = 'https://ver-bot.vercel.app/?embed=1';
+function buildAssistantChatUrl() {
+    const url = new URL('https://ver-bot.vercel.app/?embed=1');
+    if (typeof window !== 'undefined' && window.location?.origin) {
+        url.searchParams.set('parentOrigin', window.location.origin);
+    }
+    return url.toString();
+}
+
+const ASSISTANT_CHAT_URL = buildAssistantChatUrl();
 const wizardStepViewedKeys = new Set();
 const wizardCompletedKeys = new Set();
 let assistantChatPreviousFocus = null;
+let pendingAssistantChatContext = null;
 let activeCategory = 'all';
 let activeSearchQuery = '';
 const HERO_INTRO_DESKTOP_QUERY = typeof window !== 'undefined' && typeof window.matchMedia === 'function'
@@ -1322,12 +1331,106 @@ function getAssistantChatOrigin() {
     }
 }
 
-function restoreAssistantChatFrameState(frame = getAssistantChatFrame()) {
+function normalizeAssistantChatContext(context) {
+    if (!context || typeof context !== 'object') return null;
+
+    const title = typeof context.title === 'string' ? context.title.trim() : '';
+    const subtitle = typeof context.subtitle === 'string' ? context.subtitle.trim() : '';
+    const summary = typeof context.summary === 'string' ? context.summary.trim() : '';
+    const source = typeof context.source === 'string' ? context.source.trim() : '';
+    const provider = typeof context.provider === 'string' ? context.provider.trim() : '';
+    const processType = typeof context.processType === 'string' ? context.processType.trim() : '';
+    const stepTitle = typeof context.stepTitle === 'string' ? context.stepTitle.trim() : '';
+    const stepIndex = Number.isFinite(Number(context.stepIndex)) ? Number(context.stepIndex) : null;
+    const prompts = Array.isArray(context.prompts)
+        ? context.prompts.map((prompt) => String(prompt || '').trim()).filter(Boolean).slice(0, 4)
+        : [];
+
+    if (!title && !subtitle && !summary && !prompts.length && !provider && !processType && !stepTitle) {
+        return null;
+    }
+
+    return {
+        title,
+        subtitle,
+        summary,
+        source,
+        provider,
+        processType,
+        stepTitle,
+        stepIndex,
+        prompts,
+    };
+}
+
+function buildActivationChatContext(target) {
+    const chatButton = target?.closest?.('[data-chat-open]');
+    if (!chatButton) return null;
+
+    const wizard = chatButton.closest('[data-process-wizard]');
+    const step = chatButton.closest('[data-process-step]');
+    if (!wizard || !step) return null;
+
+    const containerId = wizard.dataset.processContainer;
+    const config = PROCESS_WIZARDS[containerId];
+    if (!config) return null;
+
+    const steps = getProcessSteps(wizard);
+    const stepIndex = Math.max(0, steps.indexOf(step));
+    const stepTitle = getProcessStepTitle(step, stepIndex);
+    const providerTitle = `${config.title} · ${config.subtitle}`;
+
+    const contextPromptsByStep = {
+        0: [
+            'Ποια δικαιολογητικά χρειάζονται;',
+            'Πού βρίσκω τα PDF;',
+            'Τι στέλνω στο email;'
+        ],
+        1: [
+            'Ποιο IBAN χρησιμοποιώ;',
+            'Τι γράφω στην κατάθεση;',
+            'Πώς στέλνω την απόδειξη;'
+        ],
+        2: [
+            'Ποιο email στέλνω;',
+            'Τι πρέπει να επισυνάψω;',
+            'Μπορείς να μου δώσεις έτοιμο email;'
+        ],
+        3: [
+            'Πώς ενεργοποιώ τη SIM;',
+            'Τι κάνω μετά την παραλαβή;',
+            'Ποιο τηλέφωνο καλώ;'
+        ],
+    };
+
+    const contextSummaryByStep = {
+        0: 'Εδώ μιλάμε για τα έγγραφα που χρειάζεσαι πριν στείλεις αίτηση.',
+        1: 'Εδώ μιλάμε για την κατάθεση, τον IBAN και το αποδεικτικό πληρωμής.',
+        2: 'Εδώ μιλάμε για το email αποστολής και τα συνημμένα δικαιολογητικά.',
+        3: 'Εδώ μιλάμε για την τελική ενεργοποίηση της SIM και το επόμενο βήμα.',
+    };
+
+    return normalizeAssistantChatContext({
+        source: 'activation-guide',
+        title: providerTitle,
+        subtitle: stepTitle,
+        summary: contextSummaryByStep[stepIndex] || `Συζητάμε το βήμα "${stepTitle}" για ${providerTitle}.`,
+        provider: config.title,
+        processType: config.subtitle,
+        stepTitle,
+        stepIndex,
+        prompts: contextPromptsByStep[stepIndex] || [
+            'Τι πρέπει να κάνω τώρα;',
+            'Ποια είναι τα επόμενα βήματα;',
+            'Μπορείς να με καθοδηγήσεις;'
+        ],
+    });
+}
+
+function postAssistantChatFrameMessage(frame, payload) {
     if (!frame || !frame.contentWindow) return;
 
-    const payload = { source: 'sofia-chat', type: 'restoreChat' };
     const targetOrigin = getAssistantChatOrigin();
-
     try {
         frame.contentWindow.postMessage(payload, targetOrigin);
     } catch (_) {
@@ -1335,6 +1438,37 @@ function restoreAssistantChatFrameState(frame = getAssistantChatFrame()) {
             frame.contentWindow.postMessage(payload, '*');
         } catch (_) {}
     }
+}
+
+function syncAssistantChatFrameState(frame = getAssistantChatFrame()) {
+    if (!frame) return;
+    if (pendingAssistantChatContext) {
+        postAssistantChatFrameMessage(frame, {
+            source: 'pksaa-parent',
+            type: 'setContext',
+            context: pendingAssistantChatContext,
+        });
+    } else {
+        postAssistantChatFrameMessage(frame, {
+            source: 'pksaa-parent',
+            type: 'clearContext',
+        });
+    }
+    postAssistantChatFrameMessage(frame, {
+        source: 'sofia-chat',
+        type: 'restoreChat',
+    });
+}
+
+function setAssistantChatContext(context) {
+    pendingAssistantChatContext = normalizeAssistantChatContext(context);
+    if (isAssistantChatOpen()) {
+        syncAssistantChatFrameState();
+    }
+}
+
+function restoreAssistantChatFrameState(frame = getAssistantChatFrame()) {
+    postAssistantChatFrameMessage(frame, { source: 'sofia-chat', type: 'restoreChat' });
 }
 
 function isAssistantChatOpen() {
@@ -1362,19 +1496,27 @@ function focusAssistantChatStart() {
     (closeButton || focusable[0])?.focus?.();
 }
 
-function openAssistantChat() {
+function openAssistantChat(chatContext = null) {
     const modal = getAssistantChatModal();
-    if (!modal || isAssistantChatOpen()) return;
+    if (!modal) return;
+
+    setAssistantChatContext(chatContext);
+    const wasOpen = isAssistantChatOpen();
+    if (wasOpen) {
+        syncAssistantChatFrameState();
+        setTimeout(focusAssistantChatStart, 0);
+        return;
+    }
 
     assistantChatPreviousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const iframe = getAssistantChatFrame(modal);
     if (iframe) {
-        const desiredSrc = iframe.dataset.src || ASSISTANT_CHAT_URL;
+        const desiredSrc = buildAssistantChatUrl();
         const shouldReloadFrame = iframe.getAttribute('src') !== desiredSrc;
         if (shouldReloadFrame) {
             iframe.setAttribute('src', desiredSrc);
             const restoreOnLoad = () => {
-                restoreAssistantChatFrameState(iframe);
+                syncAssistantChatFrameState(iframe);
                 iframe.removeEventListener('load', restoreOnLoad);
             };
             iframe.addEventListener('load', restoreOnLoad);
@@ -1386,7 +1528,7 @@ function openAssistantChat() {
     lockPageScroll();
     trackEvent('chat_open', { label: 'assistant_chat' });
     requestAnimationFrame(() => {
-        restoreAssistantChatFrameState(iframe);
+        syncAssistantChatFrameState(iframe);
         setTimeout(focusAssistantChatStart, 0);
     });
 }
@@ -1681,7 +1823,7 @@ function handleDocumentClick(event) {
     const chatOpenTarget = event.target.closest('[data-chat-open]');
     if (chatOpenTarget) {
         event.preventDefault();
-        openAssistantChat();
+        openAssistantChat(buildActivationChatContext(chatOpenTarget));
         return;
     }
 
