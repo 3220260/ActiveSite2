@@ -231,10 +231,21 @@ body.assistant-chat-open .assistant-chat-fab {
   background: rgba(0, 0, 0, 0.72);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 220ms ease,
+    visibility 0s linear 0s;
 }
 
 .assistant-chat-modal.hidden {
-  display: none !important;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 220ms ease,
+    visibility 0s linear 220ms;
 }
 
 .assistant-chat-backdrop {
@@ -255,6 +266,17 @@ body.assistant-chat-open .assistant-chat-fab {
   border-radius: 0;
   background: transparent;
   box-shadow: none;
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    transform 280ms cubic-bezier(.2,.8,.2,1),
+    opacity 220ms ease;
+  will-change: transform, opacity;
+}
+
+.assistant-chat-modal.hidden .assistant-chat-panel {
+  opacity: 0;
+  transform: translateX(18px) scale(0.985);
 }
 
 .assistant-chat-frame {
@@ -345,6 +367,16 @@ body.assistant-chat-open .assistant-chat-fab {
     height: 100dvh;
     margin: 0;
     border-radius: 0;
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      transform 280ms cubic-bezier(.2,.8,.2,1),
+      opacity 220ms ease;
+  }
+
+  .assistant-chat-modal.hidden .assistant-chat-panel {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
   }
 
   .mobile-bottom-nav {

@@ -1310,6 +1310,33 @@ function getAssistantChatModal() {
     return document.getElementById('assistantChatModal');
 }
 
+function getAssistantChatFrame(modal = getAssistantChatModal()) {
+    return modal ? modal.querySelector('iframe[data-src]') : null;
+}
+
+function getAssistantChatOrigin() {
+    try {
+        return new URL(ASSISTANT_CHAT_URL, window.location.href).origin;
+    } catch (_) {
+        return 'https://ver-bot.vercel.app';
+    }
+}
+
+function restoreAssistantChatFrameState(frame = getAssistantChatFrame()) {
+    if (!frame || !frame.contentWindow) return;
+
+    const payload = { source: 'sofia-chat', type: 'restoreChat' };
+    const targetOrigin = getAssistantChatOrigin();
+
+    try {
+        frame.contentWindow.postMessage(payload, targetOrigin);
+    } catch (_) {
+        try {
+            frame.contentWindow.postMessage(payload, '*');
+        } catch (_) {}
+    }
+}
+
 function isAssistantChatOpen() {
     const modal = getAssistantChatModal();
     return Boolean(modal && !modal.classList.contains('hidden'));
@@ -1340,11 +1367,17 @@ function openAssistantChat() {
     if (!modal || isAssistantChatOpen()) return;
 
     assistantChatPreviousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const iframe = modal.querySelector('iframe[data-src]');
+    const iframe = getAssistantChatFrame(modal);
     if (iframe) {
         const desiredSrc = iframe.dataset.src || ASSISTANT_CHAT_URL;
-        if (iframe.getAttribute('src') !== desiredSrc) {
+        const shouldReloadFrame = iframe.getAttribute('src') !== desiredSrc;
+        if (shouldReloadFrame) {
             iframe.setAttribute('src', desiredSrc);
+            const restoreOnLoad = () => {
+                restoreAssistantChatFrameState(iframe);
+                iframe.removeEventListener('load', restoreOnLoad);
+            };
+            iframe.addEventListener('load', restoreOnLoad);
         }
     }
 
@@ -1352,7 +1385,10 @@ function openAssistantChat() {
     setAssistantChatOpenState(true);
     lockPageScroll();
     trackEvent('chat_open', { label: 'assistant_chat' });
-    setTimeout(focusAssistantChatStart, 0);
+    requestAnimationFrame(() => {
+        restoreAssistantChatFrameState(iframe);
+        setTimeout(focusAssistantChatStart, 0);
+    });
 }
 
 function closeAssistantChat() {

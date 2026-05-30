@@ -571,10 +571,21 @@ a.phone-cta:visited,
     background: rgba(2, 6, 23, 0.72) !important;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      opacity 220ms ease,
+      visibility 0s linear 0s;
   }
 
   .assistant-chat-modal.hidden {
-    display: none !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 220ms ease,
+      visibility 0s linear 220ms;
   }
 
   .assistant-chat-panel {
@@ -588,6 +599,16 @@ a.phone-cta:visited,
     display: flex !important;
     flex-direction: column !important;
     box-shadow: none !important;
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      transform 280ms cubic-bezier(.2,.8,.2,1),
+      opacity 220ms ease;
+  }
+
+  .assistant-chat-modal.hidden .assistant-chat-panel {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
   }
 
   .assistant-chat-frame {
