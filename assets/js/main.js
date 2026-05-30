@@ -1,4 +1,4 @@
-const ASSISTANT_CHAT_URL = 'https://ver-bot.vercel.app/';
+const ASSISTANT_CHAT_URL = 'https://ver-bot.vercel.app/?embed=1';
 const wizardStepViewedKeys = new Set();
 const wizardCompletedKeys = new Set();
 let assistantChatPreviousFocus = null;
@@ -1336,8 +1336,11 @@ function openAssistantChat() {
 
     assistantChatPreviousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const iframe = modal.querySelector('iframe[data-src]');
-    if (iframe && !iframe.getAttribute('src')) {
-        iframe.setAttribute('src', iframe.dataset.src || ASSISTANT_CHAT_URL);
+    if (iframe) {
+        const desiredSrc = iframe.dataset.src || ASSISTANT_CHAT_URL;
+        if (iframe.getAttribute('src') !== desiredSrc) {
+            iframe.setAttribute('src', desiredSrc);
+        }
     }
 
     modal.classList.remove('hidden');
