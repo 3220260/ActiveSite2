@@ -1,0 +1,176 @@
+body {
+  background:
+    radial-gradient(circle at top left, rgba(22, 93, 186, 0.16), transparent 34rem),
+    radial-gradient(circle at 85% 8%, rgba(215, 35, 47, 0.08), transparent 28rem),
+    linear-gradient(180deg, #f8fafc 0%, #eef3f8 100%) !important;
+  color: #172033;
+}
+
+/* Top header */
+header {
+  background: rgba(7, 26, 51, 0.96) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 18px 45px rgba(7, 26, 51, 0.18);
+}
+
+header img {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* Main layout */
+main {
+  padding-top: 2rem !important;
+}
+
+/* Hero first section */
+main > section:first-child {
+  position: relative;
+  overflow: hidden;
+  color: white;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(96, 165, 250, 0.35), transparent 25rem),
+    radial-gradient(circle at 92% 18%, rgba(215, 35, 47, 0.18), transparent 22rem),
+    linear-gradient(135deg, #020617 0%, #071a33 46%, #0f2b5c 100%) !important;
+  border: 0 !important;
+  border-radius: 36px !important;
+  padding: clamp(1.6rem, 5vw, 4.2rem) !important;
+  box-shadow: 0 28px 80px rgba(7, 26, 51, 0.22) !important;
+}
+
+main > section:first-child::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+main > section:first-child > * {
+  position: relative;
+  z-index: 1;
+}
+
+main > section:first-child h1 {
+  color: white !important;
+  font-size: clamp(2.25rem, 5.3vw, 4.9rem) !important;
+  line-height: 0.95 !important;
+  letter-spacing: -0.055em !important;
+  max-width: 900px;
+}
+
+main > section:first-child p {
+  color: rgba(226, 232, 240, 0.92) !important;
+  max-width: 780px;
+  font-size: clamp(1rem, 1.4vw, 1.16rem) !important;
+  line-height: 1.75 !important;
+}
+
+/* All white sections */
+main > section:not(:first-child) {
+  border-radius: 30px !important;
+  background: rgba(255, 255, 255, 0.86) !important;
+  border: 1px solid rgba(148, 163, 184, 0.24) !important;
+  box-shadow: 0 18px 45px rgba(7, 26, 51, 0.08) !important;
+}
+
+/* Cards */
+article {
+  border-radius: 26px !important;
+  background: linear-gradient(180deg, #ffffff, #f8fafc) !important;
+  border: 1px solid rgba(148, 163, 184, 0.24) !important;
+  box-shadow: 0 16px 38px rgba(7, 26, 51, 0.07) !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 60px rgba(7, 26, 51, 0.13) !important;
+}
+
+/* Icon boxes */
+article > div:first-child,
+article .w-12 {
+  border-radius: 18px !important;
+}
+
+/* Contact boxes */
+section a[href^="tel:"],
+section a[href^="mailto:"] {
+  border-radius: 22px !important;
+  background: #f8fafc !important;
+  border: 1px solid rgba(148, 163, 184, 0.24) !important;
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+section a[href^="tel:"]:hover,
+section a[href^="mailto:"]:hover {
+  transform: translateY(-3px);
+  background: #eef6ff !important;
+  box-shadow: 0 14px 35px rgba(7, 26, 51, 0.10);
+}
+
+/* FAQ */
+section article h3 {
+  color: #071a33 !important;
+}
+
+section article p {
+  color: #64748b !important;
+  line-height: 1.7;
+}
+
+/* Buttons */
+a.rounded-2xl,
+a.rounded-full {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+a.rounded-2xl:hover,
+a.rounded-full:hover {
+  transform: translateY(-2px);
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  main {
+    padding-top: 1rem !important;
+  }
+
+  header .max-w-6xl {
+    min-height: 76px;
+  }
+
+  header img {
+    height: 48px !important;
+  }
+
+  header .text-xs {
+    display: none;
+  }
+
+  main > section:first-child {
+    border-radius: 24px !important;
+    padding: 1.35rem !important;
+  }
+
+  main > section:first-child h1 {
+    font-size: 2.15rem !important;
+    line-height: 1.02 !important;
+  }
+
+  main > section:not(:first-child) {
+    border-radius: 24px !important;
+  }
+
+  article:hover {
+    transform: none;
+  }
+}

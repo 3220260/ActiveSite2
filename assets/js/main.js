@@ -1253,6 +1253,9 @@ function updateOfferVisibility() {
     });
 
     requestAnimationFrame(refreshVisibleOfferCards);
+    if (typeof window.syncPremiumMenuActiveState === 'function') {
+        window.syncPremiumMenuActiveState();
+    }
 }
 
 function initializeOfferSearch() {
@@ -1285,6 +1288,9 @@ function applyOfferFilter(category, source = null) {
     }
 
     requestAnimationFrame(refreshVisibleOfferCards);
+    if (typeof window.syncPremiumMenuActiveState === 'function') {
+        window.syncPremiumMenuActiveState();
+    }
 }
 
 function getAssistantChatModal() {
@@ -1483,6 +1489,75 @@ function initializeBottomNavOffersState() {
     });
 
     observer.observe(offersSection);
+}
+
+function initializePremiumMenuActiveState() {
+    const menuLinks = {
+        mobile: document.querySelector('.premium-menu-link-mobile'),
+        internet: document.querySelector('.premium-menu-link-internet'),
+        tv: document.querySelector('.premium-menu-link-tv'),
+        health: document.querySelector('.premium-menu-link-health'),
+        info: document.querySelector('.premium-menu-link-info'),
+    };
+
+    const targetGroups = {
+        mobile: Array.from(document.querySelectorAll('[data-offer-card][data-category="mobile"]')),
+        internet: Array.from(document.querySelectorAll('[data-offer-card][data-category="internet"]')),
+        tv: Array.from(document.querySelectorAll('[data-offer-card][data-category="tv"]')),
+        health: Array.from(document.querySelectorAll('[data-offer-card][data-category="health"]')),
+        info: Array.from([document.getElementById('siteLegalBar')].filter(Boolean)),
+    };
+
+    const hasTargets = Object.values(targetGroups).some((elements) => elements.length);
+    if (!hasTargets) return;
+
+    let rafId = null;
+
+    const updateActiveState = () => {
+        rafId = null;
+
+        let bestKey = '';
+        let bestRatio = 0;
+
+        Object.entries(targetGroups).forEach(([key, elements]) => {
+            let keyRatio = 0;
+
+            elements.forEach((element) => {
+                if (!element || element.hidden) return;
+
+                const rect = element.getBoundingClientRect();
+                const visibleWidth = Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0);
+                const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+                const visibleArea = Math.max(0, visibleWidth) * Math.max(0, visibleHeight);
+                const totalArea = Math.max(1, rect.width * rect.height);
+                const ratio = visibleArea / totalArea;
+
+                if (ratio > keyRatio) keyRatio = ratio;
+            });
+
+            if (keyRatio > bestRatio) {
+                bestRatio = keyRatio;
+                bestKey = key;
+            }
+        });
+
+        Object.entries(menuLinks).forEach(([key, link]) => {
+            if (!link) return;
+            link.classList.toggle('is-active', key === bestKey && bestRatio >= 0.12);
+        });
+    };
+
+    const scheduleActiveStateUpdate = () => {
+        if (rafId !== null) return;
+        rafId = window.requestAnimationFrame(updateActiveState);
+    };
+
+    window.syncPremiumMenuActiveState = scheduleActiveStateUpdate;
+    window.addEventListener('scroll', scheduleActiveStateUpdate, { passive: true });
+    window.addEventListener('resize', scheduleActiveStateUpdate, { passive: true });
+    window.addEventListener('orientationchange', scheduleActiveStateUpdate);
+
+    scheduleActiveStateUpdate();
 }
 
 
@@ -1990,6 +2065,7 @@ function initializePage() {
     initializeLandingStepTracking();
     initializeOfferSearch();
     initializeBottomNavOffersState();
+    initializePremiumMenuActiveState();
     updateOfferVisibility();
     initializeOfferCardReveal();
     initializeOfferCardTracking();
