@@ -2699,25 +2699,7 @@
             </iframe>
         </section>
     </div>
-    <script>
-      function closeAssistantOuterChat() {
-        const modal = document.querySelector('.assistant-chat-modal');
-
-        if (modal) {
-          modal.classList.add('hidden');
-        }
-
-        document.body.classList.remove('assistant-chat-open');
-      }
-
-      window.addEventListener('message', function (event) {
-        if (event.origin !== 'https://ver-bot.vercel.app') return;
-
-        if (event.data && event.data.type === 'PKSAA_CHAT_CLOSE') {
-          closeAssistantOuterChat();
-        }
-      });
-    </script>
+    
   </body>
 
     <nav class="mobile-bottom-nav" aria-label="Γρήγορες ενέργειες κινητού">
