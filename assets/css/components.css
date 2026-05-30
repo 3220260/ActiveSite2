@@ -3600,7 +3600,7 @@
 @media (min-width: 1024px) {
   .site-top-nav .max-w-7xl {
     display: grid !important;
-    grid-template-columns: auto minmax(280px, 1fr) auto !important;
+    grid-template-columns: auto minmax(0, 1fr) auto !important;
     align-items: center !important;
     gap: 1rem !important;
   }
@@ -3614,9 +3614,46 @@
     min-width: 0 !important;
   }
 
-  .site-top-nav h2 {
-    max-width: 430px !important;
+  .site-top-nav .brand-center {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    z-index: 40;
+    grid-column: 2 !important;
+    justify-self: center !important;
+    width: auto !important;
+    max-width: min(520px, calc(100vw - 34rem)) !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+
+  .site-top-nav .brand-center a {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    min-width: 0 !important;
+    width: 100%;
+  }
+
+  .site-top-nav .brand-center img {
+    height: clamp(2.85rem, 3vw, 4rem) !important;
+    width: auto !important;
+    flex-shrink: 0;
+  }
+
+  .site-top-nav .brand-center h2 {
+    display: block !important;
+    max-width: 20rem !important;
     white-space: normal !important;
+    line-height: 1.12 !important;
+    font-size: clamp(0.58rem, 0.66vw, 0.78rem) !important;
+    letter-spacing: 0.08em !important;
+    text-align: left !important;
+  }
+
+  .site-top-nav .brand-center div {
+    align-items: flex-start !important;
   }
 
   .site-nav-link {
@@ -3624,37 +3661,13 @@
   }
 }
 
-
-.site-top-nav .brand-center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 40;
-  width: max-content;
-  max-width: min(620px, calc(100% - 360px));
-}
-.site-top-nav .brand-center {
-  min-width: 0;
-  max-width: min(560px, 42vw);
-  overflow: hidden;
-}
-
-.site-top-nav .brand-center a {
-  min-width: 0;
-}
-
-.site-top-nav .brand-center h2 {
-  white-space: normal;
-}
-
 @media (max-width: 1279px) {
-  .site-top-nav .brand-center h2 {
-    display: none !important;
+  .site-top-nav .brand-center img {
+    height: 3.2rem;
   }
 
-  .site-top-nav .brand-center img {
-    height: 3.8rem;
+  .site-top-nav .brand-center h2 {
+    max-width: 18rem;
   }
 }
 
