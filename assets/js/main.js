@@ -862,7 +862,7 @@ function enhanceProcessSimActivationCards(container) {
     callButton.dataset.simCallCta = 'true';
 
     const icon = document.createElement('i');
-    icon.className = 'fa-solid fa-phone';
+    icon.className = 'fa-solid fa-mobile-screen-button';
     callButton.prepend(icon);
 
     simCard.appendChild(callButton);
@@ -938,7 +938,7 @@ function enhanceProcessHelpBoxes(container) {
         callLink.dataset.track = 'phone_click';
         callLink.dataset.label = 'activation_help_phone';
         const callIcon = document.createElement('i');
-        callIcon.className = 'fa-solid fa-phone';
+        callIcon.className = 'fa-solid fa-mobile-screen-button';
         callLink.prepend(callIcon);
 
         const chatButton = makeEl(
@@ -951,7 +951,7 @@ function enhanceProcessHelpBoxes(container) {
         chatButton.dataset.track = 'chat_open';
         chatButton.dataset.label = 'activation_help_chat';
         const chatIcon = document.createElement('i');
-        chatIcon.className = 'fa-solid fa-comment-dots';
+        chatIcon.className = 'fa-solid fa-comments';
         chatButton.prepend(chatIcon);
 
         actions.appendChild(callLink);
@@ -1315,6 +1315,11 @@ function isAssistantChatOpen() {
     return Boolean(modal && !modal.classList.contains('hidden'));
 }
 
+function setAssistantChatOpenState(isOpen) {
+    if (!document.body) return;
+    document.body.classList.toggle('assistant-chat-open', Boolean(isOpen));
+}
+
 function getAssistantChatFocusable() {
     const modal = getAssistantChatModal();
     if (!modal) return [];
@@ -1344,6 +1349,7 @@ function openAssistantChat() {
     }
 
     modal.classList.remove('hidden');
+    setAssistantChatOpenState(true);
     lockPageScroll();
     trackEvent('chat_open', { label: 'assistant_chat' });
     setTimeout(focusAssistantChatStart, 0);
@@ -1354,6 +1360,7 @@ function closeAssistantChat() {
     if (!modal || modal.classList.contains('hidden')) return;
 
     modal.classList.add('hidden');
+    setAssistantChatOpenState(false);
     trackEvent('chat_close', { label: 'assistant_chat' });
     unlockPageScrollIfIdle();
 
