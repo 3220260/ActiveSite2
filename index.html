@@ -54,7 +54,7 @@
   <link rel="stylesheet" href="assets/css/hero-simplified.css?v=20260529-hero-simplified">
   <link rel="stylesheet" href="assets/css/mobile-wizard.css?v=20260529-wizard">
   <link rel="stylesheet" href="assets/css/activation-guide.css?v=20260529-activation-guide">
-  <link rel="stylesheet" href="assets/css/premium-menu.css?v=20260530-premium-menu">
+  <link rel="stylesheet" href="assets/css/premium-menu.css?v=20260530-gapfix">
 
   <script type="application/ld+json">
   {
@@ -190,11 +190,11 @@
               <i class="fa-solid fa-tags" aria-hidden="true"></i>
               Δες Προσφορές
             </a>
-           <a href="tel:2105245210" class="btn-secondary phone-cta" data-track="phone_click" >
-              <i class="fa-solid fa-phone" aria-hidden="true"></i>
-              Πάρε&nbsp;Τηλέφωνο
-            </a>
-            <a href="#process" class="btn-ghost hero-process-cta" data-track="process_click" data-label="hero_process">
+        <a href="tel:2105245210" class="btn-secondary phone-cta" data-track="phone_click">
+          <i class="fa-solid fa-phone" aria-hidden="true"></i>
+          Πάρε&nbsp;Τηλέφωνο
+        </a>
+                    <a href="#process" class="btn-ghost hero-process-cta" data-track="process_click" data-label="hero_process">
               <i class="fa-solid fa-list-check" aria-hidden="true"></i>
               Διαδικασία &amp; Δικαιολογητικά
             </a>
@@ -2688,15 +2688,7 @@
         aria-describedby="assistantChatDescription">
         <div class="assistant-chat-backdrop" data-chat-close aria-hidden="true"></div>
         <section class="assistant-chat-panel" data-chat-panel>
-            <header class="assistant-chat-header">
-                <div>
-                    <strong id="assistantChatTitle">Βοηθός Π.Κ.Σ.Α.Α.</strong>
-                    <span id="assistantChatDescription">Ρωτήστε για προσφορές, δικαιολογητικά και επικοινωνία.</span>
-                </div>
-                <button type="button" class="assistant-chat-close" data-chat-close aria-label="Κλείσιμο βοηθού">
-                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-                </button>
-            </header>
+            
             <iframe
                 title="Chat βοηθός Π.Κ.Σ.Α.Α."
                 class="assistant-chat-frame"
@@ -2707,6 +2699,26 @@
             </iframe>
         </section>
     </div>
+    <script>
+      function closeAssistantOuterChat() {
+        const modal = document.querySelector('.assistant-chat-modal');
+
+        if (modal) {
+          modal.classList.add('hidden');
+        }
+
+        document.body.classList.remove('assistant-chat-open');
+      }
+
+      window.addEventListener('message', function (event) {
+        if (event.origin !== 'https://ver-bot.vercel.app') return;
+
+        if (event.data && event.data.type === 'PKSAA_CHAT_CLOSE') {
+          closeAssistantOuterChat();
+        }
+      });
+    </script>
+  </body>
 
     <nav class="mobile-bottom-nav" aria-label="Γρήγορες ενέργειες κινητού">
         <a href="#offers" class="mobile-nav-offers-link" data-track="offer_click" data-label="bottom_nav_offers">

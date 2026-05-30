@@ -2191,3 +2191,4 @@ window.onpopstate = function (event) {
     unlockPageScrollIfIdle();
     requestAnimationFrame(refreshVisibleOfferCards);
 };
+

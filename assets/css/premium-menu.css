@@ -478,3 +478,74 @@
     animation: none !important;
   }
 }
+
+
+
+/* FINAL FIX: remove white gap above hero */
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #020617 !important;
+}
+
+.site-main {
+  padding-top: 0 !important;
+}
+
+.landing-hero {
+  margin-top: 0 !important;
+}
+
+.hero-single-shell {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+
+
+/* Πράσινο κουμπί τηλεφώνου σε desktop και κινητό */
+a.phone-cta,
+.btn-secondary.phone-cta,
+.hero-actions .btn-secondary.phone-cta {
+  background: linear-gradient(135deg, #22c55e, #15803d) !important;
+  color: #ffffff !important;
+  border: 1px solid #22c55e !important;
+  box-shadow: 0 14px 32px rgba(34, 197, 94, 0.28) !important;
+}
+
+a.phone-cta i,
+.btn-secondary.phone-cta i,
+.hero-actions .btn-secondary.phone-cta i {
+  color: #ffffff !important;
+}
+
+a.phone-cta:hover,
+.btn-secondary.phone-cta:hover,
+.hero-actions .btn-secondary.phone-cta:hover {
+  background: linear-gradient(135deg, #16a34a, #166534) !important;
+  color: #ffffff !important;
+  border-color: #16a34a !important;
+  box-shadow: 0 18px 42px rgba(34, 197, 94, 0.36) !important;
+}
+
+a.phone-cta:visited,
+.btn-secondary.phone-cta:visited {
+  color: #ffffff !important;
+}
+
+/* Κινητό */
+@media (max-width: 767px) {
+  a.phone-cta,
+  .btn-secondary.phone-cta,
+  .hero-actions .btn-secondary.phone-cta {
+    background: linear-gradient(135deg, #22c55e, #15803d) !important;
+    color: #ffffff !important;
+    border-color: #22c55e !important;
+  }
+
+  a.phone-cta i,
+  .btn-secondary.phone-cta i {
+    color: #ffffff !important;
+  }
+}
