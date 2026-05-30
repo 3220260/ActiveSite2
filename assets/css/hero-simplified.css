@@ -339,17 +339,30 @@ body.page-loaded .hero-actions {
 
   body.hero-intro-ready .landing-hero {
     min-height: 100vh;
-    display: flex;
-    align-items: center;
     margin-top: 0;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    display: flex;
+    align-items: stretch;
   }
 
   body.hero-intro-ready .hero-single-shell {
     width: 100%;
-    min-height: calc(100vh - 6rem);
-    padding: clamp(2.75rem, 4vw, 4rem);
-    border-radius: 40px;
-    box-shadow: 0 42px 120px rgba(7, 26, 51, 0.32);
+    min-height: 100vh;
+    padding: clamp(3rem, 4vw, 4.25rem);
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+  }
+
+  body.hero-intro-ready .hero-single-shell::before {
+    border: 0;
+    border-radius: 0;
+  }
+
+  body.hero-intro-ready .hero-single-shell::after {
+    border-radius: 0;
   }
 
   body.hero-intro-ready .hero-content {
@@ -438,6 +451,23 @@ body.page-loaded .hero-actions {
   }
 }
 
+@media (min-width: 1024px) {
+  body.hero-intro-ready.page-loaded .hero-single-shell::after {
+    animation: heroFillRevealFullscreen 900ms cubic-bezier(.2,.8,.2,1) 180ms forwards;
+  }
+}
+
+@keyframes heroFillRevealFullscreen {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   body:not(.page-loaded) .hero-single-shell::before,
   body:not(.page-loaded) .hero-single-shell::after,
@@ -448,7 +478,7 @@ body.page-loaded .hero-actions {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
-    clip-path: inset(0 0 0 0 round 34px) !important;
+    clip-path: inset(0 0 0 0) !important;
   }
 
   body.page-loaded .hero-single-shell::before,
