@@ -2194,13 +2194,7 @@ window.onpopstate = function (event) {
 
 
   function closeAssistantOuterChat() {
-    const modal = document.querySelector('.assistant-chat-modal');
-
-    if (modal) {
-      modal.classList.add('hidden');
-    }
-
-    document.body.classList.remove('assistant-chat-open');
+    closeAssistantChat();
   }
 
   document.addEventListener('click', function (event) {
@@ -2211,9 +2205,16 @@ window.onpopstate = function (event) {
   });
 
   window.addEventListener('message', function (event) {
-    if (event.origin !== 'https://ver-bot.vercel.app') return;
+    const allowedChatOrigins = new Set([
+      'https://ver-bot.vercel.app',
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
+    ]);
+    if (!allowedChatOrigins.has(event.origin)) return;
 
-    if (event.data && event.data.type === 'PKSAA_CHAT_CLOSE') {
+    const chatMessageType = event.data && typeof event.data === 'object' ? event.data.type : '';
+    const chatMessageSource = event.data && typeof event.data === 'object' ? event.data.source : '';
+    if (chatMessageSource === 'sofia-chat' && (chatMessageType === 'PKSAA_CHAT_CLOSE' || chatMessageType === 'closeChat')) {
       closeAssistantOuterChat();
     }
   });
