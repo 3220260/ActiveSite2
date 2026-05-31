@@ -114,6 +114,48 @@ body.page-loaded .facebook-promo-section {
   background: linear-gradient(180deg, #ffffff, rgba(255,245,246,0.94));
 }
 
+.offer-card-mobile-vodafone {
+  border-top-color: #dc2626;
+  background:
+    radial-gradient(circle at top right, rgba(220, 38, 38, 0.10), transparent 30%),
+    linear-gradient(180deg, #ffffff, rgba(255, 247, 247, 0.98));
+}
+
+.offer-card-mobile-vodafone .offer-category {
+  background: rgba(220, 38, 38, 0.12);
+  color: #b91c1c;
+}
+
+.offer-card-mobile-vodafone .offer-card-top i {
+  background: rgba(220, 38, 38, 0.10);
+  color: #b91c1c;
+}
+
+.offer-card-mobile-vodafone .offer-price {
+  color: #b91c1c;
+}
+
+.offer-card-mobile-nova {
+  border-top-color: var(--police-blue);
+  background:
+    radial-gradient(circle at top right, rgba(22, 93, 186, 0.10), transparent 30%),
+    linear-gradient(180deg, #ffffff, rgba(240, 246, 255, 0.98));
+}
+
+.offer-card-mobile-nova .offer-category {
+  background: rgba(22, 93, 186, 0.12);
+  color: var(--primary);
+}
+
+.offer-card-mobile-nova .offer-card-top i {
+  background: rgba(22, 93, 186, 0.10);
+  color: var(--police-blue);
+}
+
+.offer-card-mobile-nova .offer-price {
+  color: var(--primary);
+}
+
 .offer-card-internet {
   background: linear-gradient(180deg, #ffffff, rgba(240,249,255,0.96));
 }
