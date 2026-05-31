@@ -363,6 +363,36 @@ body.page-loaded .hero-actions {
   .hero-actions .btn-secondary i {
     color: #ffffff !important;
   }
+
+  body.hero-intro-ready .site-main {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  body.hero-intro-ready .landing-hero {
+    margin-top: 0;
+    min-height: 100svh;
+  }
+
+  body.hero-intro-ready .hero-single-shell {
+    min-height: 100svh;
+  }
+
+  body.hero-intro-ready:not(.hero-nav-visible) .site-top-nav {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-120%) scale(0.985);
+    filter: blur(4px);
+  }
+
+  body.hero-intro-ready.hero-nav-visible .site-top-nav {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    filter: none;
+  }
 }
 
 @media (min-width: 1024px) {

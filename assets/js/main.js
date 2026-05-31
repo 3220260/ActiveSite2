@@ -23,7 +23,7 @@ const HERO_INTRO_DESKTOP_QUERY = typeof window !== 'undefined' && typeof window.
         removeListener() {},
     };
 
-if (typeof document !== 'undefined' && document.body && document.querySelector('.landing-hero') && HERO_INTRO_DESKTOP_QUERY.matches) {
+if (typeof document !== 'undefined' && document.body && document.querySelector('.landing-hero')) {
     document.body.classList.add('hero-intro-ready');
 }
 
@@ -1777,16 +1777,12 @@ function initializeHeroIntroNavigation() {
     let listenersBound = false;
 
     const syncHeroIntroNavigationState = () => {
-        const isDesktop = HERO_INTRO_DESKTOP_QUERY.matches;
         const body = document.body;
         if (!body) return;
 
-        body.classList.toggle('hero-intro-ready', isDesktop);
-
-        if (!isDesktop) {
-            body.classList.remove('hero-nav-visible');
-            return;
-        }
+        const hasHeroIntro = Boolean(heroSection);
+        body.classList.toggle('hero-intro-ready', hasHeroIntro);
+        if (!hasHeroIntro) return;
 
         const hash = window.location.hash || '#top';
         const shouldShowNav = window.scrollY > 80 || hash !== '#top';
@@ -1794,7 +1790,6 @@ function initializeHeroIntroNavigation() {
     };
 
     const showHeroNavImmediately = () => {
-        if (!HERO_INTRO_DESKTOP_QUERY.matches) return;
         document.body?.classList.add('hero-nav-visible');
     };
 

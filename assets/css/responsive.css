@@ -75,6 +75,34 @@
     display: none !important;
   }
 
+  body.hero-intro-ready {
+    padding-bottom: 0;
+  }
+
+  body.hero-intro-ready.hero-nav-visible {
+    padding-bottom: 5.25rem;
+  }
+
+  body.hero-intro-ready:not(.hero-nav-visible) .site-top-nav {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-120%) scale(0.985);
+    filter: blur(4px);
+    transition:
+      opacity 260ms ease,
+      transform 260ms ease,
+      filter 260ms ease;
+  }
+
+  body.hero-intro-ready.hero-nav-visible .site-top-nav {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    filter: none;
+  }
+
   .landing-hero-copy,
   .hero-service-panel,
   .quick-actions,
@@ -381,6 +409,27 @@ body.assistant-chat-open .assistant-chat-fab {
 
   .mobile-bottom-nav {
     display: grid;
+  }
+
+  body.hero-intro-ready:not(.hero-nav-visible) .mobile-bottom-nav {
+    display: none !important;
+  }
+
+  body.hero-intro-ready.hero-nav-visible .mobile-bottom-nav {
+    display: grid !important;
+  }
+
+  body.hero-intro-ready:not(.hero-nav-visible) .assistant-chat-fab {
+    display: inline-flex !important;
+    right: 0.9rem;
+    bottom: 0.9rem;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  body.hero-intro-ready.hero-nav-visible .assistant-chat-fab {
+    display: none !important;
   }
 
   .site-info-shell {
