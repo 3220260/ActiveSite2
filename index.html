@@ -139,8 +139,9 @@
         <span class="w-6 h-[3px] bg-white rounded-full transition-all group-hover:w-10"></span>
         <span class="w-4 h-[3px] bg-white rounded-full transition-all group-hover:w-10"></span>
         <span class="premium-menu-toggle-label text-[9px] font-bold text-gray-100 uppercase mt-1 tracking-widest">Μενού</span>
+        
     </button>
-
+    
     <div class="brand-center justify-self-center flex justify-center items-center gap-2 md:gap-3">
         <a href="#top" data-action="go-home" class="flex items-center gap-3 no-underline hover:opacity-90 transition-opacity" aria-label="Επιστροφή στην αρχική">
         <img src="assets/images/LOGO.webp" alt="Λογότυπο" width="400" height="218" decoding="async" class="h-10 md:h-16 w-auto object-contain p-1 bg-white/20 rounded-xl border border-white/40 shadow-sm shrink-0 backdrop-blur-sm">
@@ -150,13 +151,14 @@
             </h2>
         </div>
         </a>
+        <a href="#eortologio" class="menu-name-day-pill" title="Ποιοι γιορτάζουν σήμερα">
+    <i class="fa-solid fa-gift" aria-hidden="true"></i>
+    <span class="today-nameday">Γιορτάζουν σήμερα</span>
+</a>
     </div>
 
     <div class="hidden lg:flex items-center gap-2 shrink-0 justify-self-end">
-        <a href="#offers" class="site-nav-link">Προσφορές</a>
-        <a href="#process" class="site-nav-link">Διαδικασία</a>
-        <a href="#faq" class="site-nav-link">FAQ</a>
-        <a href="#contact" class="site-nav-link">Επικοινωνία</a>
+       
     </div>
     </div>
     </nav>
@@ -194,10 +196,7 @@
           <i class="fa-solid fa-phone" aria-hidden="true"></i>
           Πάρε&nbsp;Τηλέφωνο
         </a>
-                    <a href="#process" class="btn-ghost hero-process-cta" data-track="process_click" data-label="hero_process">
-              <i class="fa-solid fa-list-check" aria-hidden="true"></i>
-              Διαδικασία &amp; Δικαιολογητικά
-            </a>
+                    
           </div>
         </div>
       </div>
@@ -226,10 +225,7 @@
           <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
           <span>Υγεία</span>
         </button>
-        <a href="#process" data-track="wizard_step_view" data-label="Δικαιολογητικά" class="quick-action quick-action-docs">
-          <i class="fa-solid fa-file-shield" aria-hidden="true"></i>
-          <span>Δικαιολογητικά</span>
-        </a>
+        
       </div>
     </section>
 
@@ -258,7 +254,7 @@
       <div id="offers-grid" class="offer-grid">
         <article class="offer-card offer-card-mobile offer-card-mobile-vodafone" data-offer-card data-offer="Vodafone CU" data-category="mobile">
           <div class="offer-card-top">
-            <span class="offer-category">Κινητή τηλεφωνία</span>
+            <span class="offer-category cu-category">Κινητή τηλεφωνία</span>
             <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
           </div>
           <h3>Vodafone CU</h3>
@@ -266,7 +262,10 @@
           <p>Ετήσιο πλάνο κινητής για μέλη που θέλουν Vodafone CU με νέο αριθμό ή φορητότητα.</p>
           <dl class="offer-details">
             <div><dt>Περιλαμβάνει</dt><dd>300 GB κάθε μήνα και απεριόριστη ομιλία.</dd></div>
-            <div><dt>Επόμενο βήμα</dt><dd>Ανοίγει ο οδηγός για νέο αριθμό ή φορητότητα.</dd></div>
+            <div class="vodafone-black-red-info">
+    <dt>Ισχύει για</dt>
+    <dd>Μέλη που τα θέλουν όλα με μόλις 8,3€ το μήνα</dd>
+</div>
           </dl>
           <ul class="offer-benefits">
             <li>300 GB κάθε μήνα.</li>
@@ -281,15 +280,21 @@
 
         <article class="offer-card offer-card-mobile offer-card-mobile-nova" data-offer-card data-offer="NOVA Q" data-category="mobile">
           <div class="offer-card-top">
-            <span class="offer-category">Κινητή τηλεφωνία</span>
+           <span class="offer-category nova-q-category">Κινητή τηλεφωνία</span>
             <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
           </div>
-          <h3>NOVA Q</h3>
-          <div class="offer-price">100€ <span>/ 12 μήνες</span></div>
+         <div class="offer-title">NOVA <span class="q-orange">Q</span></div>
+          <div class="offer-price nova-q-price">
+    100€ <span>/ 12 μήνες</span>
+</div>
           <p>Ετήσιο πλάνο κινητής για μέλη που θέλουν NOVA Q με νέο αριθμό ή φορητότητα.</p>
           <dl class="offer-details">
             <div><dt>Περιλαμβάνει</dt><dd>Απεριόριστα GB και απεριόριστη ομιλία.</dd></div>
-            <div><dt>Επόμενο βήμα</dt><dd>Ανοίγει ο οδηγός για νέο αριθμό ή φορητότητα.</dd></div>
+            <div class="blue-orange-info">
+                <dt>Ισχύει για</dt>
+                <dd>Μέλη που τα θέλουν όλα με μόλις 8,3€ το μήνα</dd>
+            </div>
+     
           </dl>
           <ul class="offer-benefits">
             <li>Απεριόριστα GB.</li>
@@ -2728,10 +2733,13 @@
             <i class="fa-solid fa-tags" aria-hidden="true"></i>
             <span>Προσφορές</span>
         </a>
-        <a href="tel:2105245210" data-track="phone_click" data-label="bottom_nav_phone">
-            <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
-            <span>Κλήση</span>
-        </a>
+       <a href="tel:2105245210"
+   class="phone-green-btn"
+   data-track="phone_click"
+   data-label="bottom_nav_phone">
+    <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
+    <span>Κλήση</span>
+</a>
         <a href="mailto:synetelas2011@gmail.com" data-track="email_click" data-label="bottom_nav_email">
             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             <span>Email</span>
@@ -2752,6 +2760,8 @@
 <script defer src="assets/js/ui-modals.js?v=20260527-pro"></script>
 <script defer src="assets/js/main.js?v=20260531-chat-bridge-fix-2"></script>
 
+
+<script src="assets/js/today-calendar-loader.js?v=20260601" defer></script>
 
 </body>
 </html>

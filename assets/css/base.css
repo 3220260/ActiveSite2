@@ -54,3 +54,24 @@ summary:focus-visible,
     outline: 3px solid rgba(22, 93, 186, 0.45);
     outline-offset: 3px;
 }
+
+
+.blue-orange-info {
+    background: #1d4ed8;
+    color: #f97316;
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+.blue-orange-info dt,
+.blue-orange-info dd {
+    color: #f97316 !important;
+}
+
+.blue-orange-info dt {
+    font-weight: 800;
+}
+
+.blue-orange-info dd {
+    margin: 4px 0 0;
+}

@@ -618,3 +618,127 @@ a.phone-cta:visited,
     border: 0 !important;
   }
 }
+
+a[data-label="bottom_nav_phone"] {
+    background: linear-gradient(135deg, #22c55e, #15803d) !important;
+    color: #ffffff !important;
+    border: 1px solid #22c55e !important;
+    border-radius: 16px;
+    box-shadow: 0 14px 32px rgba(34, 197, 94, 0.28) !important;
+}
+
+a[data-label="bottom_nav_phone"] i,
+a[data-label="bottom_nav_phone"] span {
+    color: #ffffff !important;
+}
+
+a[data-label="bottom_nav_phone"]:hover {
+    background: linear-gradient(135deg, #16a34a, #166534) !important;
+}
+
+.offers-section-catalog #offers-grid > [data-offer-card] .offer-details > div.blue-orange-info {
+    background: #1d4ed8 !important;
+    color: #f97316 !important;
+    border: 1px solid #1d4ed8 !important;
+    border-left: 3px solid #f97316 !important;
+    border-radius: 16px;
+}
+
+.offers-section-catalog #offers-grid > [data-offer-card] .offer-details > div.blue-orange-info dt,
+.offers-section-catalog #offers-grid > [data-offer-card] .offer-details > div.blue-orange-info dd {
+    color: #f97316 !important;
+}
+
+.offers-section-catalog #offers-grid > [data-offer-card] .offer-details > div.vodafone-black-red-info {
+    background: #000000 !important;
+    color: #ef4444 !important;
+    border: 1px solid #ef4444 !important;
+    border-left: 3px solid #ef4444 !important;
+    border-radius: 16px;
+}
+
+.offers-section-catalog #offers-grid > [data-offer-card] .offer-details > div.vodafone-black-red-info dt,
+.offers-section-catalog #offers-grid > [data-offer-card] .offer-details > div.vodafone-black-red-info dd {
+    color: #ef4444 !important;
+}
+
+.offer-price.nova-q-price {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    color: #ff7a00 !important;
+    font-weight: 900;
+}
+
+.offer-price.nova-q-price span {
+    color: #3d4246 !important;
+}
+
+.q-orange {
+    color: #ff7a00 !important;
+}
+
+.offers-section-catalog #offers-grid > [data-offer-card].offer-card-mobile-nova .offer-card-top .offer-category.nova-q-category {
+    background: #ff7a00 !important;
+    color: #0057b8 !important;
+    border: 1px solid #ff7a00 !important;
+    font-weight: 900 !important;
+}
+
+.offers-section-catalog #offers-grid > [data-offer-card] .offer-card-top .offer-category.cu-category {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 1px solid #e60000 !important;
+    font-weight: 900 !important;
+}
+
+#offers-grid article[data-offer="Vodafone Σταθερή και Internet"] .offer-card-top .offer-category,
+#offers-grid article[data-offer="Vodafone Σταθερή & Internet"] .offer-card-top .offer-category,
+#offers-grid article:has([data-modal-target="vodafoneFixedModal"]) .offer-card-top .offer-category {
+    background: #e60000 !important;
+    color: #ffffff !important;
+    border: 1px solid #e60000 !important;
+    font-weight: 900 !important;
+}
+
+
+.menu-name-day-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #f97316;
+    color: #ffffff !important;
+    border-radius: 999px;
+    padding: 8px 13px;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 10px 24px rgba(249, 115, 22, 0.25);
+}
+
+.menu-name-day-pill i,
+.menu-name-day-pill span {
+    color: #ffffff !important;
+}
+
+.menu-name-day-pill:hover {
+    background: #ea580c;
+    color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+    .menu-name-day-pill {
+        display: inline-flex !important;
+        width: 100%;
+        justify-content: center;
+        margin-top: 8px;
+        padding: 10px 12px;
+        font-size: 12px;
+        border-radius: 14px;
+        white-space: normal;
+        text-align: center;
+        line-height: 1.25;
+    }
+}
