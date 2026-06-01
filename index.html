@@ -54,7 +54,7 @@
   <link rel="stylesheet" href="assets/css/hero-simplified.css?v=20260529-hero-simplified">
   <link rel="stylesheet" href="assets/css/mobile-wizard.css?v=20260529-wizard">
   <link rel="stylesheet" href="assets/css/activation-guide.css?v=20260529-activation-guide">
-  <link rel="stylesheet" href="assets/css/premium-menu.css?v=20260602-two-lines">
+  <link rel="stylesheet" href="assets/css/premium-menu.css?v=20260602-mobile-strip">
 
   <script type="application/ld+json">
   {
@@ -125,7 +125,7 @@
         <a href="#process" class="site-nav-link">Διαδικασία</a>
         <a href="#faq" class="site-nav-link">FAQ</a>
         <a href="#contact" class="site-nav-link">Επικοινωνία</a>
-        <a href="#contact" class="menu-weather-pill" title="Καιρός Αθήνας">
+        <a href="#contact" class="menu-weather-pill menu-weather-pill-desktop" title="Καιρός Αθήνας">
             <i class="fa-solid fa-cloud-sun" aria-hidden="true"></i>
             <span class="menu-weather-lines">
                 <span class="menu-weather-today">Σήμερα: Καιρός Αθήνα</span>
@@ -135,6 +135,16 @@
     </div>
     </div>
     </nav>
+
+    <div class="mobile-weather-strip">
+        <a href="#contact" class="menu-weather-pill menu-weather-pill-mobile" title="Καιρός Αθήνας">
+            <i class="fa-solid fa-cloud-sun" aria-hidden="true"></i>
+            <span class="menu-weather-lines">
+                <span class="menu-weather-today">Σήμερα: Καιρός Αθήνα</span>
+                <span class="menu-weather-tomorrow">Αύριο: --° / --°</span>
+            </span>
+        </a>
+    </div>
 
     <main class="site-main">
 
@@ -2323,13 +2333,6 @@
             <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
         </button>
 
-        <a href="#contact" class="menu-weather-pill" title="Καιρός Αθήνας">
-            <i class="fa-solid fa-cloud-sun" aria-hidden="true"></i>
-            <span class="menu-weather-lines">
-                <span class="menu-weather-today">Σήμερα: Καιρός Αθήνα</span>
-                <span class="menu-weather-tomorrow">Αύριο: --° / --°</span>
-            </span>
-        </a>
     </div>
 
     <div class="premium-menu-actions">
@@ -2740,7 +2743,7 @@
 <script defer src="assets/js/main.js?v=20260531-chat-bridge-fix-2"></script>
 
 
-<script src="assets/js/weather-loader.js?v=20260602-two-lines" defer></script>
+<script src="assets/js/weather-loader.js?v=20260602-mobile-strip" defer></script>
 
 </body>
 </html>

@@ -52,29 +52,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     fetch(weatherUrl)
         .then(function (response) {
-            if (!response.ok) {
-                throw new Error("Weather request failed");
-            }
-
+            if (!response.ok) throw new Error("Weather request failed");
             return response.json();
         })
         .then(function (data) {
             const current = data.current || {};
             const daily = data.daily || {};
 
-            const todayTemp = Number.isFinite(current.temperature_2m)
-                ? Math.round(current.temperature_2m)
-                : null;
+            const todayTemp = Math.round(current.temperature_2m);
             const todayCode = Number(current.weather_code);
             const todayText = getWeatherText(todayCode);
             const todayIcon = getWeatherIcon(todayCode);
 
-            const tomorrowMax = daily.temperature_2m_max && daily.temperature_2m_max[1] !== undefined
-                ? Math.round(daily.temperature_2m_max[1])
-                : null;
-
             const tomorrowMin = daily.temperature_2m_min && daily.temperature_2m_min[1] !== undefined
                 ? Math.round(daily.temperature_2m_min[1])
+                : null;
+
+            const tomorrowMax = daily.temperature_2m_max && daily.temperature_2m_max[1] !== undefined
+                ? Math.round(daily.temperature_2m_max[1])
                 : null;
 
             const tomorrowCode = daily.weather_code && daily.weather_code[1] !== undefined
@@ -96,27 +91,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 if (todayEl) {
-                    todayEl.textContent = todayTemp !== null
-                        ? "Σήμερα: " + todayTemp + "°C · " + todayText
-                        : "Σήμερα: Καιρός Αθήνα";
+                    todayEl.textContent = "Σήμερα: " + todayTemp + "°C · " + todayText;
                 }
 
                 if (tomorrowEl) {
-                    if (tomorrowMin !== null && tomorrowMax !== null) {
-                        tomorrowEl.textContent = "Αύριο: " + tomorrowMin + "° / " + tomorrowMax + "° · " + tomorrowText;
-                    } else {
-                        tomorrowEl.textContent = "Αύριο: --° / --°";
-                    }
+                    tomorrowEl.textContent =
+                        tomorrowMin !== null && tomorrowMax !== null
+                            ? "Αύριο: " + tomorrowMin + "° / " + tomorrowMax + "° · " + tomorrowText
+                            : "Αύριο: Καιρός Αθήνα";
                 }
 
                 pill.setAttribute(
                     "title",
-                    todayTemp !== null && tomorrowMin !== null && tomorrowMax !== null
-                        ? "Σήμερα: " + todayTemp + "°C, " + todayText + " | Αύριο: " + tomorrowMin + "° / " + tomorrowMax + "°, " + tomorrowText
-                        : "Καιρός Αθήνας"
+                    "Σήμερα: " + todayTemp + "°C, " + todayText + " | Αύριο: " +
+                    (tomorrowMin !== null && tomorrowMax !== null
+                        ? tomorrowMin + "° / " + tomorrowMax + "°, " + tomorrowText
+                        : "Καιρός Αθήνας")
                 );
-
-                pill.setAttribute("aria-label", "Καιρός Αθήνας σήμερα και αύριο");
             });
         })
         .catch(function () {

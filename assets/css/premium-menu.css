@@ -794,35 +794,43 @@ a[data-label="bottom_nav_phone"]:hover {
     color: #ffffff !important;
 }
 
+.mobile-weather-strip {
+    display: none;
+}
+
 @media (max-width: 768px) {
-    .menu-weather-pill {
-        min-width: 128px;
-        padding: 7px 9px;
+    .menu-weather-pill-desktop {
+        display: none !important;
+    }
+
+    .mobile-weather-strip {
+        display: flex !important;
+        justify-content: center;
+        padding: 8px 12px 0;
+        position: relative;
+        z-index: 30;
+    }
+
+    .mobile-weather-strip .menu-weather-pill {
+        width: 100%;
+        max-width: 360px;
         border-radius: 14px;
+        padding: 9px 12px;
         font-size: 11px;
-        gap: 7px;
     }
 
-    .menu-weather-pill i {
-        font-size: 15px;
+    .mobile-weather-strip .menu-weather-pill i {
+        font-size: 16px;
     }
 
-    .menu-weather-tomorrow {
+    .mobile-weather-strip .menu-weather-tomorrow {
         font-size: 10px;
     }
 }
 
-@media (max-width: 420px) {
-    .menu-weather-pill {
-        min-width: 112px;
-        padding: 6px 8px;
-    }
-
-    .menu-weather-today {
-        font-size: 10.5px;
-    }
-
-    .menu-weather-tomorrow {
-        font-size: 9.5px;
+@media (min-width: 769px) {
+    .menu-weather-pill-mobile,
+    .mobile-weather-strip {
+        display: none !important;
     }
 }
