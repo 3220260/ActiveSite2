@@ -749,6 +749,7 @@ a[data-label="bottom_nav_phone"]:hover {
 .menu-weather-pill {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 7px;
     background: rgba(15, 23, 42, 0.92);
     color: #ffffff !important;
@@ -782,8 +783,13 @@ a[data-label="bottom_nav_phone"]:hover {
     color: #ffffff !important;
 }
 
-@media (max-width: 1024px) {
-    .site-top-nav .menu-weather-pill {
-        display: none;
+@media (max-width: 768px) {
+    .menu-weather-pill {
+        width: 100%;
+        justify-content: center;
+        border-radius: 14px;
+        padding: 10px 12px;
+        white-space: normal;
+        text-align: center;
     }
 }
