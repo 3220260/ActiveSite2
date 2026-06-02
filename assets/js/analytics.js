@@ -17,7 +17,6 @@ const TRACKED_OFFERS = Object.freeze({
     internetChoiceModal: 'Επιλογή Σταθερής & Internet',
     vodafoneFixedModal: 'Vodafone Σταθερή & Internet',
     novaEonModal: 'NOVA EON TV',
-    healthModal: 'Προσφορά Υγείας',
     gprotasisModal: 'GProtasis',
 });
 

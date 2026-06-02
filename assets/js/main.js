@@ -1685,7 +1685,6 @@ function initializePremiumMenuActiveState() {
         mobile: document.querySelector('.premium-menu-link-mobile'),
         internet: document.querySelector('.premium-menu-link-internet'),
         tv: document.querySelector('.premium-menu-link-tv'),
-        health: document.querySelector('.premium-menu-link-health'),
         info: document.querySelector('.premium-menu-link-info'),
     };
 
@@ -1693,7 +1692,6 @@ function initializePremiumMenuActiveState() {
         mobile: Array.from(document.querySelectorAll('[data-offer-card][data-category="mobile"]')),
         internet: Array.from(document.querySelectorAll('[data-offer-card][data-category="internet"]')),
         tv: Array.from(document.querySelectorAll('[data-offer-card][data-category="tv"]')),
-        health: Array.from(document.querySelectorAll('[data-offer-card][data-category="health"]')),
         info: Array.from([document.getElementById('siteLegalBar')].filter(Boolean)),
     };
 

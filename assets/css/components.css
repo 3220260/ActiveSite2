@@ -277,7 +277,6 @@
 
 .quick-action-mobile i { color: var(--accent-mobile); }
 .quick-action-internet i { color: var(--accent-internet); }
-.quick-action-health i { color: var(--accent-health); }
 .quick-action-docs i { color: var(--accent-docs); }
 
 .offer-filter-bar {
@@ -336,7 +335,6 @@
 .offer-card-mobile { border-top-color: var(--accent-mobile); }
 .offer-card-internet { border-top-color: var(--accent-internet); }
 .offer-card-tv { border-top-color: #6d5bd0; }
-.offer-card-health { border-top-color: var(--accent-health); }
 
 .offer-card-top {
     display: flex;

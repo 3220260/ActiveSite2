@@ -188,10 +188,6 @@
           <i class="fa-solid fa-tv" aria-hidden="true"></i>
           <span>TV</span>
         </button>
-        <button type="button" data-category-filter="health" data-track="category_filter_click" data-label="Υγεία" class="quick-action quick-action-health">
-          <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
-          <span>Υγεία</span>
-        </button>
 
       </div>
     </section>
@@ -206,7 +202,6 @@
         <button type="button" data-category-filter="mobile" data-track="category_filter_click" data-label="Κινητή">Κινητή</button>
         <button type="button" data-category-filter="internet" data-track="category_filter_click" data-label="Internet">Internet</button>
         <button type="button" data-category-filter="tv" data-track="category_filter_click" data-label="TV">TV</button>
-        <button type="button" data-category-filter="health" data-track="category_filter_click" data-label="Υγεία">Υγεία</button>
       </div>
 
       <div id="offers-grid" class="offer-grid">
@@ -337,28 +332,6 @@
           <p class="offer-note">Η αίτηση πρέπει να συμπληρωθεί πλήρως πριν από την αποστολή.</p>
         </article>
 
-        <article class="offer-card offer-card-health" data-offer-card data-offer="Υγεία και Περίθαλψη" data-category="health">
-          <div class="offer-card-top">
-            <span class="nova-5g-title">Υγεία</span>
-            <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
-          </div>
-          <h3>Υγεία &amp; Περίθαλψη</h3>
-          <div class="offer-price">32,18€ <span>/ μήνα</span></div>
-          <p>Παροχές υγείας για νοσοκομειακή κάλυψη και συνεργαζόμενες υπηρεσίες.</p>
-          <dl class="offer-details">
-            <div><dt>Περιλαμβάνει</dt><dd>Νοσοκομειακή κάλυψη 50.000€ και επιλεγμένες παροχές.</dd></div>
-            <div><dt>Ισχύει για</dt><dd>Μέλη, συνταξιούχους και μέλη οικογένειας όπου αναφέρεται στους όρους.</dd></div>
-          </dl>
-          <ul class="offer-benefits">
-            <li>Συνεργαζόμενα νοσοκομεία για επείγοντα.</li>
-            <li>Πρόσβαση σε ειδικότητες με προνομιακούς όρους.</li>
-            <li>Πληροφορίες από τα γραφεία του Συνεταιρισμού.</li>
-          </ul>
-          <div class="offer-actions">
-            <button type="button" data-modal-target="healthModal" data-track="offer_interest_click" data-offer="Υγεία & Περίθαλψη" data-category="health">Με ενδιαφέρει</button>
-          </div>
-          <p class="offer-note">Οι παροχές υγείας εμφανίζονται αναλυτικά στο παράθυρο της προσφοράς.</p>
-        </article>
       </div>
     </section>
 
@@ -1760,159 +1733,6 @@
     </div>
     </div>
     </div>
-
-    <div id="healthModal" class="hidden fixed inset-0 z-[70] modal-backdrop flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-[fadeIn_0.3s_ease-out]">
-        <div class="bg-teal-700 p-4 md:p-5 flex justify-between items-center text-white shrink-0 shadow-md z-20">
-            <div class="flex items-center gap-3">
-                <i class="fa-solid fa-file-medical text-2xl"></i>
-                <div>
-                    <h3 class="font-bold text-lg md:text-xl leading-none">ΠΑΡΟΧΕΣ ΥΓΕΙΑΣ</h3>
-                </div>
-            </div>
-            <button type="button" data-modal-close="healthModal" class="liquid-close w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition text-2xl leading-none pb-1" aria-label="Κλείσιμο προσφοράς υγείας">&times;</button>
-        </div>
-
-        <div class="overflow-y-auto p-4 md:p-8 bg-slate-50 grow custom-scroll">
-            <div class="relative max-w-2xl mx-auto">
-                <div class="absolute left-6 md:left-8 top-4 bottom-4 w-0.5 bg-gradient-to-b from-teal-300 via-teal-200 to-transparent"></div>
-
-                <div class="relative flex gap-4 md:gap-6 mb-8 group">
-                    <div class="flex h-12 w-12 md:h-16 md:w-16 shrink-0 items-center justify-center rounded-full bg-white border-4 border-teal-200 text-teal-700 shadow-sm z-10">
-                        <span class="font-black text-lg">1</span>
-                    </div>
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm w-full relative">
-                        <h4 class="font-black text-slate-800 text-lg mb-4 border-b border-slate-100 pb-2">Ομαδικό Συμβόλαιο (INTERAMERICAN)</h4>
-
-                        <div class="grid grid-cols-3 gap-2 mb-4 text-center">
-                            <div class="bg-slate-50 p-2 rounded border border-slate-200">
-                                <div class="text-[10px] font-bold text-slate-500">ΑΝΔΡΑΣ</div>
-                                <div class="text-lg font-black text-slate-900">36,64€</div>
-                            </div>
-                            <div class="bg-slate-50 p-2 rounded border border-slate-200">
-                                <div class="text-[10px] font-bold text-slate-500">ΓΥΝΑΙΚΑ</div>
-                                <div class="text-lg font-black text-slate-900">37,40€</div>
-                            </div>
-                            <div class="bg-slate-50 p-2 rounded border border-slate-200">
-                                <div class="text-[10px] font-bold text-slate-500">ΠΑΙΔΙ</div>
-                                <div class="text-lg font-black text-slate-900">32,18€</div>
-                            </div>
-                        </div>
-                        <p class="text-[10px] text-red-600 font-bold mb-4 text-center">* Οι τιμές δεν αυξάνονται ατομικά ή ηλικιακά.</p>
-
-                        <ul class="space-y-2 text-sm text-slate-700 list-disc list-outside pl-4">
-                            <li><strong>Ασφάλεια Ζωής:</strong> Ισχύει και εν ώρα υπηρεσίας (ειδικός όρος).</li>
-                            <li><strong>Νοσοκομειακή περίθαλψη:</strong> 50.000€ ετησίως.
-                                <ul class="text-xs text-slate-500 mt-1 pl-2">
-                                    <li>100% κάλυψη στην Αθηναϊκή Mediclinic.</li>
-                                    <li>85% Interamerican - 15% Ταμείο (στα υπόλοιπα).</li>
-                                </ul>
-                            </li>
-                            <li><strong>Επιδόματα:</strong> Τοκετού (650€), Νοσοκομειακό (60€/μέρα), Χειρουργικό (έως 3.000€).</li>
-                            <li><strong>Παιδιά:</strong> Κάλυψη έως τα 25 έτη.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="relative flex gap-4 md:gap-6 mb-8 group">
-                    <div class="flex h-12 w-12 md:h-16 md:w-16 shrink-0 items-center justify-center rounded-full bg-white border-4 border-red-200 text-red-600 shadow-sm z-10">
-                        <span class="font-black text-lg">2</span>
-                    </div>
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm w-full relative">
-                        <div class="flex justify-between items-start mb-2">
-                            <h4 class="font-black text-slate-800 text-lg">Παροχή Βοήθειας (24ωρο)</h4>
-                            <span class="bg-red-100 text-red-700 text-xs font-black px-2 py-1 rounded">20€ / ΕΤΟΣ</span>
-                        </div>
-                        <p class="text-xs text-slate-500 mb-3 font-medium">Κόστος για ΟΛΑ τα μέλη της οικογένειας.</p>
-                        <ul class="space-y-2 text-sm text-slate-700">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-red-500"></i> Παροχή ιατρικών συμβουλών.</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-tower-broadcast text-red-500"></i> Συντονισμός κάλυψης περιστατικού.</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-helicopter text-red-500"></i> Υγειονομική μεταφορά (ασθενοφόρα, ελικόπτερα, αεροπλάνα).</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="relative flex gap-4 md:gap-6 mb-8 group">
-                    <div class="flex h-12 w-12 md:h-16 md:w-16 shrink-0 items-center justify-center rounded-full bg-white border-4 border-green-200 text-green-600 shadow-sm z-10">
-                        <span class="font-black text-lg">3</span>
-                    </div>
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm w-full relative">
-                        <div class="flex justify-between items-start mb-3">
-                            <h4 class="font-black text-slate-800 text-lg">Κάρτα Προνομίων Υγείας</h4>
-                            <span class="bg-green-100 text-green-700 text-xs font-black px-2 py-1 rounded">ΔΩΡΕΑΝ</span>
-                        </div>
-
-                        <div class="bg-green-50 p-3 rounded-lg border border-green-100 mb-3">
-                            <p class="text-xs font-bold text-green-800 mb-2 uppercase">ΔΩΡΕΑΝ ΑΠΕΡΙΟΡΙΣΤΕΣ ΕΠΙΣΚΕΨΕΙΣ ΣΕ ΕΦΗΜΕΡΕΥΟΝΤΕΣ:</p>
-                            <div class="flex flex-wrap gap-1 text-[10px] font-bold text-slate-600">
-                                <span class="bg-white px-2 py-1 rounded border">Παθολόγο</span>
-                                <span class="bg-white px-2 py-1 rounded border">Καρδιολόγο</span>
-                                <span class="bg-white px-2 py-1 rounded border">Ορθοπεδικό</span>
-                                <span class="bg-white px-2 py-1 rounded border">Χειρουργό</span>
-                                <span class="bg-white px-2 py-1 rounded border">Παιδίατρο</span>
-                                <span class="bg-white px-2 py-1 rounded border">Παιδοχειρουργό</span>
-                            </div>
-                        </div>
-
-                        <p class="text-xs font-bold text-slate-700 mb-1">🏥 Συνεργαζόμενα Νοσοκομεία (Επείγοντα):</p>
-                        <ul class="text-xs text-slate-600 list-disc list-inside mb-3">
-                            <li>Metropolitan General</li>
-                            <li>Ιασώ &amp; Ιασώ Θεσσαλίας</li>
-                            <li>Ιασώ Παίδων</li>
-                        </ul>
-
-                        <div class="text-[10px] text-slate-500 bg-slate-100 p-2 rounded">
-                            * 20€ για επισκέψεις σε άλλες ειδικότητες.<br>
-                            * Προνομιακές τιμές στο Κέντρο Αποκατάστασης "Φιλοκτήτης".<br>
-                            * Ισχύει και για μέλη οικογένειας συναδέλφων.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative flex gap-4 md:gap-6 mb-8 group">
-                    <div class="flex h-12 w-12 md:h-16 md:w-16 shrink-0 items-center justify-center rounded-full bg-slate-800 border-4 border-slate-300 text-white shadow-sm z-10">
-                        <span class="font-black text-lg">4</span>
-                    </div>
-                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm w-full relative">
-                        <h4 class="font-black text-slate-800 text-lg mb-2">Anytime (Ασφάλεια Οχήματος)</h4>
-                        <p class="text-sm text-slate-700">
-                            Επιπλέον έκπτωση <span class="font-black text-green-600">5%</span> στο ήδη προνομιακό τιμολόγιο.
-                        </p>
-                        <p class="text-xs text-slate-500 mt-2">
-                            * Ισχύει για εν ενεργεία/συνταξιούχους και συγγενείς Α' βαθμού.<br>
-                            * Απαιτείται ο <strong>16ψήφιος κωδικός</strong> του Συνεταιρισμού.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="relative flex gap-4 md:gap-6 group">
-                    <div class="flex h-12 w-12 md:h-16 md:w-16 shrink-0 items-center justify-center rounded-full bg-teal-600 border-4 border-white text-white shadow-lg z-10 animate-pulse">
-                        <i class="fa-solid fa-phone text-xl"></i>
-                    </div>
-                    <div class="bg-teal-50 p-5 rounded-2xl border border-teal-200 w-full text-center">
-                        <h4 class="font-black text-teal-900 text-lg mb-1">Πληροφορίες &amp; Εγγραφές</h4>
-                        <p class="text-xs text-teal-700 mb-4">Καλέστε στα γραφεία του Συνεταιρισμού</p>
-
-                        <div class="flex flex-col sm:flex-row gap-3 justify-center mb-3">
-                            <a href="tel:2105245210" class="bg-white border-2 border-teal-200 text-teal-700 py-3 px-5 rounded-xl font-bold shadow-sm hover:bg-teal-600 hover:text-white transition flex items-center justify-center gap-2 flex-1">
-                                <i class="fa-solid fa-phone"></i> 210&nbsp;5245210
-                            </a>
-
-                        </div>
-                        <a href="mailto:synetelas2011@gmail.com" class="text-xs font-bold text-teal-600 hover:underline">synetelas2011@gmail.com</a>
-                        <div class="text-[10px] text-teal-800/60 font-medium mt-2">
-                                    Υπεύθυνος: Φιλιππίδης Ιωάννης
-                                    <a href="tel:6932313051" class="hover:text-teal-900 hover:underline transition font-bold ml-1">
-                                        <i class="fa-solid fa-phone"></i> 6932&nbsp;313051
-                                    </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    </div>
     <div id="internetChoiceModal" class="hidden fixed inset-0 z-[110] modal-backdrop flex items-end sm:items-center justify-center p-0 sm:p-4">
       <div class="internet-choice-modal w-full sm:max-w-3xl bg-white rounded-t-[2rem] sm:rounded-[2rem] shadow-2xl overflow-hidden flex flex-col max-h-[92vh] sm:max-h-[90vh] animate-[fadeIn_0.25s_ease-out]">
 
@@ -2286,16 +2106,6 @@
             <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
         </button>
 
-        <button type="button" data-sidebar-target="healthModal" class="premium-menu-link premium-menu-link-health">
-            <span class="premium-menu-link-icon">
-                <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
-            </span>
-            <span>
-                <strong>Υγεία &amp; Περίθαλψη</strong>
-                <small>Κάλυψη και διαθέσιμες παροχές</small>
-            </span>
-            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-        </button>
 
         <button type="button" data-sidebar-target="infoCoopModal" class="premium-menu-link premium-menu-link-info">
             <span class="premium-menu-link-icon">

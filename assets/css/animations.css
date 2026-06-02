@@ -199,7 +199,6 @@ body.overflow-hidden { overflow: hidden !important; overscroll-behavior: none; }
 .ekg-line { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: drawLine 3s linear infinite; }
 @keyframes drawLine { 0% { stroke-dashoffset: 1000; } 100% { stroke-dashoffset: 0; } }
 @keyframes heartBeat { 0% { transform: scale(1); } 14% { transform: scale(1.3); } 28% { transform: scale(1); } 42% { transform: scale(1.3); } 70% { transform: scale(1); } }
-.health-card-bg { background-color: #ffffff; background-image: radial-gradient(#0ea5e9 0.5px, #ffffff 0.5px); background-size: 10px 10px; }
 .pulse-line { position: absolute; bottom: 20%; left: 0; width: 100%; height: 2px; background: linear-gradient(to right, transparent 0%, #0ea5e9 20%, #0ea5e9 80%, transparent 100%); opacity: 0.3; }
 .pulse-blip { position: absolute; bottom: 20%; left: -10%; width: 6px; height: 6px; background-color: #0ea5e9; border-radius: 50%; box-shadow: 0 0 10px #0ea5e9, 0 0 20px #0ea5e9; animation: pulseMove 4s linear infinite; }
 @keyframes pulseMove { 0% { left: -10%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: 110%; opacity: 0; } }

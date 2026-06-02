@@ -164,10 +164,6 @@ body.page-loaded .facebook-promo-section {
   background: linear-gradient(180deg, #ffffff, rgba(245,243,255,0.96));
 }
 
-.offer-card-health {
-  background: linear-gradient(180deg, #ffffff, rgba(240,253,250,0.96));
-}
-
 /* Neutralize legacy per-card overlap/special styling */
 #offers-grid {
   grid-auto-rows: auto !important;
