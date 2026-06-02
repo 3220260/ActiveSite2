@@ -72,10 +72,17 @@
   box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
 }
 
-.activation-step-help-actions a:first-child {
-  background: var(--primary);
+.activation-step-help-actions a[href^="tel:"] {
+  background: linear-gradient(135deg, #22c55e, #15803d);
   color: #ffffff;
-  border-color: var(--primary);
+  border-color: rgba(34, 197, 94, 0.45);
+  box-shadow: 0 14px 28px rgba(34, 197, 94, 0.18);
+}
+
+.activation-step-help-actions a[href^="tel:"]:hover {
+  background: linear-gradient(135deg, #16a34a, #166534);
+  border-color: rgba(34, 197, 94, 0.55);
+  box-shadow: 0 18px 34px rgba(34, 197, 94, 0.22);
 }
 
 .activation-step-help-actions button[data-chat-open] {
@@ -147,6 +154,16 @@
 }
 
 @media (max-width: 767px) {
+  section[data-process-wizard] {
+    touch-action: pan-y;
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: contain;
+  }
+
+  [data-process-step] {
+    touch-action: pan-y;
+  }
+
   .activation-email-template-button {
     min-height: 50px;
     font-size: 0.95rem;
@@ -169,6 +186,10 @@
   .activation-step-help-actions button {
     min-height: 48px;
     width: 100%;
+  }
+
+  .activation-step-help-actions a[href^="tel:"] {
+    background: linear-gradient(135deg, #22c55e, #15803d);
   }
 
   .activation-next-card {

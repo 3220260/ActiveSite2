@@ -789,7 +789,47 @@ a[data-label="bottom_nav_phone"]:hover {
     opacity: 0.82;
 }
 
+.menu-weather-extra {
+    display: block;
+    color: #ffffff !important;
+    font-size: 10px;
+    font-weight: 700;
+    opacity: 0.74;
+}
+
 .menu-weather-pill:hover {
     background: #1e293b;
     color: #ffffff !important;
+}
+
+@media (min-width: 1024px) {
+    .menu-weather-pill {
+        min-width: 12rem;
+        padding: 10px 14px;
+        font-size: 13px;
+        gap: 10px;
+    }
+
+    .menu-weather-pill i {
+        font-size: 19px;
+    }
+
+    .menu-weather-lines {
+        gap: 2px;
+    }
+
+    .menu-weather-today {
+        font-size: 12px;
+        line-height: 1.08;
+    }
+
+    .menu-weather-tomorrow {
+        font-size: 11px;
+        line-height: 1.05;
+    }
+
+    .menu-weather-extra {
+        font-size: 10.5px;
+        line-height: 1.05;
+    }
 }

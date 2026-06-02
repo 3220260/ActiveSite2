@@ -61,6 +61,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const todayTemp = Math.round(current.temperature_2m);
             const todayCode = Number(current.weather_code);
+            const windSpeed = current.wind_speed_10m !== undefined && current.wind_speed_10m !== null
+                ? Math.round(current.wind_speed_10m)
+                : null;
             const todayText = getWeatherText(todayCode);
             const todayIcon = getWeatherIcon(todayCode);
 
@@ -84,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const icon = pill.querySelector("i");
                 const todayEl = pill.querySelector(".menu-weather-today");
                 const tomorrowEl = pill.querySelector(".menu-weather-tomorrow");
+                const extraEl = pill.querySelector(".menu-weather-extra");
 
                 if (icon) {
                     icon.className = "fa-solid " + todayIcon;
@@ -101,6 +105,12 @@ document.addEventListener("DOMContentLoaded", function () {
                             : "Αύριο: Καιρός Αθήνα";
                 }
 
+                if (extraEl) {
+                    extraEl.textContent = windSpeed !== null
+                        ? "Άνεμος: " + windSpeed + " km/h"
+                        : "Άνεμος: -- km/h";
+                }
+
                 pill.setAttribute(
                     "title",
                     "Σήμερα: " + todayTemp + "°C, " + todayText + " | Αύριο: " +
@@ -114,9 +124,11 @@ document.addEventListener("DOMContentLoaded", function () {
             weatherPills.forEach(function (pill) {
                 const todayEl = pill.querySelector(".menu-weather-today");
                 const tomorrowEl = pill.querySelector(".menu-weather-tomorrow");
+                const extraEl = pill.querySelector(".menu-weather-extra");
 
                 if (todayEl) todayEl.textContent = "Σήμερα: Καιρός Αθήνα";
                 if (tomorrowEl) tomorrowEl.textContent = "Αύριο: --° / --°";
+                if (extraEl) extraEl.textContent = "Άνεμος: -- km/h";
             });
         });
 });
