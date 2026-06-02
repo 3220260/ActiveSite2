@@ -833,3 +833,24 @@ a[data-label="bottom_nav_phone"]:hover {
         line-height: 1.05;
     }
 }
+
+
+.offers-section-catalog #offers-grid > [data-offer-card] .nova-5g-title {
+    display: inline-block;
+    background: #000000 !important;
+    color: #ffffff !important;
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-weight: 900;
+    line-height: 1.15;
+}
+
+.offers-section-catalog #offers-grid > [data-offer-card] .igia {
+    display: inline-block;
+    background: #16a34a !important;
+    color: #ffffff !important;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-weight: 900;
+    line-height: 1;
+}
