@@ -3,11 +3,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!weatherPills.length) return;
 
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+
     const weatherUrl =
         "https://api.open-meteo.com/v1/forecast" +
         "?latitude=37.9838" +
         "&longitude=23.7275" +
         "&current=temperature_2m,weather_code,wind_speed_10m" +
+        "&hourly=temperature_2m,weather_code" +
         "&daily=weather_code,temperature_2m_max,temperature_2m_min" +
         "&forecast_days=2" +
         "&timezone=Europe%2FAthens";
@@ -48,6 +51,42 @@ document.addEventListener("DOMContentLoaded", function () {
         if ([71, 73, 75].includes(code)) return "fa-snowflake";
         if ([95, 96, 99].includes(code)) return "fa-cloud-bolt";
         return "fa-cloud-sun";
+    }
+
+    function getHourLabel(offset) {
+        return offset === 1 ? "Σε 1 ώρα" : `Σε ${offset} ώρες`;
+    }
+
+    function getHourlyEntry(data, offset) {
+        const hourly = data.hourly || {};
+        const hourlyTimes = Array.isArray(hourly.time) ? hourly.time : [];
+        const current = data.current || {};
+        const currentTime = current.time || "";
+        let currentIndex = currentTime ? hourlyTimes.indexOf(currentTime) : -1;
+
+        if (currentIndex < 0) {
+            currentIndex = 0;
+        }
+
+        const targetIndex = currentIndex + offset;
+        if (
+            targetIndex < 0 ||
+            !Array.isArray(hourly.temperature_2m) ||
+            !Array.isArray(hourly.weather_code) ||
+            targetIndex >= hourly.temperature_2m.length ||
+            targetIndex >= hourly.weather_code.length
+        ) {
+            return null;
+        }
+
+        const timeValue = hourlyTimes[targetIndex] || "";
+        const hour = timeValue ? new Date(timeValue).getHours() : null;
+
+        return {
+            temp: Math.round(hourly.temperature_2m[targetIndex]),
+            code: Number(hourly.weather_code[targetIndex]),
+            hour,
+        };
     }
 
     fetch(weatherUrl)
@@ -94,30 +133,64 @@ document.addEventListener("DOMContentLoaded", function () {
                     icon.setAttribute("aria-hidden", "true");
                 }
 
-                if (todayEl) {
-                    todayEl.textContent = "Σήμερα: " + todayTemp + "°C · " + todayText;
+                if (isDesktop) {
+                    const nextHour = getHourlyEntry(data, 1);
+                    const nextTwoHours = getHourlyEntry(data, 2);
+
+                    if (todayEl) {
+                        todayEl.textContent = "Τώρα: " + todayTemp + "°C · " + todayText;
+                    }
+
+                    if (tomorrowEl) {
+                        tomorrowEl.textContent = nextHour
+                            ? `${getHourLabel(1)}: ${nextHour.temp}°C · ${getWeatherText(nextHour.code)}`
+                            : "Σε 1 ώρα: --°C";
+                    }
+
+                    if (extraEl) {
+                        extraEl.textContent = nextTwoHours
+                            ? `${getHourLabel(2)}: ${nextTwoHours.temp}°C · ${getWeatherText(nextTwoHours.code)}`
+                            : "Σε 2 ώρες: --°C";
+                    }
+
+                    pill.setAttribute(
+                        "title",
+                        "Τώρα: " + todayTemp + "°C, " + todayText + " | " +
+                        (nextHour
+                            ? `${getHourLabel(1)}: ${nextHour.temp}°C, ${getWeatherText(nextHour.code)}`
+                            : "Σε 1 ώρα: --°C") + " | " +
+                        (nextTwoHours
+                            ? `${getHourLabel(2)}: ${nextTwoHours.temp}°C, ${getWeatherText(nextTwoHours.code)}`
+                            : "Σε 2 ώρες: --°C")
+                    );
+                } else {
+                    if (todayEl) {
+                        todayEl.textContent = "Σήμερα: " + todayTemp + "°C · " + todayText;
+                    }
+
+                    if (tomorrowEl) {
+                        tomorrowEl.textContent =
+                            tomorrowMin !== null && tomorrowMax !== null
+                                ? "Αύριο: " + tomorrowMin + "° / " + tomorrowMax + "° · " + tomorrowText
+                                : "Αύριο: Καιρός Αθήνα";
+                    }
+
+                    if (extraEl) {
+                        extraEl.textContent = windSpeed !== null
+                            ? "Άνεμος: " + windSpeed + " km/h"
+                            : "Άνεμος: -- km/h";
+                    }
+
+                    pill.setAttribute(
+                        "title",
+                        "Σήμερα: " + todayTemp + "°C, " + todayText + " | Αύριο: " +
+                        (tomorrowMin !== null && tomorrowMax !== null
+                            ? tomorrowMin + "° / " + tomorrowMax + "°, " + tomorrowText
+                            : "Καιρός Αθήνας")
+                    );
                 }
 
-                if (tomorrowEl) {
-                    tomorrowEl.textContent =
-                        tomorrowMin !== null && tomorrowMax !== null
-                            ? "Αύριο: " + tomorrowMin + "° / " + tomorrowMax + "° · " + tomorrowText
-                            : "Αύριο: Καιρός Αθήνα";
-                }
-
-                if (extraEl) {
-                    extraEl.textContent = windSpeed !== null
-                        ? "Άνεμος: " + windSpeed + " km/h"
-                        : "Άνεμος: -- km/h";
-                }
-
-                pill.setAttribute(
-                    "title",
-                    "Σήμερα: " + todayTemp + "°C, " + todayText + " | Αύριο: " +
-                    (tomorrowMin !== null && tomorrowMax !== null
-                        ? tomorrowMin + "° / " + tomorrowMax + "°, " + tomorrowText
-                        : "Καιρός Αθήνας")
-                );
+                pill.setAttribute("aria-label", pill.getAttribute("title"));
             });
         })
         .catch(function () {
@@ -126,9 +199,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 const tomorrowEl = pill.querySelector(".menu-weather-tomorrow");
                 const extraEl = pill.querySelector(".menu-weather-extra");
 
-                if (todayEl) todayEl.textContent = "Σήμερα: Καιρός Αθήνα";
-                if (tomorrowEl) tomorrowEl.textContent = "Αύριο: --° / --°";
-                if (extraEl) extraEl.textContent = "Άνεμος: -- km/h";
+                if (isDesktop) {
+                    if (todayEl) todayEl.textContent = "Τώρα: Καιρός Αθήνα";
+                    if (tomorrowEl) tomorrowEl.textContent = "Σε 1 ώρα: --°C";
+                    if (extraEl) extraEl.textContent = "Σε 2 ώρες: --°C";
+                    pill.setAttribute("title", "Τώρα: Καιρός Αθήνα | Σε 1 ώρα: --°C | Σε 2 ώρες: --°C");
+                } else {
+                    if (todayEl) todayEl.textContent = "Σήμερα: Καιρός Αθήνα";
+                    if (tomorrowEl) tomorrowEl.textContent = "Αύριο: --° / --°";
+                    if (extraEl) extraEl.textContent = "Άνεμος: -- km/h";
+                    pill.setAttribute("title", "Σήμερα: Καιρός Αθήνα | Αύριο: --° / --°");
+                }
+
+                pill.setAttribute("aria-label", pill.getAttribute("title"));
             });
         });
 });

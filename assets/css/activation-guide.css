@@ -301,3 +301,40 @@
     justify-self: center;
   }
 }
+/* Φορητότητα / Νέος αριθμός - πιο ήπιο χρώμα */
+.process-provider-type {
+    background: #eb0303 !important;
+    color: #991b1b !important;
+    border: 1px solid #0c0404 !important;
+    border-radius: 999px !important;
+    padding: 7px 13px !important;
+    font-weight: 900 !important;
+}
+
+.process-provider-badge.is-voda {
+    background: #e60000 !important;
+    color: #000000 !important;
+    border-radius: 999px !important;
+    padding: 7px 13px !important;
+    font-weight: 900 !important;
+}
+
+/* NOVA Q - provider badge */
+.process-provider-badge.is-nova {
+    background: #0057b8 !important;
+    color: #ff7a00 !important;
+    border: 1px solid #0057b8 !important;
+    border-radius: 999px !important;
+    padding: 7px 13px !important;
+    font-weight: 900 !important;
+}
+
+/* NOVA Q - Φορητότητα / Νέος αριθμός */
+.process-provider-badge.is-nova + .process-provider-type {
+    background: #ffedd5 !important;
+    color: #0057b8 !important;
+    border: 1px solid #fdba74 !important;
+    border-radius: 999px !important;
+    padding: 7px 13px !important;
+    font-weight: 900 !important;
+}

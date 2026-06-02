@@ -79,32 +79,32 @@
     display: inline-flex !important;
     justify-self: end !important;
     margin-left: auto !important;
-    min-width: 8.8rem !important;
-    max-width: 10rem !important;
-    min-height: 2.55rem !important;
-    padding: 0.4rem 0.55rem !important;
-    border-radius: 14px !important;
-    font-size: 0.62rem !important;
-    gap: 0.4rem !important;
+    min-width: 10.25rem !important;
+    max-width: 12rem !important;
+    min-height: 3rem !important;
+    padding: 0.52rem 0.72rem !important;
+    border-radius: 16px !important;
+    font-size: 0.68rem !important;
+    gap: 0.55rem !important;
     white-space: normal !important;
     text-align: left !important;
   }
 
   .site-top-nav .menu-weather-pill i {
-    font-size: 1rem !important;
+    font-size: 1.12rem !important;
   }
 
   .site-top-nav .menu-weather-lines {
-    gap: 0.08rem !important;
+    gap: 0.12rem !important;
   }
 
   .site-top-nav .menu-weather-today {
-    font-size: 0.63rem !important;
-    line-height: 1.02 !important;
+    font-size: 0.67rem !important;
+    line-height: 1.04 !important;
   }
 
   .site-top-nav .menu-weather-tomorrow {
-    font-size: 0.56rem !important;
+    font-size: 0.59rem !important;
     line-height: 1.02 !important;
   }
 
@@ -842,16 +842,6 @@ body.assistant-chat-open .assistant-chat-fab {
     font-size: 1rem;
   }
 
-  .offer-search-bar {
-    width: 100%;
-    margin-top: 0.2rem;
-    margin-left: 0;
-  }
-
-  .offer-search-bar input {
-    min-height: 2.85rem;
-  }
-
   .offer-filter-bar {
     top: 5.4rem;
     margin-top: 0.75rem;
@@ -1041,37 +1031,37 @@ body.assistant-chat-open .assistant-chat-fab {
   }
 
   .site-top-nav .menu-weather-pill {
-    min-width: 12.25rem !important;
-    max-width: 14rem !important;
-    min-height: 3rem !important;
-    padding: 0.52rem 0.7rem !important;
-    border-radius: 16px !important;
-    font-size: 0.7rem !important;
-    gap: 0.42rem !important;
-    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.18) !important;
+    min-width: 15.5rem !important;
+    max-width: 18rem !important;
+    min-height: 3.45rem !important;
+    padding: 0.7rem 0.95rem !important;
+    border-radius: 18px !important;
+    font-size: 0.76rem !important;
+    gap: 0.62rem !important;
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.18) !important;
   }
 
   .site-top-nav .menu-weather-pill i {
-    font-size: 1.05rem !important;
+    font-size: 1.18rem !important;
   }
 
   .site-top-nav .menu-weather-lines {
-    gap: 0.08rem !important;
+    gap: 0.14rem !important;
   }
 
   .site-top-nav .menu-weather-today {
-    font-size: 0.72rem !important;
+    font-size: 0.78rem !important;
     line-height: 1.05 !important;
   }
 
   .site-top-nav .menu-weather-tomorrow {
-    font-size: 0.64rem !important;
+    font-size: 0.67rem !important;
     line-height: 1.05 !important;
   }
 
   .site-top-nav .menu-weather-extra {
     display: block !important;
-    font-size: 0.58rem !important;
+    font-size: 0.62rem !important;
     line-height: 1.02 !important;
   }
 }

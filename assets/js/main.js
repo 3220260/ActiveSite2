@@ -1271,16 +1271,6 @@ function updateOfferVisibility() {
     }
 }
 
-function initializeOfferSearch() {
-    const searchInput = document.getElementById('offerSearchInput');
-    if (!searchInput) return;
-
-    searchInput.addEventListener('input', (event) => {
-        activeSearchQuery = event.target.value || '';
-        updateOfferVisibility();
-    });
-}
-
 function applyOfferFilter(category, source = null) {
     const normalizedCategory = category || 'all';
     activeCategory = normalizedCategory;
@@ -2312,7 +2302,6 @@ function initializePage() {
     enhanceIbanWarnings();
     initializeFaqTracking();
     initializeLandingStepTracking();
-    initializeOfferSearch();
     initializeBottomNavOffersState();
     initializePremiumMenuActiveState();
     updateOfferVisibility();
@@ -2389,38 +2378,3 @@ window.onpopstate = function (event) {
       closeAssistantOuterChat();
     }
   });
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    const namedayEls = document.querySelectorAll(".today-nameday");
-
-    if (!namedayEls.length) return;
-
-    const today = new Date();
-    const key =
-        String(today.getMonth() + 1).padStart(2, "0") +
-        "-" +
-        String(today.getDate()).padStart(2, "0");
-
-    fetch("assets/data/namedays.json?v=20260601")
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (namedays) {
-            const names = namedays[key];
-
-            const text = names
-                ? "Γιορτάζουν: " + names
-                : "Ποιοι γιορτάζουν σήμερα";
-
-            namedayEls.forEach(function (el) {
-                el.textContent = text;
-            });
-        })
-        .catch(function () {
-            namedayEls.forEach(function (el) {
-                el.textContent = "Ποιοι γιορτάζουν σήμερα";
-            });
-        });
-});
