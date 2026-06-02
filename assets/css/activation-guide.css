@@ -301,22 +301,36 @@
     justify-self: center;
   }
 }
-/* Φορητότητα / Νέος αριθμός - πιο ήπιο χρώμα */
-.process-provider-type {
-    background: #eb0303 !important;
-    color: #991b1b !important;
-    border: 1px solid #0c0404 !important;
+/* Vodafone CU - Φορητότητα / Νέος αριθμός και σε κινητά */
+.process-wizard-sticky[data-process-container^="v-"] span.process-provider-type,
+.process-wizard-sticky[data-process-container^="v-"] .process-provider-type {
+    background: #e60000 !important;
+    color: #ffffff !important;
+    border: 1px solid #e60000 !important;
     border-radius: 999px !important;
     padding: 7px 13px !important;
     font-weight: 900 !important;
 }
 
-.process-provider-badge.is-voda {
+/* Vodafone CU badge και σε κινητά */
+.process-wizard-sticky[data-process-container^="v-"] span.process-provider-badge.is-voda,
+.process-wizard-sticky[data-process-container^="v-"] .process-provider-badge.is-voda {
     background: #e60000 !important;
-    color: #000000 !important;
+    color: #ffffff !important;
+    border: 1px solid #e60000 !important;
     border-radius: 999px !important;
     padding: 7px 13px !important;
     font-weight: 900 !important;
+}
+
+/* Extra δυνατό override για mobile, επειδή το mobile-wizard.css πατάει όλα τα span */
+@media (max-width: 767px) {
+    .process-wizard-sticky[data-process-container^="v-"] span.process-provider-type,
+    .process-wizard-sticky[data-process-container^="v-"] span.process-provider-badge.is-voda {
+        color: #ffffff !important;
+        background: #e60000 !important;
+        border-color: #e60000 !important;
+    }
 }
 
 /* NOVA Q - provider badge */
