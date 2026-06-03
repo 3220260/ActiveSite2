@@ -306,3 +306,53 @@
 .mobile-bottom-nav.compact-mobile-bottom-nav span {
     font-size: 12px !important;
 }
+
+
+/* Κρύβεται σε υπολογιστή / tablet */
+.mobile-bottom-nav {
+    display: none !important;
+}
+
+/* Εμφανίζεται μόνο σε κινητό */
+@media (max-width: 768px) {
+    .mobile-bottom-nav.compact-mobile-bottom-nav {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 6px !important;
+        padding: 6px 10px !important;
+        min-height: 46px !important;
+        position: fixed !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        z-index: 9999 !important;
+        background: #ffffff !important;
+        box-shadow: 0 -6px 18px rgba(15, 23, 42, 0.12) !important;
+    }
+
+    .mobile-bottom-nav.compact-mobile-bottom-nav a,
+    .mobile-bottom-nav.compact-mobile-bottom-nav button {
+        min-height: 36px !important;
+        padding: 5px 8px !important;
+        border-radius: 999px !important;
+        font-size: 12px !important;
+        line-height: 1 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 5px !important;
+        font-weight: 700 !important;
+    }
+
+    .mobile-bottom-nav.compact-mobile-bottom-nav i {
+        font-size: 14px !important;
+    }
+
+    .mobile-bottom-nav.compact-mobile-bottom-nav span {
+        font-size: 12px !important;
+    }
+
+    body {
+        padding-bottom: 58px !important;
+    }
+}
