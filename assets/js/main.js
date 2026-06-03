@@ -577,8 +577,8 @@ function createProcessWizard(containerId, config, theme, steps) {
     );
     closeButton.type = 'button';
     closeButton.dataset.modalClose = modalId;
-    closeButton.dataset.modalTarget = choiceModalId;
-    closeButton.setAttribute('aria-label', 'Κλείσιμο οδηγού και επιστροφή στην επιλογή');
+    // closeButton.dataset.modalTarget = choiceModalId; // disabled: prevents mobile scroll jump
+    closeButton.setAttribute('aria-label', 'Κλείσιμο οδηγού');
 
     right.appendChild(closeButton);
 
@@ -1105,7 +1105,8 @@ function showProcessWizardStep(containerId, index) {
         });
 
         const activeButton = stepNav.querySelector('.process-step-scroll-button.is-active');
-        if (activeButton) {
+
+        if (activeButton && window.innerWidth > 768) {
             activeButton.scrollIntoView({
                 behavior: 'smooth',
                 block: 'nearest',
@@ -1531,7 +1532,7 @@ function closeAssistantChat() {
     unlockPageScrollIfIdle();
 
     if (assistantChatPreviousFocus && document.contains(assistantChatPreviousFocus)) {
-        assistantChatPreviousFocus.focus();
+        assistantChatPreviousFocus.focus({ preventScroll: true });
     }
     assistantChatPreviousFocus = null;
 }
@@ -2377,3 +2378,94 @@ window.onpopstate = function (event) {
       closeAssistantOuterChat();
     }
   });
+
+
+
+/* MOBILE_MODAL_RETURN_TO_OPEN_POSITION */
+(function () {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return;
+
+  let modalOpenScrollY = 0;
+
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
+  function getCurrentPageScrollY() {
+    const bodyTop = document.body.style.top;
+
+    // Αν το body είναι fixed, η πραγματική θέση βρίσκεται στο top: -1234px
+    if (document.body.style.position === 'fixed' && bodyTop) {
+      const parsedTop = parseInt(bodyTop, 10);
+      if (!Number.isNaN(parsedTop)) {
+        return Math.abs(parsedTop);
+      }
+    }
+
+    return window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+  }
+
+  function restorePageScrollY(scrollY) {
+    if (!isMobile()) return;
+
+    const html = document.documentElement;
+    const body = document.body;
+    const previousHtmlBehavior = html.style.scrollBehavior;
+    const previousBodyBehavior = body.style.scrollBehavior;
+
+    html.style.scrollBehavior = 'auto';
+    body.style.scrollBehavior = 'auto';
+
+    requestAnimationFrame(function () {
+      window.scrollTo(0, scrollY);
+
+      requestAnimationFrame(function () {
+        window.scrollTo(0, scrollY);
+
+        setTimeout(function () {
+          window.scrollTo(0, scrollY);
+          html.style.scrollBehavior = previousHtmlBehavior || '';
+          body.style.scrollBehavior = previousBodyBehavior || '';
+        }, 120);
+      });
+    });
+  }
+
+  // Πριν ανοίξει modal, αποθηκεύουμε τη θέση της σελίδας
+  document.addEventListener('click', function (event) {
+    const openButton = event.target.closest('[data-modal-target]');
+    const closeButton = event.target.closest('[data-modal-close]');
+
+    if (!openButton || closeButton || !isMobile()) return;
+
+    modalOpenScrollY = getCurrentPageScrollY();
+  }, true);
+
+  // Όταν κλείνει modal, γυρίζουμε στη θέση από όπου άνοιξε
+  document.addEventListener('click', function (event) {
+    const closeButton = event.target.closest('[data-modal-close]');
+    if (!closeButton || !isMobile()) return;
+
+    const targetToOpen = closeButton.getAttribute('data-modal-target');
+
+    // Αν το κουμπί κλείνει ένα modal και ανοίγει άλλο, μη γυρίσεις ακόμα τη σελίδα
+    if (targetToOpen) return;
+
+    const scrollY = modalOpenScrollY || getCurrentPageScrollY();
+
+    setTimeout(function () {
+      restorePageScrollY(scrollY);
+    }, 0);
+  }, true);
+
+  // Και για κλείσιμο με Escape ή backdrop, αν υπάρχει τέτοια λειτουργία
+  document.addEventListener('keydown', function (event) {
+    if (event.key !== 'Escape' || !isMobile()) return;
+
+    const scrollY = modalOpenScrollY || getCurrentPageScrollY();
+
+    setTimeout(function () {
+      restorePageScrollY(scrollY);
+    }, 0);
+  }, true);
+})();
