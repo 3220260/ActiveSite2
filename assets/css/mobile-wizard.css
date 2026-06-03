@@ -277,13 +277,7 @@
 }
 
 
-.mobile-bottom-nav.compact-mobile-bottom-nav {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 6px !important;
-    padding: 6px 10px !important;
-    min-height: 48px !important;
-}
+
 
 .mobile-bottom-nav.compact-mobile-bottom-nav a,
 .mobile-bottom-nav.compact-mobile-bottom-nav button {
