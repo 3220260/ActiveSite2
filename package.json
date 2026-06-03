@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tailwindcss -i ./assets/css/tailwind.input.css -o ./assets/css/tailwind.css --minify",
     "dev": "tailwindcss -i ./assets/css/tailwind.input.css -o ./assets/css/tailwind.css --watch",
-    "check": "npm run build && html-validate index.html && node --check ./assets/js/offers-data.js && node --check ./assets/js/offers-renderer.js && node --check ./assets/js/wizard-ui.js && node --check ./assets/js/main.js && node ./scripts/check-repo-clean.mjs && node ./scripts/check-static-assets.mjs",
+    "check": "node ./scripts/check-tailwind-build.mjs && html-validate index.html && node ./scripts/check-javascript.mjs && node ./scripts/check-repo-clean.mjs && node ./scripts/check-static-assets.mjs",
     "prebuild": "node ./scripts/write-site-version.mjs"
   },
   "devDependencies": {

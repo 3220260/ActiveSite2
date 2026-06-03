@@ -286,19 +286,23 @@ body.page-loaded .hero-actions {
 
   .hero-single-shell {
     min-height: calc(100svh - 5.05rem);
-    padding: 1.15rem 1rem 1.3rem;
+    padding: calc(env(safe-area-inset-top) + 2.4rem) 1rem 1.25rem;
     border-radius: 0;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 
   .hero-content {
     max-width: 100%;
     width: 100%;
+    margin: 0;
+    justify-content: flex-start;
+    min-height: 0;
   }
 
   .hero-kicker {
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.6rem;
     padding: 0.38rem 0.6rem;
     font-size: 0.58rem;
     letter-spacing: 0.09em;
@@ -311,7 +315,7 @@ body.page-loaded .hero-actions {
   }
 
   .hero-title-svg text {
-    font-size: 76px;
+    font-size: 68px;
   }
 
   .hero-title-mobile-plain {
@@ -319,9 +323,9 @@ body.page-loaded .hero-actions {
   }
 
   .hero-content > p {
-    margin-top: 0.8rem;
-    font-size: 0.92rem;
-    line-height: 1.46;
+    margin-top: 0.65rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
     max-width: 34rem;
   }
 
@@ -330,15 +334,15 @@ body.page-loaded .hero-actions {
     grid-template-columns: 1fr 1fr;
     gap: 0.55rem;
     width: 100%;
-    margin-top: 0.95rem;
+    margin-top: 0.75rem;
   }
 
   .hero-actions .btn-primary,
   .hero-actions .btn-secondary,
   .hero-actions .btn-ghost {
-    min-height: 2.9rem;
-    padding: 0.72rem 0.75rem;
-    font-size: 0.84rem;
+    min-height: 2.8rem;
+    padding: 0.68rem 0.72rem;
+    font-size: 0.81rem;
     border-radius: 16px;
     width: 100%;
   }
@@ -376,6 +380,10 @@ body.page-loaded .hero-actions {
 
   body.hero-intro-ready .hero-single-shell {
     min-height: 100svh;
+  }
+
+  body.hero-intro-ready .hero-content {
+    padding-top: 0.1rem;
   }
 
   body.hero-intro-ready:not(.hero-nav-visible) .site-top-nav {
