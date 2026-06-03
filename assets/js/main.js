@@ -1992,7 +1992,8 @@ if (modalCloseTarget) {
     const modalToClose = modalCloseTarget.dataset.modalClose;
     const modalToOpen = modalCloseTarget.dataset.modalTarget;
 
-    closeModal(modalToClose);
+    closeModal(modalToClose, !modalToOpen);
+
 
     if (modalToOpen) {
         trackEvent('offer_click', {
