@@ -28,7 +28,7 @@
         },
         {
           icon: 'fa-solid fa-comment-sms',
-          text: '100 sms',
+          text: '100 SMS',
         },
         {
           icon: 'fa-solid fa-piggy-bank',
@@ -76,7 +76,7 @@
         },
         {
           icon: 'fa-solid fa-comment-sms',
-          text: '300 sms',
+          text: '300 SMS',
         },
         {
           icon: 'fa-solid fa-piggy-bank',

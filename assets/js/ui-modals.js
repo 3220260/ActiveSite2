@@ -64,12 +64,24 @@ function hasOpenBlockingLayer() {
     );
 }
 
+function shouldUseFixedScrollLock() {
+    return window.matchMedia('(pointer: coarse)').matches &&
+        window.matchMedia('(hover: none)').matches;
+}
+
 
 function lockPageScroll() {
     if (document.body.dataset.scrollLocked === 'true') return;
     pageScrollY = window.scrollY || document.documentElement.scrollTop || 0;
     document.body.dataset.scrollLocked = 'true';
     document.body.classList.add('overflow-hidden');
+
+    if (!shouldUseFixedScrollLock()) {
+        document.body.dataset.scrollLockMode = 'overflow';
+        return;
+    }
+
+    document.body.dataset.scrollLockMode = 'fixed';
     document.body.style.position = 'fixed';
     document.body.style.top = `-${pageScrollY}px`;
     document.body.style.left = '0';
@@ -81,6 +93,8 @@ function lockPageScroll() {
 function unlockPageScrollIfIdle() {
     if (hasOpenBlockingLayer() || document.body.dataset.scrollLocked !== 'true') return;
 
+    const lockMode = document.body.dataset.scrollLockMode;
+
     document.body.classList.remove('overflow-hidden', 'scroll-locked');
     document.body.style.position = '';
     document.body.style.top = '';
@@ -88,7 +102,11 @@ function unlockPageScrollIfIdle() {
     document.body.style.right = '';
     document.body.style.width = '';
     document.body.removeAttribute('data-scroll-locked');
-    window.scrollTo(0, pageScrollY);
+    document.body.removeAttribute('data-scroll-lock-mode');
+
+    if (lockMode === 'fixed') {
+        window.scrollTo(0, pageScrollY);
+    }
 }
 
 
@@ -146,9 +164,9 @@ function closeModal(id, updateHistory = true) {
         }
     }
     
-   if (updateHistory && window.location.hash === `#${id}`) {
-    history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
-}
+    if (updateHistory && window.location.hash === `#${id}`) {
+        history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+    }
 
     if (wasOpen) {
         unlockPageScrollIfIdle();

@@ -215,7 +215,7 @@
   [data-process-step] .wizard-email-copy-action,
   [data-process-step] .wizard-email-open-action,
   [data-process-step] .wizard-call-cta {
-    min-height: 48px !important;
+    min-height: 30px !important;
     border-radius: 16px !important;
     font-size: 0.9rem !important;
   }
@@ -274,4 +274,35 @@
       transform: translateY(0);
     }
   }
+}
+
+
+.mobile-bottom-nav.compact-mobile-bottom-nav {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+    padding: 6px 10px !important;
+    min-height: 48px !important;
+}
+
+.mobile-bottom-nav.compact-mobile-bottom-nav a,
+.mobile-bottom-nav.compact-mobile-bottom-nav button {
+    min-height: 38px !important;
+    padding: 5px 8px !important;
+    border-radius: 999px !important;
+    font-size: 12px !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    font-weight: 700 !important;
+}
+
+.mobile-bottom-nav.compact-mobile-bottom-nav i {
+    font-size: 14px !important;
+}
+
+.mobile-bottom-nav.compact-mobile-bottom-nav span {
+    font-size: 12px !important;
 }

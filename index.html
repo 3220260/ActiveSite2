@@ -46,7 +46,7 @@
   <link rel="stylesheet" href="assets/css/tailwind.css?v=20260429-2">
   <link rel="stylesheet" href="assets/css/info-modern.css?v=20260530-1">
   <link rel="stylesheet" href="assets/css/base.css?v=20260527-pro">
-  <link rel="stylesheet" href="assets/css/components.css?v=20260527-pro">
+  <link rel="stylesheet" href="assets/css/components.css?v=20260603-mobile-plan-2">
   <link rel="stylesheet" href="assets/css/animations.css?v=20260523-7">
   <link rel="stylesheet" href="assets/css/responsive.css?v=20260603-mobile-polish">
   <link rel="stylesheet" href="assets/css/landing-redesign.css?v=20260530-offers-catalog">
@@ -54,7 +54,7 @@
   <link rel="stylesheet" href="assets/css/hero-simplified.css?v=20260603-hero-mobile-tight">
   <link rel="stylesheet" href="assets/css/mobile-wizard.css?v=20260529-wizard">
   <link rel="stylesheet" href="assets/css/activation-guide.css?v=20260529-activation-guide">
-  <link rel="stylesheet" href="assets/css/premium-menu.css?v=20260602-weather-bigger">
+  <link rel="stylesheet" href="assets/css/premium-menu.css?v=20260603-nameday">
 
   <script type="application/ld+json">
   {
@@ -121,14 +121,13 @@
     </div>
 
     <div class="flex items-center gap-2 shrink-0 justify-self-end">
-        <a href="#contact" class="menu-weather-pill" title="Καιρός Αθήνας">
-            <i class="fa-solid fa-cloud-sun" aria-hidden="true"></i>
-            <span class="menu-weather-lines">
-                <span class="menu-weather-today">Τώρα: Καιρός Αθήνα</span>
-                <span class="menu-weather-tomorrow">Σε 1 ώρα: --°</span>
-                <span class="menu-weather-extra">Σε 2 ώρες: --°</span>
+        <div class="menu-nameday-pill" title="Εορτολόγιο: φόρτωση">
+            <i class="fa-solid fa-calendar-day" aria-hidden="true"></i>
+            <span class="menu-nameday-lines">
+                <span class="menu-nameday-today">Σήμερα: φόρτωση</span>
+                <span class="menu-nameday-tomorrow">Αύριο: φόρτωση</span>
             </span>
-        </a>
+          </div>
     </div>
     </div>
     </nav>
@@ -161,7 +160,7 @@
             </a>
         <a href="tel:2105245210" class="btn-secondary phone-cta" data-track="phone_click">
           <i class="fa-solid fa-phone" aria-hidden="true"></i>
-          Πάρε&nbsp;Τηλέφωνο
+          Κλήση
         </a>
 
           </div>
@@ -220,11 +219,37 @@
     <dd>Μέλη που τα θέλουν όλα με μόλις 8,3€ το μήνα</dd>
 </div>
           </dl>
-          <ul class="offer-benefits">
-            <li>300 GB κάθε μήνα.</li>
-            <li>Απεριόριστη ομιλία σε σταθερά και κινητά.</li>
-            <li>200 λεπτά roaming και 11 GB.</li>
-          </ul>
+          <div class="mobile-plan-summary" role="group" aria-label="Παροχές Vodafone CU">
+            <div class="mobile-plan-hero">
+              <i class="fa-solid fa-cloud-arrow-down" aria-hidden="true"></i>
+              <div>
+                <strong>300 GB Data</strong>
+                <span>Κάθε μήνα</span>
+              </div>
+            </div>
+            <div class="mobile-plan-feature-list">
+              <div class="mobile-plan-feature mobile-plan-feature-wide">
+                <i class="fa-solid fa-rotate" aria-hidden="true"></i>
+                <span>Ό,τι μείνει μεταφέρεται στον επόμενο μήνα</span>
+              </div>
+              <div class="mobile-plan-feature">
+                <i class="fa-solid fa-phone-flip" aria-hidden="true"></i>
+                <span>Απεριόριστη Ομιλία <small>σταθερά &amp; κινητά</small></span>
+              </div>
+              <div class="mobile-plan-feature">
+                <i class="fa-solid fa-plane-arrival" aria-hidden="true"></i>
+                <span>Roaming <small>200 Λεπτά Ομιλίας και 11 GB</small></span>
+              </div>
+              <div class="mobile-plan-feature mobile-plan-feature-sms">
+                <i class="fa-solid fa-comment-sms" aria-hidden="true"></i>
+                <span>100 SMS</span>
+              </div>
+            </div>
+            <div class="mobile-plan-annual">
+              <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+              <span>Ετήσιο πλάνο επικοινωνίας: 12 μήνες πλήρους κάλυψης χωρίς δεσμεύσεις.</span>
+            </div>
+          </div>
           <div class="offer-actions">
             <button type="button" data-modal-target="vodaChoiceModal" data-track="offer_interest_click" data-offer="Vodafone CU" data-category="mobile">Με ενδιαφέρει</button>
           </div>
@@ -249,11 +274,29 @@
             </div>
 
           </dl>
-          <ul class="offer-benefits">
-            <li>Απεριόριστα GB.</li>
-            <li>Απεριόριστη ομιλία σε σταθερά και κινητά.</li>
-            <li>300 sms.</li>
-          </ul>
+          <div class="mobile-plan-summary mobile-plan-summary-nova" role="group" aria-label="Παροχές NOVA Q">
+            <div class="mobile-plan-hero">
+              <i class="fa-solid fa-infinity" aria-hidden="true"></i>
+              <div>
+                <strong>Απεριόριστα GB</strong>
+                <span>NOVA Q</span>
+              </div>
+            </div>
+            <div class="mobile-plan-feature-list mobile-plan-feature-list-compact">
+              <div class="mobile-plan-feature">
+                <i class="fa-solid fa-phone-flip" aria-hidden="true"></i>
+                <span>Απεριόριστη Ομιλία <small>σταθερά &amp; κινητά</small></span>
+              </div>
+              <div class="mobile-plan-feature mobile-plan-feature-sms">
+                <i class="fa-solid fa-comment-sms" aria-hidden="true"></i>
+                <span>300 SMS</span>
+              </div>
+            </div>
+            <div class="mobile-plan-annual">
+              <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+              <span>Ετήσιο πλάνο επικοινωνίας: 12 μήνες πλήρους κάλυψης χωρίς δεσμεύσεις.</span>
+            </div>
+          </div>
           <div class="offer-actions">
             <button type="button" data-modal-target="novaChoiceModal" data-track="offer_interest_click" data-offer="NOVA Q" data-category="mobile">Με ενδιαφέρει</button>
           </div>
@@ -377,34 +420,7 @@
     </main>
 
 
-    <div id="mobileModal" class="hidden fixed inset-0 z-[9999] modal-backdrop flex items-center justify-center p-2 md:p-4">
-    <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden animate-[fadeIn_0.3s_ease-out] flex flex-col max-h-[90vh]">
-        <div class="mobile-provider-modal-header">
-            <div class="mobile-provider-modal-title">
-                <i class="fa-solid fa-mobile-screen"></i>
-                <span>Επιλέξτε Πάροχο</span>
-            </div>
-
-            <button
-                type="button"
-                data-modal-close="mobileModal"
-                class="liquid-close mobile-provider-modal-close"
-                aria-label="Κλείσιμο επιλογής παρόχου">
-                ✕
-            </button>
-        </div>
-
-        <div
-    id="mobileOffersProviderGrid"
-    class="p-4 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 overflow-y-auto custom-scroll"
-    aria-live="polite"
-    >
-    <p class="col-span-full text-center text-sm font-bold text-slate-500">
-        Φόρτωση παρόχων...
-    </p>
-    </div>
-    </div>
-    </div>
+    
 
     <!-- VODAFONE - ΕΠΙΛΟΓΗ ΤΥΠΟΥ ΔΙΑΔΙΚΑΣΙΑΣ -->
     <div id="vodaChoiceModal" class="hidden fixed inset-0 z-[9999] modal-backdrop flex items-center justify-center p-4">
@@ -434,6 +450,7 @@
               type="button"
               data-modal-close="vodaChoiceModal"
               data-modal-target="mobileModal"
+              data-modal-history="replace"
               class="liquid-close voda-choice-close"
               aria-label="Πίσω στις προσφορές κινητής">
               ✕
@@ -493,6 +510,7 @@
               type="button"
               data-modal-close="novaChoiceModal"
               data-modal-target="mobileModal"
+              data-modal-history="replace"
               class="liquid-close nova-choice-close"
               aria-label="Πίσω στις προσφορές κινητής">
               ✕
@@ -2074,16 +2092,24 @@
     <div class="premium-menu-body custom-scroll">
         <p class="premium-menu-eyebrow">ΕΝΕΡΓΕΣ ΠΡΟΣΦΟΡΕΣ</p>
 
-        <button type="button" data-sidebar-target="mobileModal" class="premium-menu-link premium-menu-link-mobile">
-            <span class="premium-menu-link-icon">
-                <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
-            </span>
-            <span>
-                <strong>Κινητή Τηλεφωνία</strong>
-                <small>Δες τις ενεργές επιλογές</small>
-            </span>
-            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-        </button>
+      <button type="button"
+      data-category-filter="mobile"
+      data-track="category_filter_click"
+      data-label="Κινητή τηλεφωνία"
+      class="premium-menu-link premium-menu-link-mobile js-menu-mobile-offers">
+      <span class="premium-menu-link-icon">
+      <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
+      </span>
+
+      <span>
+      <strong>Κινητή Τηλεφωνία</strong>
+      <small>Δες τις ενεργές επιλογές</small>
+      </span>
+
+      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      </button>
+
+
         <button type="button" data-sidebar-target="internetChoiceModal" class="premium-menu-link premium-menu-link-internet">
             <span class="premium-menu-link-icon">
                 <i class="fa-solid fa-wifi" aria-hidden="true"></i>
@@ -2121,12 +2147,13 @@
     </div>
 
     <div class="premium-menu-actions">
-        <a href="tel:2105245210">
+
+        <a href="tel:6985177202" class="phone-green-btn">
             <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
             <span>Κλήση</span>
         </a>
 
-        <a href="mailto:synetelas2011@gmail.com">
+        <a href="mailto:synetelas2011@gmail.com" class="email-box">
             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             <span>Email</span>
         </a>
@@ -2495,40 +2522,41 @@
     </div>
 
 
-    <nav class="mobile-bottom-nav" aria-label="Γρήγορες ενέργειες κινητού">
-        <a href="#offers" class="mobile-nav-offers-link" data-track="offer_click" data-label="bottom_nav_offers">
-            <i class="fa-solid fa-tags" aria-hidden="true"></i>
-            <span>Προσφορές</span>
-        </a>
-       <a href="tel:2105245210"
-   class="phone-green-btn"
-   data-track="phone_click"
-   data-label="bottom_nav_phone">
-    <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
-    <span>Κλήση</span>
-</a>
-        <a href="mailto:synetelas2011@gmail.com" data-track="email_click" data-label="bottom_nav_email">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-            <span>Email</span>
-        </a>
-        <button type="button" data-chat-open data-track="chat_open" data-label="bottom_nav_chat">
-            <i class="fa-solid fa-comments" aria-hidden="true"></i>
-            <span>Chat</span>
-        </button>
-    </nav>
+    <nav class="mobile-bottom-nav compact-mobile-bottom-nav" aria-label="Γρήγορες ενέργειες κινητού">
 
-<script defer src="assets/js/offers-data.js?v=20260502"></script>
-<script defer src="assets/js/offers-renderer.js?v=20260502"></script>
+      <a href="mailto:synetelas2011@gmail.com?subject=Αίτημα%20πληροφοριών&body=Καλησπέρα%20σας,%0D%0A%0D%0AΘα%20ήθελα%20να%20ζητήσω%20πληροφορίες%20σχετικά%20με%20τις%20παροχές%20και%20τις%20προσφορές%20του%20συνεταιρισμού.%0D%0A%0D%0AΕυχαριστώ."
+       class="email-blue-btn"
+       data-track="email_click"
+       data-label="bottom_nav_email">
+        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+        <span>Mail</span>
+    </a>
+    <a href="tel:6985177202" class="phone-green-btn" data-track="phone_click" data-label="bottom_nav_phone">
+        <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
+        <span>Κλήση</span>
+    </a>
+
+    <button type="button" data-chat-open data-track="chat_open" data-label="bottom_nav_chat">
+        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+        <span>Chat</span>
+    </button>
+
+    
+
+</nav>
+
+<script defer src="assets/js/offers-data.js?v=20260603-mobile-plan-2"></script>
+<script defer src="assets/js/offers-renderer.js?v=20260603-mobile-plan"></script>
 
 <script defer src="assets/js/app-state.js?v=20260522-1"></script>
 <script defer src="assets/js/analytics.js?v=20260527-pro"></script>
 <script defer src="assets/js/clipboard.js?v=20260527-pro"></script>
 <script defer src="assets/js/image-preview.js?v=20260522-1"></script>
-<script defer src="assets/js/ui-modals.js?v=20260527-pro"></script>
-<script defer src="assets/js/main.js?v=20260602-nameday-online-only"></script>
+<script defer src="assets/js/ui-modals.js?v=20260603-desktop-scroll-lock"></script>
+<script defer src="assets/js/main.js?v=20260603-modal-history-2"></script>
 
 
-<script src="assets/js/weather-loader.js?v=20260602-weather-eortologio" defer></script>
+<script src="assets/js/nameday-loader.js?v=20260603-eortologio" defer></script>
 
 </body>
 </html>

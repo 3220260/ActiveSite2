@@ -700,7 +700,7 @@ a[data-label="bottom_nav_phone"]:hover {
 }
 
 
-.menu-weather-pill {
+.menu-nameday-pill {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -718,46 +718,38 @@ a[data-label="bottom_nav_phone"]:hover {
     line-height: 1.12;
 }
 
-.menu-weather-pill i {
+.menu-nameday-pill i {
     color: #facc15 !important;
     font-size: 19px;
     flex: 0 0 auto;
 }
 
-.menu-weather-lines {
+.menu-nameday-lines {
     display: flex;
     flex-direction: column;
     gap: 3px;
     color: #ffffff !important;
 }
 
-.menu-weather-today,
-.menu-weather-tomorrow {
+.menu-nameday-today,
+.menu-nameday-tomorrow {
     display: block;
     color: #ffffff !important;
 }
 
-.menu-weather-tomorrow {
+.menu-nameday-tomorrow {
     font-size: 11px;
     font-weight: 800;
     opacity: 0.82;
 }
 
-.menu-weather-extra {
-    display: block;
-    color: #ffffff !important;
-    font-size: 10px;
-    font-weight: 700;
-    opacity: 0.74;
-}
-
-.menu-weather-pill:hover {
+.menu-nameday-pill:hover {
     background: #1e293b;
     color: #ffffff !important;
 }
 
 @media (min-width: 1024px) {
-    .menu-weather-pill {
+    .menu-nameday-pill {
         min-width: 15.5rem;
         max-width: 18rem;
         min-height: 3.45rem;
@@ -766,28 +758,24 @@ a[data-label="bottom_nav_phone"]:hover {
         gap: 12px;
     }
 
-    .menu-weather-pill i {
+    .menu-nameday-pill i {
         font-size: 21px;
     }
 
-    .menu-weather-lines {
+    .menu-nameday-lines {
         gap: 3px;
     }
 
-    .menu-weather-today {
+    .menu-nameday-today {
         font-size: 13px;
         line-height: 1.06;
     }
 
-    .menu-weather-tomorrow {
+    .menu-nameday-tomorrow {
         font-size: 11.5px;
         line-height: 1.04;
     }
 
-    .menu-weather-extra {
-        font-size: 10.5px;
-        line-height: 1.03;
-    }
 }
 
 
@@ -1009,4 +997,102 @@ a[data-label="bottom_nav_phone"]:hover {
     font-size: clamp(2rem, 9vw, 3rem) !important;
     line-height: 1.05 !important;
   }
+}
+
+
+
+
+.premium-menu-actions a.email-box {
+    background-color: #1670bf !important;
+    color: #ffffff !important;
+    border: 1px solid #14b8c8 !important;
+    border-radius: 12px !important;
+    padding: 8px 14px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+}
+
+.premium-menu-actions a.email-box i,
+.premium-menu-actions a.email-box span {
+    color: #ffffff !important;
+}
+
+.premium-menu-actions a.email-box:hover {
+    background-color: #0f9aaa !important;
+    border-color: #0f9aaa !important;
+    color: #ffffff !important;
+}
+
+.premium-menu-actions a.phone-green-btn {
+    background-color: #16a34a !important;
+    color: #ffffff !important;
+    border: 1px solid #16a34a !important;
+    border-radius: 20px !important;
+    padding: 8px 14px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+}
+
+.premium-menu-actions a.phone-green-btn i,
+.premium-menu-actions a.phone-green-btn span {
+    color: #ffffff !important;
+}
+
+.premium-menu-actions a.phone-green-btn:hover {
+    background-color: #15803d !important;
+    border-color: #15803d !important;
+    color: #ffffff !important;
+}
+
+.mobile-bottom-nav a.phone-green-btn {
+    background-color: #11e626 !important;
+    color: #ffffff !important;
+    border: 1px solid #16a34a !important;
+    border-radius: 20px !important;
+    padding: 8px 10px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+}
+
+.mobile-bottom-nav a.phone-green-btn i,
+.mobile-bottom-nav a.phone-green-btn span {
+    color: #ffffff !important;
+}
+
+.mobile-bottom-nav a.phone-green-btn:hover,
+.mobile-bottom-nav a.phone-green-btn:focus {
+    background-color: #010e06 !important;
+    border-color: #15803d !important;
+    color: #ffffff !important;
+}
+
+
+.mobile-bottom-nav a.email-blue-btn {
+    background-color: #048995 !important;
+    color: #ffffff !important;
+    border: 1px solid #14b8c8 !important;
+    border-radius: 20px !important;
+    padding: 8px 10px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+}
+
+.mobile-bottom-nav a.email-blue-btn i,
+.mobile-bottom-nav a.email-blue-btn span {
+    color: #ffffff !important;
 }

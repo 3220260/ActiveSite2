@@ -7,7 +7,6 @@ html.firefox-esr-mode body {
 html.firefox-esr-mode .liquid-close,
 html.firefox-esr-mode .vodafone-sticky-header,
 html.firefox-esr-mode .nova-sticky-header,
-html.firefox-esr-mode .mobile-provider-modal-header,
 html.firefox-esr-mode .process-wizard-sticky,
 html.firefox-esr-mode .official-intro-badge,
 html.firefox-esr-mode .official-intro-tags button,
@@ -75,7 +74,6 @@ html.firefox-esr-mode .process-wizard-sticky span {
 }
 
 /* Headers σταθερά και σκουρόχρωμα */
-html.firefox-esr-mode .mobile-provider-modal-header,
 html.firefox-esr-mode .vodafone-sticky-header,
 html.firefox-esr-mode .nova-sticky-header {
   background: #0f172a !important;

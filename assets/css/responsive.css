@@ -75,7 +75,7 @@
     display: none !important;
   }
 
-  .site-top-nav .menu-weather-pill {
+  .site-top-nav .menu-nameday-pill {
     display: inline-flex !important;
     justify-self: end !important;
     margin-left: auto !important;
@@ -90,26 +90,22 @@
     text-align: left !important;
   }
 
-  .site-top-nav .menu-weather-pill i {
+  .site-top-nav .menu-nameday-pill i {
     font-size: 1.12rem !important;
   }
 
-  .site-top-nav .menu-weather-lines {
+  .site-top-nav .menu-nameday-lines {
     gap: 0.12rem !important;
   }
 
-  .site-top-nav .menu-weather-today {
+  .site-top-nav .menu-nameday-today {
     font-size: 0.67rem !important;
     line-height: 1.04 !important;
   }
 
-  .site-top-nav .menu-weather-tomorrow {
+  .site-top-nav .menu-nameday-tomorrow {
     font-size: 0.59rem !important;
     line-height: 1.02 !important;
-  }
-
-  .site-top-nav .menu-weather-extra {
-    display: none !important;
   }
 
   body.hero-intro-ready {
@@ -600,10 +596,6 @@ body.assistant-chat-open .assistant-chat-fab {
     border-radius: 18px !important;
   }
 
-  #mobileModal > div {
-    height: 94dvh !important;
-    max-height: 94dvh !important;
-  }
 }
 
 #vodaModal .flex:has(> #btn-v-port):has(> #btn-v-new),
@@ -1083,7 +1075,7 @@ body.assistant-chat-open .assistant-chat-fab {
     letter-spacing: 0.09em !important;
   }
 
-  .site-top-nav .menu-weather-pill {
+  .site-top-nav .menu-nameday-pill {
     min-width: 15.5rem !important;
     max-width: 18rem !important;
     min-height: 3.45rem !important;
@@ -1094,27 +1086,22 @@ body.assistant-chat-open .assistant-chat-fab {
     box-shadow: 0 12px 26px rgba(15, 23, 42, 0.18) !important;
   }
 
-  .site-top-nav .menu-weather-pill i {
+  .site-top-nav .menu-nameday-pill i {
     font-size: 1.18rem !important;
   }
 
-  .site-top-nav .menu-weather-lines {
+  .site-top-nav .menu-nameday-lines {
     gap: 0.14rem !important;
   }
 
-  .site-top-nav .menu-weather-today {
+  .site-top-nav .menu-nameday-today {
     font-size: 0.78rem !important;
     line-height: 1.05 !important;
   }
 
-  .site-top-nav .menu-weather-tomorrow {
+  .site-top-nav .menu-nameday-tomorrow {
     font-size: 0.67rem !important;
     line-height: 1.05 !important;
   }
 
-  .site-top-nav .menu-weather-extra {
-    display: block !important;
-    font-size: 0.62rem !important;
-    line-height: 1.02 !important;
-  }
 }

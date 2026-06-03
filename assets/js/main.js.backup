@@ -578,8 +578,7 @@ function createProcessWizard(containerId, config, theme, steps) {
     closeButton.type = 'button';
     closeButton.dataset.modalClose = modalId;
     closeButton.dataset.modalTarget = choiceModalId;
-    closeButton.dataset.modalHistory = 'replace';
-    closeButton.setAttribute('aria-label', 'Κλείσιμο οδηγού');
+    closeButton.setAttribute('aria-label', 'Κλείσιμο οδηγού και επιστροφή στην επιλογή');
 
     right.appendChild(closeButton);
 
@@ -1106,8 +1105,7 @@ function showProcessWizardStep(containerId, index) {
         });
 
         const activeButton = stepNav.querySelector('.process-step-scroll-button.is-active');
-
-        if (activeButton && window.innerWidth > 768) {
+        if (activeButton) {
             activeButton.scrollIntoView({
                 behavior: 'smooth',
                 block: 'nearest',
@@ -1533,7 +1531,7 @@ function closeAssistantChat() {
     unlockPageScrollIfIdle();
 
     if (assistantChatPreviousFocus && document.contains(assistantChatPreviousFocus)) {
-        assistantChatPreviousFocus.focus({ preventScroll: true });
+        assistantChatPreviousFocus.focus();
     }
     assistantChatPreviousFocus = null;
 }
@@ -1925,8 +1923,7 @@ function handleDocumentClick(event) {
 
         if (currentModal && document.getElementById(choiceModalId)) {
             closeModal(currentModal.id, false);
-            openModal(choiceModalId, false);
-            history.replaceState({ screen: 'offer', modalId: choiceModalId }, '', `#${choiceModalId}`);
+            openModal(choiceModalId);
         }
 
         return;
@@ -1988,22 +1985,12 @@ function handleDocumentClick(event) {
         return;
     }
 
-    const sidebarCategoryTarget = event.target.closest('[data-sidebar-category]');
-    if (sidebarCategoryTarget) {
-        event.preventDefault();
-        const category = sidebarCategoryTarget.dataset.sidebarCategory || 'all';
-        toggleSidebar();
-        setTimeout(() => applyOfferFilter(category, sidebarCategoryTarget), 300);
-        return;
-    }
-
    const modalCloseTarget = event.target.closest('[data-modal-close]');
 if (modalCloseTarget) {
     event.preventDefault();
 
     const modalToClose = modalCloseTarget.dataset.modalClose;
     const modalToOpen = modalCloseTarget.dataset.modalTarget;
-    const replaceModalHistory = modalCloseTarget.dataset.modalHistory === 'replace';
 
     closeModal(modalToClose, !modalToOpen);
 
@@ -2014,11 +2001,7 @@ if (modalCloseTarget) {
             offer_name: modalCloseTarget.dataset.offer || getOfferName(modalToOpen),
             category: modalCloseTarget.dataset.category,
         });
-        openModal(modalToOpen, !replaceModalHistory);
-
-        if (replaceModalHistory) {
-            history.replaceState({ screen: 'offer', modalId: modalToOpen }, '', `#${modalToOpen}`);
-        }
+        openModal(modalToOpen);
 
         if (
             modalCloseTarget.dataset.openTabShow &&
@@ -2394,127 +2377,3 @@ window.onpopstate = function (event) {
       closeAssistantOuterChat();
     }
   });
-
-
-
-/* MOBILE_MODAL_RETURN_TO_OPEN_POSITION */
-(function () {
-  if (typeof window === 'undefined' || typeof document === 'undefined') return;
-
-  let modalOpenScrollY = 0;
-
-  function isMobile() {
-    return window.innerWidth <= 768;
-  }
-
-  function getCurrentPageScrollY() {
-    const bodyTop = document.body.style.top;
-
-    // Αν το body είναι fixed, η πραγματική θέση βρίσκεται στο top: -1234px
-    if (document.body.style.position === 'fixed' && bodyTop) {
-      const parsedTop = parseInt(bodyTop, 10);
-      if (!Number.isNaN(parsedTop)) {
-        return Math.abs(parsedTop);
-      }
-    }
-
-    return window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-  }
-
-  function restorePageScrollY(scrollY) {
-    if (!isMobile()) return;
-
-    const html = document.documentElement;
-    const body = document.body;
-    const previousHtmlBehavior = html.style.scrollBehavior;
-    const previousBodyBehavior = body.style.scrollBehavior;
-
-    html.style.scrollBehavior = 'auto';
-    body.style.scrollBehavior = 'auto';
-
-    requestAnimationFrame(function () {
-      window.scrollTo(0, scrollY);
-
-      requestAnimationFrame(function () {
-        window.scrollTo(0, scrollY);
-
-        setTimeout(function () {
-          window.scrollTo(0, scrollY);
-          html.style.scrollBehavior = previousHtmlBehavior || '';
-          body.style.scrollBehavior = previousBodyBehavior || '';
-        }, 120);
-      });
-    });
-  }
-
-  // Πριν ανοίξει modal, αποθηκεύουμε τη θέση της σελίδας
-  document.addEventListener('click', function (event) {
-    const openButton = event.target.closest('[data-modal-target]');
-    const closeButton = event.target.closest('[data-modal-close]');
-
-    if (!openButton || closeButton || !isMobile()) return;
-
-    modalOpenScrollY = getCurrentPageScrollY();
-  }, true);
-
-  // Όταν κλείνει modal, γυρίζουμε στη θέση από όπου άνοιξε
-  document.addEventListener('click', function (event) {
-    const closeButton = event.target.closest('[data-modal-close]');
-    if (!closeButton || !isMobile()) return;
-
-    const targetToOpen = closeButton.getAttribute('data-modal-target');
-
-    // Αν το κουμπί κλείνει ένα modal και ανοίγει άλλο, μη γυρίσεις ακόμα τη σελίδα
-    if (targetToOpen) return;
-
-    const scrollY = modalOpenScrollY || getCurrentPageScrollY();
-
-    setTimeout(function () {
-      restorePageScrollY(scrollY);
-    }, 0);
-  }, true);
-
-  // Και για κλείσιμο με Escape ή backdrop, αν υπάρχει τέτοια λειτουργία
-  document.addEventListener('keydown', function (event) {
-    if (event.key !== 'Escape' || !isMobile()) return;
-
-    const scrollY = modalOpenScrollY || getCurrentPageScrollY();
-
-    setTimeout(function () {
-      restorePageScrollY(scrollY);
-    }, 0);
-  }, true);
-})();
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".js-menu-mobile-offers").forEach(function (button) {
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            if (typeof closeSidebarInstantly === "function") {
-                closeSidebarInstantly();
-            }
-
-            const mobileFilterButton =
-                document.querySelector('.quick-action-mobile[data-category-filter="mobile"]') ||
-                document.querySelector('.offer-filter-bar [data-category-filter="mobile"]');
-
-            if (mobileFilterButton) {
-                mobileFilterButton.click();
-            }
-
-            setTimeout(function () {
-                const offersSection = document.querySelector("#offers");
-
-                if (offersSection) {
-                    offersSection.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
-                }
-            }, 150);
-        });
-    });
-});

@@ -8,7 +8,6 @@
    ========================================= */
 const GA_MEASUREMENT_ID = 'G-LHQ9SHKY6J';
 const TRACKED_OFFERS = Object.freeze({
-    mobileModal: 'Κινητή Τηλεφωνία',
     vodaChoiceModal: 'Επιλογή Vodafone CU',
     novaChoiceModal: 'Επιλογή NOVA Q',
     vodaModal: 'Vodafone CU',
