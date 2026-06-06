@@ -14,6 +14,7 @@ function closeSidebarInstantly() {
     }
 
     syncMobileBottomNavState();
+    unlockPageScrollIfIdle();
 }
 
 
@@ -208,6 +209,7 @@ function toggleSidebar() {
   if (isClosed) {
     overlay.classList.remove('hidden');
     setMobileBottomNavSuppressed(true);
+    lockPageScroll();
 
     requestAnimationFrame(() => {
       overlay.classList.remove('opacity-0');
@@ -221,6 +223,7 @@ function toggleSidebar() {
     setTimeout(() => {
       overlay.classList.add('hidden');
       syncMobileBottomNavState();
+      unlockPageScrollIfIdle();
     }, 300);
   }
 }
