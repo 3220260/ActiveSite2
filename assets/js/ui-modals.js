@@ -12,6 +12,8 @@ function closeSidebarInstantly() {
         overlay.classList.add('opacity-0');
         overlay.classList.add('hidden');
     }
+
+    syncMobileBottomNavState();
 }
 
 
@@ -64,6 +66,14 @@ function hasOpenBlockingLayer() {
     );
 }
 
+function setMobileBottomNavSuppressed(shouldSuppress) {
+    document.body.classList.toggle('mobile-bottom-nav-suppressed', Boolean(shouldSuppress));
+}
+
+function syncMobileBottomNavState() {
+    setMobileBottomNavSuppressed(hasOpenBlockingLayer());
+}
+
 function shouldUseFixedScrollLock() {
     return window.matchMedia('(pointer: coarse)').matches &&
         window.matchMedia('(hover: none)').matches;
@@ -71,6 +81,8 @@ function shouldUseFixedScrollLock() {
 
 
 function lockPageScroll() {
+    setMobileBottomNavSuppressed(true);
+
     if (document.body.dataset.scrollLocked === 'true') return;
     pageScrollY = window.scrollY || document.documentElement.scrollTop || 0;
     document.body.dataset.scrollLocked = 'true';
@@ -91,7 +103,14 @@ function lockPageScroll() {
 
 
 function unlockPageScrollIfIdle() {
-    if (hasOpenBlockingLayer() || document.body.dataset.scrollLocked !== 'true') return;
+    if (hasOpenBlockingLayer()) {
+        setMobileBottomNavSuppressed(true);
+        return;
+    }
+
+    setMobileBottomNavSuppressed(false);
+
+    if (document.body.dataset.scrollLocked !== 'true') return;
 
     const lockMode = document.body.dataset.scrollLockMode;
 
@@ -188,10 +207,12 @@ function toggleSidebar() {
 
   if (isClosed) {
     overlay.classList.remove('hidden');
+    setMobileBottomNavSuppressed(true);
 
     requestAnimationFrame(() => {
       overlay.classList.remove('opacity-0');
       menu.classList.remove('-translate-x-full');
+      syncMobileBottomNavState();
     });
   } else {
     menu.classList.add('-translate-x-full');
@@ -199,6 +220,7 @@ function toggleSidebar() {
 
     setTimeout(() => {
       overlay.classList.add('hidden');
+      syncMobileBottomNavState();
     }, 300);
   }
 }

@@ -3812,7 +3812,7 @@
 
   .site-top-nav .brand-center img {
     height: clamp(2.85rem, 3vw, 4rem) !important;
-    width: auto !important;
+    width: clamp(2.85rem, 3vw, 4rem) !important;
     flex-shrink: 0;
   }
 

@@ -30,11 +30,6 @@
           icon: 'fa-solid fa-comment-sms',
           text: '100 SMS',
         },
-        {
-          icon: 'fa-solid fa-piggy-bank',
-          text: 'Ετήσιο πλάνο επικοινωνίας: 12 μήνες πλήρους κάλυψης χωρίς δεσμεύσεις.',
-          strong: true,
-        },
       ]),
       procedures: Object.freeze([
         {
@@ -77,11 +72,6 @@
         {
           icon: 'fa-solid fa-comment-sms',
           text: '300 SMS',
-        },
-        {
-          icon: 'fa-solid fa-piggy-bank',
-          text: 'Ετήσιο πλάνο επικοινωνίας: 12 μήνες πλήρους κάλυψης χωρίς δεσμεύσεις.',
-          strong: true,
         },
       ]),
       procedures: Object.freeze([

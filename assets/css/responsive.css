@@ -65,7 +65,7 @@
 
   .site-top-nav .brand-center img {
     height: 2.75rem !important;
-    width: auto !important;
+    width: 2.75rem !important;
     padding: 0.12rem !important;
     border-radius: 0.85rem !important;
   }
@@ -85,13 +85,8 @@
     padding: 0.52rem 0.72rem !important;
     border-radius: 16px !important;
     font-size: 0.68rem !important;
-    gap: 0.55rem !important;
     white-space: normal !important;
     text-align: left !important;
-  }
-
-  .site-top-nav .menu-nameday-pill i {
-    font-size: 1.12rem !important;
   }
 
   .site-top-nav .menu-nameday-lines {
@@ -1065,6 +1060,7 @@ body.assistant-chat-open .assistant-chat-fab {
 
   .site-top-nav .brand-center img {
     height: 3.45rem !important;
+    width: 3.45rem !important;
     padding: 0.16rem !important;
     border-radius: 0.95rem !important;
   }
@@ -1082,12 +1078,7 @@ body.assistant-chat-open .assistant-chat-fab {
     padding: 0.7rem 0.95rem !important;
     border-radius: 18px !important;
     font-size: 0.76rem !important;
-    gap: 0.62rem !important;
     box-shadow: 0 12px 26px rgba(15, 23, 42, 0.18) !important;
-  }
-
-  .site-top-nav .menu-nameday-pill i {
-    font-size: 1.18rem !important;
   }
 
   .site-top-nav .menu-nameday-lines {

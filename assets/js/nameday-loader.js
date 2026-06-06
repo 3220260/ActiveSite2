@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const namedayPills = document.querySelectorAll(".menu-nameday-pill");
     const calendarCache = {};
     const timeZone = "Europe/Athens";
-    const maxVisibleNames = 5;
+    const isCompactNameday = window.matchMedia("(max-width: 767px)").matches;
+    const maxVisibleNames = isCompactNameday ? 2 : 3;
 
     if (!namedayPills.length) return;
 
@@ -65,14 +66,13 @@ document.addEventListener("DOMContentLoaded", function () {
             .replace(/\([^)]*\)/g, "")
             .replace(/\s*\*+\s*/g, "")
             .replace(/\s+\(\d+\)\s*/g, " ")
+            .replace(/[()]/g, " ")
             .replace(/\s+/g, " ")
             .trim();
     }
 
     function getDisplayNames(summary) {
-        const withoutSource = unescapeIcs(summary)
-            .replace(" ", "")
-            .trim();
+        const withoutSource = unescapeIcs(summary).trim();
 
         if (
             !withoutSource ||
@@ -81,10 +81,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return [];
         }
 
-        const openIndex = withoutSource.indexOf("(");
-        const closeIndex = withoutSource.lastIndexOf(")");
-        const source = openIndex >= 0 && closeIndex > openIndex
-            ? withoutSource.slice(openIndex + 1, closeIndex)
+        const parentheticalGroups = Array.from(withoutSource.matchAll(/\(([^()]*)\)/g))
+            .map(function (match) { return match[1].trim(); })
+            .filter(function (group) { return group && !/^\*+$/.test(group); });
+        const source = parentheticalGroups.length
+            ? parentheticalGroups[parentheticalGroups.length - 1]
             : withoutSource;
         const seen = new Map();
 
@@ -166,14 +167,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const label = `Σήμερα: ${todayText} | Αύριο: ${tomorrowText}`;
 
         namedayPills.forEach(function (pill) {
-            const icon = pill.querySelector("i");
             const todayEl = pill.querySelector(".menu-nameday-today");
             const tomorrowEl = pill.querySelector(".menu-nameday-tomorrow");
-
-            if (icon) {
-                icon.className = "fa-solid fa-calendar-day";
-                icon.setAttribute("aria-hidden", "true");
-            }
 
             if (todayEl) todayEl.textContent = `Σήμερα: ${todayText}`;
             if (tomorrowEl) tomorrowEl.textContent = `Αύριο: ${tomorrowText}`;
