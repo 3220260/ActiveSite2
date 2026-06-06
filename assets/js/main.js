@@ -254,7 +254,7 @@ function shouldIgnoreSwipeBackTarget(target) {
         return true;
     }
 
-    if (target.closest('[data-preview-zoom], [data-preview-reset], [data-copy-text], [data-copy-iban], [data-tab-show]')) {
+    if (target.closest('[data-preview-zoom], [data-preview-reset], [data-copy-text], [data-copy-iban], [data-copy-beneficiary], [data-tab-show]')) {
         return true;
     }
 
@@ -727,6 +727,36 @@ function enhanceProcessDepositCards(container) {
         card.dataset.depositEnhanced = 'true';
         card.classList.add('wizard-deposit-card');
 
+        const beneficiaryLabel = Array.from(card.querySelectorAll('div')).find((element) => {
+            return (element.textContent || '').replace(/\s+/g, ' ').trim() === 'Δικαιούχος';
+        });
+        const beneficiaryValue = beneficiaryLabel?.nextElementSibling;
+
+        if (beneficiaryValue) {
+            const beneficiaryName = 'SOUTH ATTICA TELECOMMUNICATIONS E.E.';
+            beneficiaryValue.textContent = beneficiaryName;
+            beneficiaryValue.classList.add('wizard-beneficiary-value');
+
+            const copyBeneficiaryButton = makeEl('button', 'wizard-beneficiary-copy');
+            copyBeneficiaryButton.type = 'button';
+            copyBeneficiaryButton.dataset.copyBeneficiary = beneficiaryName;
+            copyBeneficiaryButton.dataset.copyLabel = 'Αντιγραφή δικαιούχου';
+
+            const copyBeneficiaryIcon = document.createElement('i');
+            copyBeneficiaryIcon.className = 'fa-regular fa-copy icon-copy';
+
+            const checkBeneficiaryIcon = document.createElement('i');
+            checkBeneficiaryIcon.className = 'fa-solid fa-check icon-check hidden';
+
+            const copyBeneficiaryLabel = makeEl('span', '', 'Αντιγραφή δικαιούχου');
+
+            copyBeneficiaryButton.appendChild(copyBeneficiaryIcon);
+            copyBeneficiaryButton.appendChild(checkBeneficiaryIcon);
+            copyBeneficiaryButton.appendChild(copyBeneficiaryLabel);
+
+            beneficiaryValue.insertAdjacentElement('afterend', copyBeneficiaryButton);
+        }
+
         const ibanTextBox = Array.from(card.querySelectorAll('div')).find((element) => {
             return /GR\d{2}/.test(element.textContent || '');
         });
@@ -1148,7 +1178,7 @@ function shouldIgnoreProcessSwipe(target) {
     if (!target || !target.closest) return false;
 
     return Boolean(target.closest(
-        'button, a, input, textarea, select, [role="button"], [contenteditable="true"], [data-preview-src], [data-preview-zoom], [data-preview-reset], [data-copy-iban], [data-copy-email], [data-copy-text], [data-modal-target], [data-modal-close], #imagePreviewModal'
+        'button, a, input, textarea, select, [role="button"], [contenteditable="true"], [data-preview-src], [data-preview-zoom], [data-preview-reset], [data-copy-iban], [data-copy-beneficiary], [data-copy-email], [data-copy-text], [data-modal-target], [data-modal-close], #imagePreviewModal'
     ));
 }
 
@@ -1899,6 +1929,17 @@ function handleDocumentClick(event) {
             copy_type: 'account_name',
         });
         copyToClipboard(copyTextTarget.dataset.copyText, copyTextTarget);
+        return;
+    }
+
+    const copyBeneficiaryTarget = event.target.closest('[data-copy-beneficiary]');
+    if (copyBeneficiaryTarget) {
+        event.preventDefault();
+        trackEvent('payment_copy', {
+            ...getOpenOfferContext(),
+            copy_type: 'beneficiary_name',
+        });
+        copyIbanWithFeedback(copyBeneficiaryTarget.dataset.copyBeneficiary, copyBeneficiaryTarget);
         return;
     }
 

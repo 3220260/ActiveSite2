@@ -64,6 +64,35 @@
   color: #0f172a;
 }
 
+.wizard-beneficiary-value {
+  line-height: 1.18;
+}
+
+.wizard-beneficiary-copy {
+  margin-top: 0.55rem;
+  min-height: 2.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 900;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.wizard-beneficiary-copy:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
 @media (max-width: 767px) {
   #vodaModal,
   #novaModal {
@@ -212,6 +241,7 @@
   [data-process-step] a[href$=".pdf"],
   [data-process-step] [data-preview-src],
   [data-process-step] [data-copy-iban],
+  [data-process-step] [data-copy-beneficiary],
   [data-process-step] .wizard-email-copy-action,
   [data-process-step] .wizard-email-open-action,
   [data-process-step] .wizard-call-cta {
